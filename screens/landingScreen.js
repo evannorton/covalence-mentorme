@@ -17,11 +17,31 @@ export default class LandingScreen extends Component {
         }
     };
 
+    navigate(screen) {
+        this.props.navigation.navigate(screen);
+    }
+
     render() {
         return (
-            <View>
-                <Text>MentorMe</Text>
+            <View style={styles.container}>
+                <Text style={styles.text}>MentorMe</Text>
+                <Button title='Mentors' onPress={() => { this.navigate('MentorLogin') }} />
+                <Button title='Students' onPress={() => { this.navigate('StudentLogin') }} />
             </View>
         )
     };
 }
+
+const styles = StyleSheet.create({
+    container: {
+        padding: 30,
+        backgroundColor: 'blue',
+        flex: 1,
+        justifyContent: 'center'
+    },
+
+    text: {
+        textAlign: 'center'
+    }
+
+});
