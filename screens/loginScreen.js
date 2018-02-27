@@ -4,7 +4,12 @@ import { Button } from 'react-native-elements';
 
 
 
-export default class MentorLoginScreen extends Component {
+export default class LoginScreen extends Component {
+
+    constructor(props) {
+        super(props);
+        this.userType = this.props.navigation.state.params.userType;
+    }
 
     static navigationOptions = {
         headerStyle: {
@@ -24,7 +29,9 @@ export default class MentorLoginScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.text}>Mentor Login Screen</Text>
+                <Text style={styles.text}>Login Screen {this.props.navigation.state.params.userType}</Text>
+                <Button title='Sign Up' onPress={() => { this.navigate('SignUp') }} />
+                <Button title='Sign In' onPress={() => { this.navigate(`${this.userType}Profile`) }} />
 
             </View>
         )

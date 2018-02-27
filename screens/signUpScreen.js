@@ -4,7 +4,7 @@ import { Button } from 'react-native-elements';
 
 
 
-export default class LandingScreen extends Component {
+export default class SignUpScreen extends Component {
 
     static navigationOptions = {
         headerStyle: {
@@ -17,16 +17,16 @@ export default class LandingScreen extends Component {
         }
     };
 
-    navigate(userType) {
-        this.props.navigation.navigate('Login', { userType });
+    navigate(screen) {
+        this.props.navigation.navigate(screen);
     }
 
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.text}>Mentor.Me</Text>
-                <Button title='Mentors' onPress={() => { this.navigate('Mentor') }} />
-                <Button title='Students' onPress={() => { this.navigate('Student') }} />
+                <Text style={styles.text}>Sign Up Screen</Text>
+
+
             </View>
         )
     };
@@ -41,8 +41,7 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        textAlign: 'center',
-        fontWeight: 'bold'
+        textAlign: 'center'
     }
 
 });
