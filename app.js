@@ -1,23 +1,17 @@
 import React, { Component } from 'react';
-import {
-    Platform,
-    StyleSheet,
-    Text,
-    View
-} from 'react-native';
+import { StackNavigator } from 'react-navigation';
+import LandingScreen from './screens/landingScreen';
+
+const RootNavigator = StackNavigator({
+    Home: { screen: LandingScreen },
+}, { intitialRouteName: 'Home' }
+);
+
 
 export default class App extends Component {
     render() {
         return (
-            <View style={styles.container}>
-                <Text style={styles.welcome}>
-                    Welcome to React Native!
-                </Text>
-            </View>
+            <RootNavigator />
         );
     }
 }
-
-const styles = StyleSheet.create({
-
-});
