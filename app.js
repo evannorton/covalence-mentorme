@@ -3,8 +3,7 @@ import { StackNavigator } from 'react-navigation';
 import LandingScreen from './screens/landingScreen';
 import LoginScreen from './screens/loginScreen';
 import SignUpScreen from './screens/signUpScreen';
-import MentorProfileScreen from './screens/mentorProfileScreen';
-import StudentProfileScreen from './screens/studentProfileScreen';
+import TabScreen from './screens/tabScreen';
 
 
 
@@ -12,8 +11,7 @@ const RootNavigator = StackNavigator({
     Home: { screen: LandingScreen },
     Login: { screen: LoginScreen },
     SignUp: { screen: SignUpScreen },
-    MentorProfile: { screen: MentorProfileScreen },
-    StudentProfile: { screen: StudentProfileScreen },
+    Tab: { screen: TabScreen }
 
 }, { intitialRouteName: 'Home' }
 );

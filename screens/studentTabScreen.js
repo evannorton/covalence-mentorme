@@ -4,7 +4,7 @@ import { Button } from 'react-native-elements';
 
 
 
-export default class MentorProfileScreen extends Component {
+export default class StudentTabScreen extends Component {
 
     static navigationOptions = {
         headerStyle: {
@@ -24,7 +24,7 @@ export default class MentorProfileScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.text}> Mentor Profile</Text>
+                <Text style={styles.text}> Student Profile</Text>
 
 
             </View>

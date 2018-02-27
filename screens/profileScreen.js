@@ -4,7 +4,7 @@ import { Button } from 'react-native-elements';
 
 
 
-export default class LoginScreen extends Component {
+export default class ProfileScreen extends Component {
 
     constructor(props) {
         super(props);
@@ -27,14 +27,21 @@ export default class LoginScreen extends Component {
     }
 
     render() {
-        return (
-            <View style={styles.container}>
-                <Text style={styles.text}>Login Screen {this.props.navigation.state.params.userType}</Text>
-                <Button title='Sign Up' onPress={() => { this.navigate('SignUp') }} />
-                <Button title='Sign In' onPress={() => { this.navigate('Tab') }} />
 
-            </View>
-        )
+        if (this.props.screenProps.userType === 'Mentor') {
+            return (
+                <View style={styles.container}>
+                    <Text style={styles.text}>Mentor Screen</Text>
+                </View>
+            );
+
+        } else {
+            return (
+                <View style={styles.container}>
+                    <Text style={styles.text}>Student Screen</Text>
+                </View>
+            )
+        }
     };
 }
 
