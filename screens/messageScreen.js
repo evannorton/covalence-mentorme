@@ -4,7 +4,7 @@ import { Button } from 'react-native-elements';
 
 
 
-export default class ProfileScreen extends Component {
+export default class MessageScreen extends Component {
 
     constructor(props) {
         super(props);
@@ -21,19 +21,24 @@ export default class ProfileScreen extends Component {
         }
     };
 
+    navigate(screen) {
+        userType = this.props.navigation.state.params.userType;
+        this.props.navigation.navigate(screen, { userType });
+    }
+
     render() {
 
-        if (this.props.screenProps.navigation.state.params.userType === 'Mentor') {
+        if (this.props.screenProps.userType === 'Mentor') {
             return (
                 <View style={styles.container}>
-                    <Text style={styles.text}>Mentor Screen</Text>
+                    <Text style={styles.text}>Mentor Message Screen</Text>
                 </View>
             );
 
         } else {
             return (
                 <View style={styles.container}>
-                    <Text style={styles.text}>Student Screen</Text>
+                    <Text style={styles.text}>Student Message Screen</Text>
                 </View>
             )
         }

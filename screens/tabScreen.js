@@ -1,14 +1,24 @@
 import React, { Component } from 'react';
 import { TabNavigator } from 'react-navigation';
 import ProfileScreen from './profileScreen';
+import FinanceScreen from './financeScreen';
+import CalendarScreen from './calendarScreen';
+import MessageScreen from './messageScreen';
+import SearchScreen from './searchScreen';
 
 
 const MentorTabNavigation = TabNavigator({
-    Profile: { screen: ProfileScreen }
+    Profile: { screen: ProfileScreen },
+    Finance: { screen: FinanceScreen },
+    Calendar: { screen: CalendarScreen },
+    Message: { screen: MessageScreen }
 });
 
 const StudentTabNavigation = TabNavigator({
-    Profile: { screen: ProfileScreen }
+    Profile: { screen: ProfileScreen },
+    Search: { screen: SearchScreen },
+    Calendar: { screen: CalendarScreen },
+    Message: { screen: MessageScreen }
 });
 
 
@@ -32,12 +42,12 @@ export default class TabScreen extends Component {
     render() {
         if (this.props.navigation.state.params.userType === 'Mentor') {
             return (
-                <MentorTabNavigation screenProps={this.props.navigation.state.params} />
+                <MentorTabNavigation screenProps={this.props} />
             );
 
         } else {
             return (
-                <StudentTabNavigation screenProps={this.props.navigation.state.params} />
+                <StudentTabNavigation screenProps={this.props} />
             )
         }
     };

@@ -4,7 +4,11 @@ import { Button } from 'react-native-elements';
 
 
 
-export default class StudentTabScreen extends Component {
+export default class SearchScreen extends Component {
+
+    constructor(props) {
+        super(props);
+    }
 
     static navigationOptions = {
         headerStyle: {
@@ -18,18 +22,19 @@ export default class StudentTabScreen extends Component {
     };
 
     navigate(screen) {
-        this.props.navigation.navigate(screen);
+
+        this.props.screenProps.navigation.navigate(screen);
     }
 
     render() {
+
         return (
             <View style={styles.container}>
-                <Text style={styles.text}> Student Profile</Text>
-
-
+                <Text style={styles.text}>Search Screen</Text>
+                <Button title='Select Subject' onPress={() => { this.navigate('MentorList') }} />
             </View>
-        )
-    };
+        );
+    }
 }
 
 const styles = StyleSheet.create({
