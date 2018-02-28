@@ -3,7 +3,7 @@ import * as AuthServices from './authToken';
 let loggedIn = false;
 
 async function getUsers() {
-    let users = await fetch({ url: 'http://localhost:3000/api/users' });
+    let users = await fetch({ url: 'https://fsccgixvyx.localtunnel.me/api/users' });
     return users.JSON();
 }
 
@@ -20,7 +20,7 @@ function checkLogin() {
 }
 
 function login(email, password) {
-    fetch('http://localhost:3000/api/auth/login', {
+    fetch('https://fsccgixvyx.localtunnel.me/api/auth/login', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -51,8 +51,8 @@ function logout() {
     loggedIn = false;
 }
 
-function signup(name, email, password) {
-    fetch('http://localhost:3000/api/users/', {
+function signup(name, email, password, usertype) {
+    fetch('https://wncorfirlx.localtunnel.me/api/users/', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -61,7 +61,8 @@ function signup(name, email, password) {
         body: JSON.stringify({
             name,
             email,
-            password
+            password,
+            usertype
         })
     }).then((res) => {
         //this.login(email, password);

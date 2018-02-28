@@ -12,6 +12,7 @@ export default class SignUpScreen extends Component {
         this.name;
         this.email;
         this.password;
+        this.userType = this.props.navigation.state.params.userType;
     }
 
     static navigationOptions = {
@@ -79,7 +80,7 @@ export default class SignUpScreen extends Component {
                     text='submit'
                     buttonStyle={styles.button}
                     onPress={() => {
-                        signup(this.name, this.email, this.password);
+                        signup(this.name, this.email, this.password, this.userType);
                     }}
                 />
 

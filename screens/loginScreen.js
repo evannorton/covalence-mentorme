@@ -22,8 +22,7 @@ export default class LoginScreen extends Component {
     };
 
     navigate(screen) {
-        userType = this.props.navigation.state.params.userType;
-        this.props.navigation.navigate(screen, { userType });
+        this.props.navigation.navigate(screen, { userType: this.props.navigation.state.params.userType });
     }
 
     render() {
