@@ -3,7 +3,7 @@ import * as AuthServices from './authToken';
 let loggedIn = false;
 
 async function getUsers() {
-    let users = await fetch({ url: 'http://www.mentorme.commonrealm.com/api/users' });
+    let users = await fetch({ url: 'http://localhost:3000/api/users' });
     return users.JSON();
 }
 
@@ -20,7 +20,7 @@ function checkLogin() {
 }
 
 function login(email, password) {
-    fetch('http://www.mentorme.commonrealm.com/api/auth/login', {
+    fetch('http://localhost:3000/api/auth/login', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -52,7 +52,7 @@ function logout() {
 }
 
 function signup(name, email, password) {
-    fetch('http://www.mentorme.commonrealm.com/api/users/', {
+    fetch('http://localhost:3000/api/users/', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
