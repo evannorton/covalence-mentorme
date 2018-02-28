@@ -25,8 +25,8 @@ export default class LandingScreen extends Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.text}>Mentor.Me</Text>
-                <Button title='Mentors' onPress={() => { this.navigate('Mentor') }} />
-                <Button title='Students' onPress={() => { this.navigate('Student') }} />
+                <Button text='Mentors' onPress={() => { this.navigate('Mentor') }} />
+                <Button text='Students' onPress={() => { this.navigate('Student') }} />
             </View>
         )
     };

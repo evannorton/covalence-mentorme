@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, Input as FormInput, Icon } from 'react-native-elements';
 
 
 
@@ -24,7 +24,51 @@ export default class SignUpScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.text}>Sign Up Screen</Text>
+                <FormInput
+                    containerStyle={styles.input}
+                    placeholder='FULL NAME'
+                    leftIcon={
+                        <Icon
+                            name='user'
+                            size={24}
+                            color='black'
+                            type='simple-line-icon'
+                        />
+                    }
+                />
+
+                <FormInput
+                    containerStyle={styles.input}
+                    placeholder='EMAIL'
+                    leftIcon={
+                        <Icon
+                            name='mail'
+                            size={24}
+                            color='black'
+                            type='feather'
+                        />
+                    }
+
+                />
+
+                <FormInput
+                    containerStyle={styles.input}
+                    placeholder='PASSWORD'
+                    leftIcon={
+                        <Icon
+                            name='lock'
+                            size={24}
+                            color='black'
+                            type='octicon'
+                        />
+                    }
+                />
+
+                <Button
+                    text='submit'
+                    buttonStyle={styles.button}
+
+                />
 
 
             </View>
@@ -35,13 +79,32 @@ export default class SignUpScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         padding: 30,
-        backgroundColor: 'blue',
         flex: 1,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        margin: 0,
+        alignItems: 'center'
+
     },
 
     text: {
         textAlign: 'center'
+    },
+
+    input: {
+        borderColor: 'black',
+        borderRadius: 70,
+        borderWidth: 1,
+        marginTop: 10
+    },
+
+    button: {
+        borderColor: 'blue',
+        backgroundColor: 'blue',
+        borderRadius: 70,
+        borderWidth: 1,
+        marginTop: 10
+
     }
+
 
 });
