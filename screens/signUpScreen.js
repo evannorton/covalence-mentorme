@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text } from 'react-native';
-import { Button, Input as FormInput, Icon } from 'react-native-elements';
+import { Button, Input, Icon } from 'react-native-elements';
+import { signup } from '../services/user';
 
 
 
 export default class SignUpScreen extends Component {
+
+    constructor(props) {
+        super(props);
+        this.name;
+        this.email;
+        this.password;
+    }
 
     static navigationOptions = {
         headerStyle: {
@@ -24,7 +32,8 @@ export default class SignUpScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <FormInput
+                <Input
+                    onChangeText={(name) => { this.name = name }}
                     containerStyle={styles.input}
                     placeholder='FULL NAME'
                     leftIcon={
@@ -37,7 +46,8 @@ export default class SignUpScreen extends Component {
                     }
                 />
 
-                <FormInput
+                <Input
+                    onChangeText={(email) => { this.email = email }}
                     containerStyle={styles.input}
                     placeholder='EMAIL'
                     leftIcon={
@@ -51,7 +61,8 @@ export default class SignUpScreen extends Component {
 
                 />
 
-                <FormInput
+                <Input
+                    onChangeText={(password) => { this.password = password }}
                     containerStyle={styles.input}
                     placeholder='PASSWORD'
                     leftIcon={
@@ -67,7 +78,9 @@ export default class SignUpScreen extends Component {
                 <Button
                     text='submit'
                     buttonStyle={styles.button}
-
+                    onPress={() => {
+                        signup(this.name, this.email, this.password);
+                    }}
                 />
 
 

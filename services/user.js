@@ -2,7 +2,7 @@ import * as AuthServices from './authToken';
 
 let loggedIn = false;
 
-function getUsers() {
+async function getUsers() {
     let users = await fetch({ url: 'http://www.mentorme.commonrealm.com/api/users' });
     return users.JSON();
 }
@@ -64,7 +64,7 @@ function signup(name, email, password) {
             password
         })
     }).then((res) => {
-        this.login(email, password);
+        //this.login(email, password);
     }).catch((err) => {
         throw err;
     })

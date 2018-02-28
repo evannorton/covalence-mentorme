@@ -3,7 +3,6 @@
     "version": "0.0.1",
     "private": true,
     "scripts": {
-        "postinstall": "rm ./node_modules/react-native/local-cli/core/__fixtures__/files/package.json",
         "start": "node node_modules/react-native/local-cli/cli.js start",
         "test": "jest"
     },
