@@ -47,7 +47,7 @@ function logout() {
 }
 
 function signup(name, email, password, usertype) {
-    fetch('https://vrdoqcybxs.localtunnel.me/api/users', {
+    fetch('https://racuvfyknd.localtunnel.me/api/users', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -66,4 +66,4 @@ function signup(name, email, password, usertype) {
     })
 }
 
-export { isLoggedIn, checkLogin, login, logout, signup, getUsers };
+export { isLoggedIn, checkLogin, login, logout, signup };
