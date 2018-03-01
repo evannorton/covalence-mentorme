@@ -32,6 +32,7 @@ async function login(email, password, usertype) {
 }
 
 async function logout() {
+    console.log('in the logout function');
     await AuthServices.clearAuthToken();
 }
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text } from 'react-native';
 import { Button } from 'react-native-elements';
+import { logout, getMe } from '../services/user';
 
 
 
@@ -21,12 +22,27 @@ export default class ProfileScreen extends Component {
         }
     };
 
+    async logout() {
+        await logout();
+        this.props.screenProps.navigation.navigate('Home');
+    }
+
+    renderLogout() {
+        return (
+            <Button
+                text='log out'
+                onPress={() => { this.logout() }}
+            />
+        );
+    }
+
     render() {
 
         if (this.props.screenProps.navigation.state.params.userType === 'Mentor') {
             return (
                 <View style={styles.container}>
                     <Text style={styles.text}>Mentor Screen</Text>
+                    {this.renderLogout()}
                 </View>
             );
 
@@ -34,6 +50,7 @@ export default class ProfileScreen extends Component {
             return (
                 <View style={styles.container}>
                     <Text style={styles.text}>Student Screen</Text>
+                    {this.renderLogout()}
                 </View>
             )
         }
