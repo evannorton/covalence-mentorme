@@ -26,6 +26,14 @@ export default class SignUpScreen extends Component {
         }
     };
 
+    async signup() {
+        try {
+            await signup(this.name, this.email, this.password, this.userType);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     navigate(screen) {
         this.props.navigation.navigate(screen);
     }
@@ -80,7 +88,7 @@ export default class SignUpScreen extends Component {
                     text='submit'
                     buttonStyle={styles.button}
                     onPress={() => {
-                        signup(this.name, this.email, this.password, this.userType);
+                        this.signup();
                     }}
                 />
 

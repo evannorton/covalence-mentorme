@@ -1,78 +1,51 @@
+import * as RestServices from './rest';
 import * as AuthServices from './authToken';
 
-let loggedIn = false;
-
-function isLoggedIn() {
-    return loggedIn;
+async function isLoggedIn() {
+    return checkLogin();
 }
 
-function checkLogin() {
-    if (loggedIn) {
-        return Promise.resolve(true);
-    } else {
-        AuthServices.getAuthToken();
+async function checkLogin() {
+    await RestServices.getAuthToken();
+
+    try {
+        const user = await me();
+
+        if (!user) {
+            return false;
+        }
+
+        return true;
+    } catch (e) {
+        return false;
     }
 }
 
-function login(email, password) {
-    fetch('/api/users', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            email,
-            password
-        })
-    }).then((res) => {
-        if (res.ok) {
-            return res.JSON()
-                .then((res) => {
-                    AuthServices.setAuthToken(res.token);
-                    loggedIn = true;
-                });
-        } else if (res.status === 401) {
-            return res.JSON()
-                .then((res) => {
-                    throw res;
-                });
-        }
+async function login(email, password, usertype) {
+    await logout();
+    const response = await RestServices.post('/api/auth/login', {
+        email,
+        password,
+        usertype
+    });
+    await AuthServices.setAuthToken(response.token);
+}
+
+async function logout() {
+    await AuthServices.clearAuthToken();
+}
+
+async function signup(name, email, password, usertype) {
+    await RestServices.post('/api/users', {
+        name,
+        email,
+        password,
+        usertype
     });
 }
 
-function logout() {
-    AuthServices.clearAuthToken();
-    loggedIn = false;
-}
-
-function signup(name, email, password, usertype) {
-    fetch('/api/users', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            name,
-            email,
-            password,
-            usertype
-        })
-    }).then((res) => {
-        //this.login(email, password);
-    }).catch((err) => {
-        throw err;
-    })
-}
-
-function getMe(email, usertype) {
-    fetch('/api/users')
-        .then((res) => {
-            return res.JSON();
-        }).catch((err) => {
-            console.log(err);
-        })
+async function getMe(email, usertype) {
+    return RestServices.get('/api/users/me');
 }
 
 export { isLoggedIn, checkLogin, login, logout, signup, getMe };
