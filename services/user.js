@@ -15,7 +15,7 @@ function checkLogin() {
 }
 
 function login(email, password) {
-    fetch('https://fsccgixvyx.localtunnel.me/api/auth/login', {
+    fetch('/api/users', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -31,7 +31,7 @@ function login(email, password) {
                 .then((res) => {
                     AuthServices.setAuthToken(res.token);
                     loggedIn = true;
-                })
+                });
         } else if (res.status === 401) {
             return res.JSON()
                 .then((res) => {
@@ -47,7 +47,7 @@ function logout() {
 }
 
 function signup(name, email, password, usertype) {
-    fetch('https://racuvfyknd.localtunnel.me/api/users', {
+    fetch('/api/users', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -66,4 +66,13 @@ function signup(name, email, password, usertype) {
     })
 }
 
-export { isLoggedIn, checkLogin, login, logout, signup };
+function getMe(email, usertype) {
+    fetch('/api/users')
+        .then((res) => {
+            return res.JSON();
+        }).catch((err) => {
+            console.log(err);
+        })
+}
+
+export { isLoggedIn, checkLogin, login, logout, signup, getMe };
