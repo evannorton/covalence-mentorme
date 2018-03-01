@@ -2,33 +2,19 @@ const AUTH_TOKEN_KEY = 'authtoken';
 let authToken = '';
 
 async function setAuthToken(token) {
-    authToken = `Bearer ${token}`;
-    try {
-        await AsyncStorage.setItem(AUTH_TOKEN_KEY, authToken);
-    } catch (err) {
-        console.log(err)
-    }
+    return await AsyncStorage.setItem(AUTH_TOKEN_KEY, `Bearer ${token}`);
 }
 
 async function clearAuthToken() {
-    authToken = '';
-    try {
-        await AsyncStorage.removeItem(AUTH_TOKEN_KEY);
-    } catch (err) {
-        console.log(err);
-    }
-
+    return await AsyncStorage.removeItem(AUTH_TOKEN_KEY);
 }
 
-async function populateAuthToken() {
-    let token = await AsyncStorage.getItem(AUTH_TOKEN_KEY);
-    if (token && token !== null) {
-        authToken = token;
-    }
+async function getAuthToken() {
+    return await AsyncStorage.getItem(AUTH_TOKEN_KEY);
 }
 
 export {
     setAuthToken,
-    populateAuthToken,
+    getAuthToken,
     clearAuthToken,
 };
