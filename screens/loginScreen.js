@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, Input, Icon } from 'react-native-elements';
+import { login, getMe } from '../services/user';
 
 
 
@@ -8,6 +9,10 @@ export default class LoginScreen extends Component {
 
     constructor(props) {
         super(props);
+        
+        this.email;
+        this.password;
+        this.userType = this.props.navigation.state.params.userType;
     }
 
     static navigationOptions = {
@@ -21,6 +26,21 @@ export default class LoginScreen extends Component {
         }
     };
 
+    login(email, password) {
+        getMe(email,this.userType)
+            .then((res) => {
+                if (res[0].length > 0) {
+                    login(email, password);
+                } else {
+                    //display error message
+                }
+            })
+            this.navigate('Tab');
+
+
+
+    }
+
     navigate(screen) {
         this.props.navigation.navigate(screen, { userType: this.props.navigation.state.params.userType });
     }
@@ -28,25 +48,88 @@ export default class LoginScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.text}>Login Screen {this.props.navigation.state.params.userType}</Text>
-                <Button title='Sign Up' onPress={() => { this.navigate('SignUp') }} />
-                <Button title='Sign In' onPress={() => { this.navigate('Tab') }} />
+                <Text style={styles.message}>Login Screen {this.props.navigation.state.params.userType}</Text>
+
+                <Input
+                    onChangeText={(email) => { this.email = email }}
+                    containerStyle={styles.input}
+                    placeholder='EMAIL'
+                    leftIcon={
+                        <Icon
+                            name='mail'
+                            size={24}
+                            color='black'
+                            type='feather'
+                        />
+                    }
+
+                />
+
+                <Input
+                    onChangeText={(password) => { this.password = password }}
+                    containerStyle={styles.input}
+                    placeholder='PASSWORD'
+                    leftIcon={
+                        <Icon
+                            name='lock'
+                            size={24}
+                            color='black'
+                            type='octicon'
+                        />
+                    }
+                />
+
+                <View style={styles.buttonsContainer}>
+                    <Text style={styles.signup} onPress={() => { this.navigate('SignUp') }} >Sign Up! </Text>
+                    <Button containerStyle={styles.signin} buttonStyle={styles.button} text='Sign In' onPress={() => { this.login(this.email, this.password); }} />
+                </View>
 
             </View>
+            
         )
     };
 }
 
 const styles = StyleSheet.create({
     container: {
-        padding: 30,
-        backgroundColor: 'blue',
         flex: 1,
-        justifyContent: 'center'
+        padding: 30,
+        backgroundColor: 'white',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
 
-    text: {
+    message: {
         textAlign: 'center'
+    },
+
+    input: {
+        borderColor: 'black',
+        borderRadius: 70,
+        borderWidth: 1,
+        marginTop: 10
+    },
+    
+    buttonsContainer: {
+        marginTop: 10,
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+
+    button: {
+        borderColor: 'blue',
+        backgroundColor: 'blue',
+        borderRadius: 70,
+        borderWidth: 1,
+    },
+
+    signup: {
+        textAlign: 'center',
+        flex: 1,
+    },
+
+    signin: {
+        flex: 1,
     }
 
 });
