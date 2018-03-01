@@ -27,11 +27,7 @@ export default class SignUpScreen extends Component {
     };
 
     async signup() {
-        try {
-            await signup(this.name, this.email, this.password, this.userType);
-        } catch (e) {
-            console.log(e);
-        }
+        await signup(this.name, this.email, this.password, this.userType);
     }
 
     navigate(screen) {

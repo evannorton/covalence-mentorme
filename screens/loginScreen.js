@@ -9,7 +9,7 @@ export default class LoginScreen extends Component {
 
     constructor(props) {
         super(props);
-        
+
         this.email;
         this.password;
         this.userType = this.props.navigation.state.params.userType;
@@ -26,19 +26,12 @@ export default class LoginScreen extends Component {
         }
     };
 
-    login(email, password) {
-        getMe(email,this.userType)
-            .then((res) => {
-                if (res[0].length > 0) {
-                    login(email, password);
-                } else {
-                    //display error message
-                }
-            })
+    async login() {
+        await login(this.email, this.password, this.userType);
+        let res = await getMe();
+        if (res) {
             this.navigate('Tab');
-
-
-
+        }
     }
 
     navigate(screen) {
@@ -81,11 +74,11 @@ export default class LoginScreen extends Component {
 
                 <View style={styles.buttonsContainer}>
                     <Text style={styles.signup} onPress={() => { this.navigate('SignUp') }} >Sign Up! </Text>
-                    <Button containerStyle={styles.signin} buttonStyle={styles.button} text='Sign In' onPress={() => { this.login(this.email, this.password); }} />
+                    <Button containerStyle={styles.signin} buttonStyle={styles.button} text='Sign In' onPress={() => { this.login(); }} />
                 </View>
 
             </View>
-            
+
         )
     };
 }
@@ -109,7 +102,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         marginTop: 10
     },
-    
+
     buttonsContainer: {
         marginTop: 10,
         flexDirection: 'row',
