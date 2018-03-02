@@ -105,8 +105,8 @@ export default class ProfileScreen extends Component {
 
     renderSkills() {
         return (
-            <View style={styles.skills}>
-                <Text>
+            <View style={styles.skillsContainer}>
+                <Text style={styles.skills}>
                     {this.state.me.skills}
                 </Text>
             </View>
@@ -115,9 +115,15 @@ export default class ProfileScreen extends Component {
 
     renderContact() {
         return (
-            <View style={styles.contact}>
-                <Text>
-                    {this.state.me.contact}
+            <View style={styles.contactContainer}>
+                <Text style={styles.contact}  >
+                    CONTACT INFO:
+                </Text>
+                <Text style={styles.contact}>
+                    email: {this.state.me.email}
+                </Text>
+                <Text style={styles.contact}>
+                    phone: {this.state.me.phone}
                 </Text>
             </View>
         )
@@ -143,6 +149,7 @@ export default class ProfileScreen extends Component {
                     {this.renderName()}
                     {this.renderWage()}
                     {this.renderBio()}
+                    {this.renderContact()}
                     {this.renderLogout()}
                 </View>
             );
@@ -153,6 +160,7 @@ export default class ProfileScreen extends Component {
                     {this.renderPhoto()}
                     {this.renderName()}
                     {this.renderBio()}
+                    {this.renderContact()}
                     {this.renderLogout()}
                 </View>
             )
@@ -288,7 +296,7 @@ const styles = StyleSheet.create({
     contact: {
         textAlign: 'center',
         fontWeight: 'bold',
-        fontSize: 20
+        fontSize: 20,
 
     },
 
