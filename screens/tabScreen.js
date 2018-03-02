@@ -5,6 +5,7 @@ import FinanceScreen from './financeScreen';
 import CalendarScreen from './calendarScreen';
 import MessageScreen from './messageScreen';
 import SearchScreen from './searchScreen';
+import { getMe } from '../services/user';
 
 
 const MentorTabNavigation = TabNavigator({
@@ -24,6 +25,13 @@ const StudentTabNavigation = TabNavigator({
 
 export default class TabScreen extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            me: {}
+        }
+    }
+
     static navigationOptions = {
         headerStyle: {
             position: 'absolute',
@@ -35,12 +43,17 @@ export default class TabScreen extends Component {
         }
     };
 
+    async componentDidMount() {
+        let me = await getMe();
+        this.setState({ me });
+    }
+
     navigate(screen) {
         this.props.navigation.navigate(screen);
     }
 
     render() {
-        if (this.props.navigation.state.params.userType === 'Mentor') {
+        if (this.state.me.usertype === 'Mentor') {
             return (
                 <MentorTabNavigation screenProps={this.props} />
             );

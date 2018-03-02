@@ -54,7 +54,7 @@ export default class ProfileScreen extends Component {
 
     renderLogout() {
         return (
-            <View style={flex = 5}>
+            <View style={styles.logout}>
                 <Button
                     text='log out'
                     onPress={() => { this.logout() }}
@@ -125,15 +125,14 @@ const styles = StyleSheet.create({
         bottom: 3
     },
 
-
-
     imgContainer: {
         flex: 4,
         alignItems: 'center',
 
+    },
+
+    logout: {
+        flex: 5
     }
-
-
-
 
 });

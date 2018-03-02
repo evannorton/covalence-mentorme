@@ -7,7 +7,6 @@ async function setAuthToken(token) {
 }
 
 async function clearAuthToken() {
-    console.log('in authservices');
     return await AsyncStorage.removeItem(AUTH_TOKEN_KEY);
 }
 

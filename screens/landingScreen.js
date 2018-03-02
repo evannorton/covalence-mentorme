@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 
-
+//temporary code for testing
+import { login, getMe } from '../services/user';
+//end temporary code
 
 export default class LandingScreen extends Component {
 
@@ -16,6 +18,18 @@ export default class LandingScreen extends Component {
             right: 0
         }
     };
+
+    //temporary code for testing
+
+    async componentDidMount() {
+        await login('admin', 'Admin', 'Mentor');
+        let res = await getMe();
+        if (res) {
+            this.props.navigation.navigate('Tab');
+        }
+    }
+
+    //end temporary code
 
     navigate(userType) {
         this.props.navigation.navigate('Login', { userType });

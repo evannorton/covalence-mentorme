@@ -29,6 +29,7 @@ export default class LoginScreen extends Component {
     async login() {
         await login(this.email, this.password, this.userType);
         let res = await getMe();
+        console.log(res);
         if (res) {
             this.navigate('Tab');
         }

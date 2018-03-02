@@ -4,7 +4,6 @@ import { getAuthToken } from './authToken';
 const BASE_URL = 'https://en-mentorme.herokuapp.com';
 
 async function makeFetch(url, info) {
-    console.log(info);
     return fetch(`${BASE_URL}${url}`, info);
 }
 

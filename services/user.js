@@ -32,7 +32,6 @@ async function login(email, password, usertype) {
 }
 
 async function logout() {
-    console.log('in the logout function');
     await AuthServices.clearAuthToken();
 }
 
@@ -45,7 +44,7 @@ async function signup(name, email, password, usertype) {
     });
 }
 
-async function getMe(email, usertype) {
+async function getMe() {
     return RestServices.get('/api/users/me');
 }
 
