@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text } from 'react-native';
 import { Button } from 'react-native-elements';
-import { logout, getMe } from '../services/user';
+import { logout, getMe, getMentorSkills, getMentorSubjects } from '../services/user';
+
 
 
 
@@ -10,7 +11,9 @@ export default class ProfileScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            me: {}
+            me: {},
+            subjects: [],
+            skills: []
         }
     }
 
@@ -27,7 +30,14 @@ export default class ProfileScreen extends Component {
 
     async componentDidMount() {
         let me = await getMe();
-        this.setState({ me });
+        let subjects = await getMentorSubjects(me.id);
+        let skills = await getMentorSkills(me.id);
+        this.setState({
+            me,
+            subjects,
+            skills
+        });
+        console.log(subjects)
     }
 
     async logout() {
@@ -52,6 +62,68 @@ export default class ProfileScreen extends Component {
         )
     }
 
+    renderName() {
+        return (
+            <View style={styles.nameContainer}>
+                <Text style={styles.name}>
+                    {this.state.me.name}
+                </Text>
+            </View>
+        )
+    }
+
+    renderWage() {
+        return (
+            <View style={styles.wageContainer}>
+                <Text style={styles.wage}>
+                    ${this.state.me.rate}/hour
+                </Text>
+            </View>
+        )
+    }
+
+
+    renderBio() {
+        return (
+            <View style={styles.bio}>
+                <Text>
+                    {this.state.me.bio}
+                </Text>
+            </View>
+        )
+    }
+
+    renderSubjects() {
+        return (
+            <View style={styles.subjects}>
+                <Text>
+                    {this.state.me.subjects}
+                </Text>
+            </View>
+        )
+    }
+
+    renderSkills() {
+        return (
+            <View style={styles.skills}>
+                <Text>
+                    {this.state.me.skills}
+                </Text>
+            </View>
+        )
+    }
+
+    renderContact() {
+        return (
+            <View style={styles.contact}>
+                <Text>
+                    {this.state.me.contact}
+                </Text>
+            </View>
+        )
+    }
+
+
     renderLogout() {
         return (
             <View style={styles.logout}>
@@ -67,8 +139,10 @@ export default class ProfileScreen extends Component {
         if (this.state.me.usertype === 'Mentor') {
             return (
                 <View style={styles.container}>
-                    <Text style={styles.text}>Mentor Screen</Text>
                     {this.renderPhoto()}
+                    {this.renderName()}
+                    {this.renderWage()}
+                    {this.renderBio()}
                     {this.renderLogout()}
                 </View>
             );
@@ -76,8 +150,9 @@ export default class ProfileScreen extends Component {
         } else {
             return (
                 <View style={styles.container}>
-                    <Text style={styles.text}>Student Screen</Text>
                     {this.renderPhoto()}
+                    {this.renderName()}
+                    {this.renderBio()}
                     {this.renderLogout()}
                 </View>
             )
@@ -88,14 +163,16 @@ export default class ProfileScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         paddingTop: 80,
-        backgroundColor: 'blue',
+        backgroundColor: 'transparent',
         flex: 1,
         flexDirection: 'column',
 
     },
 
     text: {
-        textAlign: 'center'
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 20
     },
 
     image: {
@@ -126,13 +203,94 @@ const styles = StyleSheet.create({
     },
 
     imgContainer: {
-        flex: 4,
+        flex: 0,
         alignItems: 'center',
+        borderColor: 'black',
+        borderWidth: 2,
+
 
     },
 
     logout: {
-        flex: 5
-    }
+        flex: 0,
+        borderColor: 'black',
+        borderWidth: 2
+    },
+
+    bio: {
+        borderColor: 'black',
+        borderWidth: 2,
+        flex: 0,
+        paddingLeft: 20,
+        paddingRight: 20,
+
+    },
+
+    nameContainer: {
+        borderColor: 'black',
+        borderWidth: 2,
+        flex: 0,
+
+    },
+
+    name: {
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 30
+
+    },
+
+    wageContainer: {
+        borderColor: 'black',
+        borderWidth: 2,
+        flex: 0,
+    },
+
+    wage: {
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 20
+
+    },
+
+    subjectsContainer: {
+        borderColor: 'black',
+        borderWidth: 2,
+        flex: 0,
+    },
+
+    subjects: {
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 20
+
+    },
+
+    skillsContainer: {
+        borderColor: 'black',
+        borderWidth: 2,
+        flex: 0,
+    },
+
+    skills: {
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 20
+
+    },
+
+    contactContainer: {
+        borderColor: 'black',
+        borderWidth: 2,
+        flex: 0,
+    },
+
+    contact: {
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 20
+
+    },
+
 
 });

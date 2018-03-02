@@ -5,8 +5,16 @@ async function isLoggedIn() {
     return checkLogin();
 }
 
+async function getMentorSubjects(userid) {
+    return await RestServices.get(`/api/mentorSubjects/${userid}`);
+}
+
+async function getMentorSkills(userid) {
+    return await RestServices.get(`/api/mentorSkills/${userid}`);
+}
+
 async function checkLogin() {
-    await RestServices.getAuthToken();
+    await AuthServices.getAuthToken();
 
     try {
         const user = await me();
@@ -48,4 +56,4 @@ async function getMe() {
     return RestServices.get('/api/users/me');
 }
 
-export { isLoggedIn, checkLogin, login, logout, signup, getMe };
+export { isLoggedIn, checkLogin, login, logout, signup, getMe, getMentorSkills, getMentorSubjects };
