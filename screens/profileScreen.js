@@ -13,9 +13,10 @@ export default class ProfileScreen extends Component {
         this.state = {
             me: {},
             subjects: [],
-            skills: []
+            skills: [],
+            photos: {}
         }
-    }
+    };
 
     static navigationOptions = {
         headerStyle: {
@@ -38,16 +39,26 @@ export default class ProfileScreen extends Component {
             skills
         });
         console.log(subjects)
-    }
+    };
 
     async logout() {
         await logout();
         this.props.screenProps.navigation.navigate('Home');
-    }
+    };
 
     photo() {
-        alert('Clicked')
-    }
+        CameraRoll.getPhotos({
+            first: 12,
+            assetType: 'Photos',
+        })
+            .then(r => {
+                this.setState({ photos: r.edges });
+            })
+            .catch((err) => {
+                //Error Loading Images
+            })
+    };
+
 
     renderPhoto() {
         return (
@@ -64,7 +75,7 @@ export default class ProfileScreen extends Component {
                 </View>
             </View>
         )
-    }
+    };
 
     renderName() {
         return (
@@ -74,7 +85,7 @@ export default class ProfileScreen extends Component {
                 </Text>
             </View>
         )
-    }
+    };
 
     renderWage() {
         return (
@@ -84,7 +95,7 @@ export default class ProfileScreen extends Component {
                 </Text>
             </View>
         )
-    }
+    };
 
 
     renderBio() {
