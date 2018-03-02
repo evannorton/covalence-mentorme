@@ -9,6 +9,9 @@ export default class ProfileScreen extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            me: {}
+        }
     }
 
     static navigationOptions = {
@@ -22,26 +25,50 @@ export default class ProfileScreen extends Component {
         }
     };
 
+    async componentDidMount() {
+        let me = await getMe();
+        this.setState({ me });
+    }
+
     async logout() {
         await logout();
         this.props.screenProps.navigation.navigate('Home');
     }
 
+    renderPhoto() {
+        return (
+            <View style={styles.imgContainer} >
+                <Image
+                    style={styles.image}
+                    source={require('../images/profilephoto.jpg')}
+                />
+                <View style={styles.plusContainer}>
+                    <Text style={styles.plus}>
+                        +
+                    </Text>
+
+                </View>
+            </View>
+        )
+    }
+
     renderLogout() {
         return (
-            <Button
-                text='log out'
-                onPress={() => { this.logout() }}
-            />
+            <View style={flex = 5}>
+                <Button
+                    text='log out'
+                    onPress={() => { this.logout() }}
+                />
+            </View>
         );
     }
 
     render() {
-
-        if (this.props.screenProps.navigation.state.params.userType === 'Mentor') {
+        if (this.state.me.usertype === 'Mentor') {
             return (
                 <View style={styles.container}>
                     <Text style={styles.text}>Mentor Screen</Text>
+                    {this.renderPhoto()}
                     {this.renderLogout()}
                 </View>
             );
@@ -50,6 +77,7 @@ export default class ProfileScreen extends Component {
             return (
                 <View style={styles.container}>
                     <Text style={styles.text}>Student Screen</Text>
+                    {this.renderPhoto()}
                     {this.renderLogout()}
                 </View>
             )
@@ -59,14 +87,53 @@ export default class ProfileScreen extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 30,
+        paddingTop: 80,
         backgroundColor: 'blue',
         flex: 1,
-        justifyContent: 'center'
+        flexDirection: 'column',
+
     },
 
     text: {
         textAlign: 'center'
+    },
+
+    image: {
+        resizeMode: 'cover',
+        width: 150,
+        height: 150,
+        borderRadius: 75
+    },
+
+    plusContainer: {
+        width: 30,
+        height: 30,
+        backgroundColor: 'rgba(255,254,226,0.7)',
+        borderColor: 'white',
+        borderWidth: 1,
+        borderRadius: 15,
+        bottom: 33,
+        left: 50,
+        justifyContent: 'center',
+
+
+    },
+
+    plus: {
+        textAlign: 'center',
+        fontSize: 40,
+        bottom: 3
+    },
+
+
+
+    imgContainer: {
+        flex: 4,
+        alignItems: 'center',
+
     }
+
+
+
 
 });

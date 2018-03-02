@@ -44,7 +44,7 @@ export default class LoginScreen extends Component {
                 <Text style={styles.message}>Login Screen {this.props.navigation.state.params.userType}</Text>
 
                 <Input
-                    onChangeText={(email) => { this.email = email }}
+                    onChangeText={(email) => { this.email = email.toLowerCase() }}
                     containerStyle={styles.input}
                     placeholder='EMAIL'
                     leftIcon={
