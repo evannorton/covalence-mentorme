@@ -45,6 +45,10 @@ export default class ProfileScreen extends Component {
         this.props.screenProps.navigation.navigate('Home');
     }
 
+    photo() {
+        alert('Clicked')
+    }
+
     renderPhoto() {
         return (
             <View style={styles.imgContainer} >
@@ -53,7 +57,7 @@ export default class ProfileScreen extends Component {
                     source={require('../images/profilephoto.jpg')}
                 />
                 <View style={styles.plusContainer}>
-                    <Text style={styles.plus}>
+                    <Text style={styles.plus} onPress={() => { this.photo() }}>
                         +
                     </Text>
 
