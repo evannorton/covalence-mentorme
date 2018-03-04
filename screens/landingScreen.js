@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text } from 'react-native';
 import { Button } from 'react-native-elements';
+import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
 
 //temporary code for testing
 import { login, getMe } from '../services/user';
@@ -8,16 +9,7 @@ import { login, getMe } from '../services/user';
 
 export default class LandingScreen extends Component {
 
-    static navigationOptions = {
-        headerStyle: {
-            position: 'absolute',
-            backgroundColor: 'transparent',
-            zIndex: 100,
-            top: 0,
-            left: 0,
-            right: 0
-        }
-    };
+    static navigationOptions = DEFAULT_NAVIGATION_OPTIONS;
 
     //temporary code for testing
 

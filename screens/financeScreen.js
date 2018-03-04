@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text } from 'react-native';
 import { Button } from 'react-native-elements';
-
+import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
 
 
 export default class FinanceScreen extends Component {
@@ -10,16 +10,7 @@ export default class FinanceScreen extends Component {
         super(props);
     }
 
-    static navigationOptions = {
-        headerStyle: {
-            position: 'absolute',
-            backgroundColor: 'transparent',
-            zIndex: 100,
-            top: 0,
-            left: 0,
-            right: 0
-        }
-    };
+    static navigationOptions = DEFAULT_NAVIGATION_OPTIONS;
 
     navigate(screen) {
         userType = this.props.navigation.state.params.userType;

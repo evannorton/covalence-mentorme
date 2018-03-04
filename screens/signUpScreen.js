@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text } from 'react-native';
 import { Button, Input, Icon } from 'react-native-elements';
 import { signup } from '../services/user';
-
-
+import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
 
 export default class SignUpScreen extends Component {
 
@@ -15,19 +14,11 @@ export default class SignUpScreen extends Component {
         this.userType = this.props.navigation.state.params.userType;
     }
 
-    static navigationOptions = {
-        headerStyle: {
-            position: 'absolute',
-            backgroundColor: 'transparent',
-            zIndex: 100,
-            top: 0,
-            left: 0,
-            right: 0
-        }
-    };
+    static navigationOptions = DEFAULT_NAVIGATION_OPTIONS;
 
     async signup() {
         await signup(this.name, this.email.toLowerCase(), this.password, this.userType);
+
     }
 
     navigate(screen) {

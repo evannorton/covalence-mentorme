@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text } from 'react-native';
 import { Button, Input, Icon } from 'react-native-elements';
 import { login, getMe } from '../services/user';
+import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
 
 
 
@@ -15,16 +16,7 @@ export default class LoginScreen extends Component {
         this.userType = this.props.navigation.state.params.userType;
     }
 
-    static navigationOptions = {
-        headerStyle: {
-            position: 'absolute',
-            backgroundColor: 'transparent',
-            zIndex: 100,
-            top: 0,
-            left: 0,
-            right: 0
-        }
-    };
+    static navigationOptions = DEFAULT_NAVIGATION_OPTIONS;
 
     async login() {
         await login(this.email, this.password, this.userType);
@@ -35,8 +27,8 @@ export default class LoginScreen extends Component {
         }
     }
 
-    navigate(screen) {
-        this.props.navigation.navigate(screen, { userType: this.props.navigation.state.params.userType });
+    navigate(screen, props) {
+        this.props.navigation.navigate(screen, props);
     }
 
     render() {
@@ -74,7 +66,7 @@ export default class LoginScreen extends Component {
                 />
 
                 <View style={styles.buttonsContainer}>
-                    <Text style={styles.signup} onPress={() => { this.navigate('SignUp') }} >Sign Up! </Text>
+                    <Text style={styles.signup} onPress={() => { this.navigate('SignUp', { userType: this.props.navigation.state.params.userType }) }} >Sign Up! </Text>
                     <Button containerStyle={styles.signin} buttonStyle={styles.button} text='Sign In' onPress={() => { this.login(); }} />
                 </View>
 
