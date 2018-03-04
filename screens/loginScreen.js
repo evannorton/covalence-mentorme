@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { Button, Input, Icon } from 'react-native-elements';
-import { login, getMe } from '../services/user';
+
 import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
-
-
+import { login, getMe } from '../services/user';
 
 export default class LoginScreen extends Component {
 
@@ -66,13 +65,13 @@ export default class LoginScreen extends Component {
                 />
 
                 <View style={styles.buttonsContainer}>
-                    <Text style={styles.signup} onPress={() => { this.navigate('SignUp', { userType: this.props.navigation.state.params.userType }) }} >Sign Up! </Text>
+                    <Text style={styles.signup} onPress={() => { this.navigate('SignUp', { userType: this.props.navigation.state.params.userType }) }} >First time user?</Text>
                     <Button containerStyle={styles.signin} buttonStyle={styles.button} text='Sign In' onPress={() => { this.login(); }} />
                 </View>
 
             </View>
 
-        )
+        );
     };
 }
 

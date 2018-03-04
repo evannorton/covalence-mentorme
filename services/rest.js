@@ -1,4 +1,5 @@
 import { AsyncStorage } from 'react-native';
+
 import { getAuthToken } from './authToken';
 
 const BASE_URL = 'https://en-mentorme.herokuapp.com';

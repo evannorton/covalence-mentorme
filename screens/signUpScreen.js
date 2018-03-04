@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { Button, Input, Icon } from 'react-native-elements';
-import { signup } from '../services/user';
+
 import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
+import { signup } from '../services/user';
 
 export default class SignUpScreen extends Component {
 
@@ -78,10 +79,8 @@ export default class SignUpScreen extends Component {
                         this.signup();
                     }}
                 />
-
-
             </View>
-        )
+        );
     };
 }
 
@@ -93,10 +92,6 @@ const styles = StyleSheet.create({
         margin: 0,
         alignItems: 'center'
 
-    },
-
-    text: {
-        textAlign: 'center'
     },
 
     input: {
@@ -114,6 +109,5 @@ const styles = StyleSheet.create({
         marginTop: 10
 
     }
-
 
 });

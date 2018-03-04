@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { Button } from 'react-native-elements';
+
 import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
 
 //temporary code for testing
@@ -30,11 +31,11 @@ export default class LandingScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.text}>Mentor.Me</Text>
+                <Text style={styles.text}>MentorMe</Text>
                 <Button text='Mentors' onPress={() => { this.navigate('Mentor') }} />
                 <Button text='Students' onPress={() => { this.navigate('Student') }} />
             </View>
-        )
+        );
     };
 }
 

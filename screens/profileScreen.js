@@ -46,7 +46,6 @@ export default class ProfileScreen extends Component {
                     <ProfileLogout />
                 </View>
             );
-
         } else {
             return (
                 <View style={styles.container}>

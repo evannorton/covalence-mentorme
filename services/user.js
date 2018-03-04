@@ -1,5 +1,5 @@
-import * as RestServices from './rest';
 import * as AuthServices from './authToken';
+import * as RestServices from './rest';
 
 async function isLoggedIn() {
     return checkLogin();
