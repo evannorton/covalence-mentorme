@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
-import { Button } from 'react-native-elements';
-import { logout, getMe, getMentorSkills, getMentorSubjects } from '../services/user';
+import { View, StyleSheet } from 'react-native';
+import { getMe, getMentorSkills, getMentorSubjects } from '../services/user';
 import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
+
+import ProfilePhoto from '../components/profilePhoto';
+import ProfileName from '../components/profileName';
+import ProfileWage from '../components/profileWage'; //mentor only
+import ProfileBio from '../components/profileBio';
+import ProfileContact from '../components/profileContact';
+import ProfileLogout from '../components/profileLogout';
 
 export default class ProfileScreen extends Component {
 
@@ -11,8 +17,7 @@ export default class ProfileScreen extends Component {
         this.state = {
             me: {},
             subjects: [],
-            skills: [],
-            photos: {}
+            skills: []
         }
     };
 
@@ -27,145 +32,29 @@ export default class ProfileScreen extends Component {
             subjects,
             skills
         });
-        console.log(subjects)
     };
-
-    async logout() {
-        await logout();
-        this.props.screenProps.navigation.navigate('Home');
-    };
-
-    photo() {
-        CameraRoll.getPhotos({
-            first: 12,
-            assetType: 'Photos',
-        })
-            .then(r => {
-                this.setState({ photos: r.edges });
-            })
-            .catch((err) => {
-                //Error Loading Images
-            })
-    };
-
-
-    renderPhoto() {
-        return (
-            <View style={styles.imgContainer} >
-                <Image
-                    style={styles.image}
-                    source={require('../images/profilephoto.jpg')}
-                />
-                <View style={styles.plusContainer}>
-                    <Text style={styles.plus} onPress={() => { this.photo() }}>
-                        +
-                    </Text>
-
-                </View>
-            </View>
-        )
-    };
-
-    renderName() {
-        return (
-            <View style={styles.nameContainer}>
-                <Text style={styles.name}>
-                    {this.state.me.name}
-                </Text>
-            </View>
-        )
-    };
-
-    renderWage() {
-        return (
-            <View style={styles.wageContainer}>
-                <Text style={styles.wage}>
-                    ${this.state.me.rate}/hour
-                </Text>
-            </View>
-        )
-    };
-
-
-    renderBio() {
-        return (
-            <View style={styles.bio}>
-                <Text>
-                    {this.state.me.bio}
-                </Text>
-            </View>
-        )
-    }
-
-    renderSubjects() {
-        return (
-            <View style={styles.subjects}>
-                <Text>
-                    {this.state.me.subjects}
-                </Text>
-            </View>
-        )
-    }
-
-    renderSkills() {
-        return (
-            <View style={styles.skillsContainer}>
-                <Text style={styles.skills}>
-                    {this.state.me.skills}
-                </Text>
-            </View>
-        )
-    }
-
-    renderContact() {
-        return (
-            <View style={styles.contactContainer}>
-                <Text style={styles.contact}  >
-                    CONTACT INFO:
-                </Text>
-                <Text style={styles.contact}>
-                    email: {this.state.me.email}
-                </Text>
-                <Text style={styles.contact}>
-                    phone: {this.state.me.phone}
-                </Text>
-            </View>
-        )
-    }
-
-
-    renderLogout() {
-        return (
-            <View style={styles.logout}>
-                <Button
-                    text='log out'
-                    onPress={() => { this.logout() }}
-                />
-            </View>
-        );
-    }
 
     render() {
         if (this.state.me.usertype === 'Mentor') {
             return (
                 <View style={styles.container}>
-                    {this.renderPhoto()}
-                    {this.renderName()}
-                    {this.renderWage()}
-                    {this.renderBio()}
-                    {this.renderContact()}
-                    {this.renderLogout()}
+                    <ProfilePhoto />
+                    <ProfileName name={this.state.me.name} />
+                    <ProfileWage wage={this.state.me.wage} />
+                    <ProfileBio bio={this.state.me.bio} />
+                    <ProfileContact email={this.state.me.email} phone={this.state.me.phone} />
+                    <ProfileLogout />
                 </View>
             );
 
         } else {
             return (
                 <View style={styles.container}>
-                    {this.renderPhoto()}
-                    {this.renderName()}
-                    {this.renderBio()}
-                    {this.renderContact()}
-                    {this.renderLogout()}
+                    <ProfilePhoto />
+                    <ProfileName name={this.state.me.name} />
+                    <ProfileBio bio={this.state.me.bio} />
+                    <ProfileContact email={this.state.me.email} phone={this.state.me.phone} />
+                    <ProfileLogout />
                 </View>
             )
         }
@@ -173,136 +62,12 @@ export default class ProfileScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+
     container: {
         paddingTop: 80,
         backgroundColor: 'transparent',
         flex: 1,
         flexDirection: 'column',
-
-    },
-
-    text: {
-        textAlign: 'center',
-        fontWeight: 'bold',
-        fontSize: 20
-    },
-
-    image: {
-        resizeMode: 'cover',
-        width: 150,
-        height: 150,
-        borderRadius: 75
-    },
-
-    plusContainer: {
-        width: 30,
-        height: 30,
-        backgroundColor: 'rgba(255,254,226,0.7)',
-        borderColor: 'white',
-        borderWidth: 1,
-        borderRadius: 15,
-        bottom: 33,
-        left: 50,
-        justifyContent: 'center',
-
-
-    },
-
-    plus: {
-        textAlign: 'center',
-        fontSize: 40,
-        bottom: 3
-    },
-
-    imgContainer: {
-        flex: 0,
-        alignItems: 'center',
-        borderColor: 'black',
-        borderWidth: 2,
-
-
-    },
-
-    logout: {
-        flex: 0,
-        borderColor: 'black',
-        borderWidth: 2
-    },
-
-    bio: {
-        borderColor: 'black',
-        borderWidth: 2,
-        flex: 0,
-        paddingLeft: 20,
-        paddingRight: 20,
-
-    },
-
-    nameContainer: {
-        borderColor: 'black',
-        borderWidth: 2,
-        flex: 0,
-
-    },
-
-    name: {
-        textAlign: 'center',
-        fontWeight: 'bold',
-        fontSize: 30
-
-    },
-
-    wageContainer: {
-        borderColor: 'black',
-        borderWidth: 2,
-        flex: 0,
-    },
-
-    wage: {
-        textAlign: 'center',
-        fontWeight: 'bold',
-        fontSize: 20
-
-    },
-
-    subjectsContainer: {
-        borderColor: 'black',
-        borderWidth: 2,
-        flex: 0,
-    },
-
-    subjects: {
-        textAlign: 'center',
-        fontWeight: 'bold',
-        fontSize: 20
-
-    },
-
-    skillsContainer: {
-        borderColor: 'black',
-        borderWidth: 2,
-        flex: 0,
-    },
-
-    skills: {
-        textAlign: 'center',
-        fontWeight: 'bold',
-        fontSize: 20
-
-    },
-
-    contactContainer: {
-        borderColor: 'black',
-        borderWidth: 2,
-        flex: 0,
-    },
-
-    contact: {
-        textAlign: 'center',
-        fontWeight: 'bold',
-        fontSize: 20,
-
-    },
-
+    }
 
 });
