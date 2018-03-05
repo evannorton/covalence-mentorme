@@ -34,30 +34,27 @@ export default class ProfileScreen extends Component {
         });
     };
 
-    render() {
+    renderWage() {
         if (this.state.me.usertype === 'Mentor') {
             return (
-                <View style={styles.container}>
-                    <ProfilePhoto />
-                    <ProfileName name={this.state.me.name} />
-                    <ProfileWage wage={this.state.me.wage} />
-                    <ProfileBio bio={this.state.me.bio} />
-                    <ProfileContact email={this.state.me.email} phone={this.state.me.phone} />
-                    <ProfileLogout />
-                </View>
+                <ProfileWage wage={this.state.me.wage} />
             );
-        } else {
-            return (
-                <View style={styles.container}>
-                    <ProfilePhoto />
-                    <ProfileName name={this.state.me.name} />
-                    <ProfileBio bio={this.state.me.bio} />
-                    <ProfileContact email={this.state.me.email} phone={this.state.me.phone} />
-                    <ProfileLogout />
-                </View>
-            )
         }
+    }
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <ProfilePhoto />
+                <ProfileName name={this.state.me.name} />
+                {this.renderWage()}
+                <ProfileBio bio={this.state.me.bio} />
+                <ProfileContact email={this.state.me.email} phone={this.state.me.phone} />
+                <ProfileLogout />
+            </View>
+        );
     };
+
 }
 
 const styles = StyleSheet.create({
