@@ -28,16 +28,14 @@ export default class CameraRollScreen extends Component {
 
         let userid = this.userid;
         let uri = images[0].uri;
-        console.log(uri);
 
         const data = new FormData();
         data.append('image', {
-            userid,
             uri,
             type: 'image/jpeg',
             name: 'profile'
         });
-        fetch('https://en-mentorme.herokuapp.com/api/images', {
+        fetch(`https://en-mentorme.herokuapp.com/api/images/${userid}`, {
             method: 'post',
             body: data
         }).then((res) => {
