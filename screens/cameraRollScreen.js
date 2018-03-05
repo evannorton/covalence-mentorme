@@ -3,9 +3,14 @@ import { ScrollView } from 'react-native';
 
 import CameraRollPicker from 'react-native-camera-roll-picker';
 
-import { post } from '../services/rest';
+import { postForm } from '../services/rest';
 
 export default class CameraRollScreen extends Component {
+
+    constructor(props) {
+        super(props);
+        userid = this.props.navigation.state.params.userid;
+    }
 
     static navigationOptions = {
         headerLeft: null,
@@ -20,25 +25,24 @@ export default class CameraRollScreen extends Component {
     };
 
     getImage(images) {
-        let uri = images[0].uri;
-        const data = new FormData();
 
-        /*
-        data.append('name', 'testName'); // you can append anyone.
+        let userid = this.userid;
+        let uri = images[0].uri;
+        console.log(uri);
+
+        const data = new FormData();
         data.append('image', {
-            uri: image.uri,
-            type: 'image/jpeg', // or photo.type
-            name: 'testPhotoName'
+            userid,
+            uri,
+            type: 'image/jpeg',
+            name: 'profile'
         });
-        fetch(url, {
+        fetch('https://en-mentorme.herokuapp.com/api/images', {
             method: 'post',
             body: data
-        }).then(res => {
-            console.log(res)
-        });
-        post('/api/images', )
-        */
-
+        }).then((res) => {
+            console.log(res);
+        })
     }
 
     render() {

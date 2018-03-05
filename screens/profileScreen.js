@@ -32,7 +32,7 @@ export default class ProfileScreen extends Component {
             subjects,
             skills
         });
-    };
+    }
 
     renderWage() {
         if (this.state.me.usertype === 'Mentor') {
@@ -45,7 +45,7 @@ export default class ProfileScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <ProfilePhoto navigate={this.props.screenProps.navigation.navigate} />
+                <ProfilePhoto userid={this.state.me.id} navigate={this.props.screenProps.navigation.navigate} />
                 <ProfileName name={this.state.me.name} />
                 {this.renderWage()}
                 <ProfileBio bio={this.state.me.bio} />

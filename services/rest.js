@@ -17,6 +17,7 @@ async function json(url, method = 'GET', payload = {}) {
     if (!!authToken) {
         headers.Authorization = authToken;
     }
+
     const data = {
         method,
         body: JSON.stringify(payload),
