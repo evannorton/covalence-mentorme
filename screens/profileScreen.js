@@ -45,7 +45,7 @@ export default class ProfileScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <ProfilePhoto />
+                <ProfilePhoto navigate={this.props.screenProps.navigation.navigate} />
                 <ProfileName name={this.state.me.name} />
                 {this.renderWage()}
                 <ProfileBio bio={this.state.me.bio} />

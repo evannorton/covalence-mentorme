@@ -11,11 +11,14 @@ export default class ProfilePhoto extends Component {
                     source={require('../images/profilephoto.jpg')}
                 />
                 <View style={styles.plusContainer}>
-                    <Text style={styles.plus}>
+                    <Text style={styles.plus} onPress={() => {
+                        console.log(this.props);
+                        this.props.navigate('CameraRoll')
+                    }}>
                         +
                     </Text>
                 </View>
-            </View>
+            </View >
         );
     }
 

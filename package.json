@@ -9,6 +9,7 @@
     "dependencies": {
         "react": "16.2.0",
         "react-native": "0.53.3",
+        "react-native-camera-roll-picker": "^1.2.3",
         "react-native-elements": "^1.0.0-beta2",
         "react-native-vector-icons": "^4.5.0",
         "react-navigation": "^1.2.1"
