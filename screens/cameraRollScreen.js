@@ -28,8 +28,8 @@ export default class CameraRollScreen extends Component {
             type: 'image/jpeg',
             name: 'profile'
         });
-        fetch(`https://en-mentorme.herokuapp.com/api/images/${userid}`, {
-            method: 'post',
+        fetch(`https://en-mentorme.herokuapp.com/api/users/images/${userid}`, {
+            method: 'put',
             body: data
         }).then((res) => {
             this.navigate('Tab');

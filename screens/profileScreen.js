@@ -9,6 +9,7 @@ import ProfileWage from '../components/profileWage'; //mentor only
 import ProfileBio from '../components/profileBio';
 import ProfileContact from '../components/profileContact';
 import ProfileLogout from '../components/profileLogout';
+import ProfileAttributes from '../components/profileAttributes';
 
 export default class ProfileScreen extends Component {
 
@@ -42,6 +43,14 @@ export default class ProfileScreen extends Component {
         }
     }
 
+    renderAttributes() {
+        if (this.state.me.usertype === 'Mentor') {
+            return (
+                <ProfileAttributes subjects={this.state.subjects} skills={this.state.skills} />
+            );
+        }
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -51,6 +60,7 @@ export default class ProfileScreen extends Component {
                 <ProfileBio bio={this.state.me.bio} />
                 <ProfileContact email={this.state.me.email} phone={this.state.me.phone} />
                 <ProfileLogout navigate={this.props.screenProps.navigation.navigate} />
+                {this.renderAttributes()}
             </View>
         );
     };
