@@ -6,7 +6,8 @@ import CalendarScreen from './calendarScreen';
 import MessageScreen from './messageScreen';
 import SearchScreen from './searchScreen';
 import { getMe } from '../services/user';
-import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
+
+import { DEFAULT_NAVIGATION_NO_ARROW } from '../services/navigation';
 
 
 const MentorTabNavigation = TabNavigator({
@@ -33,7 +34,7 @@ export default class TabScreen extends Component {
         }
     }
 
-    static navigationOptions = DEFAULT_NAVIGATION_OPTIONS;
+    static navigationOptions = DEFAULT_NAVIGATION_NO_ARROW;
 
     async componentDidMount() {
         let me = await getMe();

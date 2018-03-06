@@ -4,6 +4,7 @@ import { ScrollView } from 'react-native';
 import CameraRollPicker from 'react-native-camera-roll-picker';
 
 import { postForm } from '../services/rest';
+import { DEFAULT_NAVIGATION_NO_ARROW } from '../services/navigation';
 
 export default class CameraRollScreen extends Component {
 
@@ -12,17 +13,7 @@ export default class CameraRollScreen extends Component {
         userid = this.props.navigation.state.params.userid;
     }
 
-    static navigationOptions = {
-        headerLeft: null,
-        headerStyle: {
-            position: 'absolute',
-            backgroundColor: 'transparent',
-            zIndex: 100,
-            top: 0,
-            left: 0,
-            right: 0
-        }
-    };
+    static navigationOptions = DEFAULT_NAVIGATION_NO_ARROW;
 
     getImage(images) {
 
