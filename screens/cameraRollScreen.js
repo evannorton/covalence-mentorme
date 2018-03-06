@@ -18,6 +18,7 @@ export default class CameraRollScreen extends Component {
 
     getImage(images) {
 
+        console.log(images);
         let userid = this.userid;
         let uri = images[0].uri;
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { View, StyleSheet } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 
 import ProfileScreen from './profileScreen';
@@ -58,14 +59,26 @@ export default class TabScreen extends Component {
     render() {
         if (this.state.me.usertype === 'Mentor') {
             return (
-                <MentorTabNavigation navigate={this.props.navigation.navigate} screenProps={this.props} />
+                <View style={styles.container}>
+                    <MentorTabNavigation navigate={this.props.navigation.navigate} screenProps={this.props} />
+                </View>
             );
 
         } else {
             return (
-                <StudentTabNavigation navigate={this.props.navigation.navigate} screenProps={this.props} />
+                <View style={styles.container}>
+                    <StudentTabNavigation navigate={this.props.navigation.navigate} screenProps={this.props} />
+                </View>
             )
         }
     };
 }
 
+const styles = StyleSheet.create({
+
+    container: {
+        backgroundColor: 'rgb(208,230,210)',
+        flex: 1,
+    }
+
+});

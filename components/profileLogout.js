@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
 import { logout } from '../services/user';
 
@@ -33,8 +33,6 @@ const styles = StyleSheet.create({
 
     button: {
         backgroundColor: 'rgb(135,204,236)',
-
-
     }
 
 });

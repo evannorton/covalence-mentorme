@@ -60,9 +60,13 @@ export default class ProfileScreen extends Component {
 const styles = StyleSheet.create({
 
     container: {
-        backgroundColor: 'rgb(208,230,210)',
+        margin: 20,
+        backgroundColor: 'rgba(255,255,255,0.5)',
         flex: 1,
         flexDirection: 'column',
+        borderColor: 'rgba(255,255,255,0.5)',
+        borderWidth: 1,
+        borderRadius: 100
     }
 
 });
