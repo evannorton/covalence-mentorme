@@ -90,7 +90,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         margin: 0,
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: 'rgb(208,230,210)',
 
     },
 
@@ -102,8 +103,8 @@ const styles = StyleSheet.create({
     },
 
     button: {
-        borderColor: 'blue',
-        backgroundColor: 'blue',
+        borderColor: 'rgb(135,204,236)',
+        backgroundColor: 'rgb(135,204,236)',
         borderRadius: 70,
         borderWidth: 1,
         marginTop: 10
