@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Image } from 'react-native';
 import { Button } from 'react-native-elements';
 
 import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
@@ -31,9 +31,11 @@ export default class LandingScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.text}>MentorMe</Text>
-                <Button text='Mentors' onPress={() => { this.navigate('Mentor') }} />
-                <Button text='Students' onPress={() => { this.navigate('Student') }} />
+                <Image style={styles.image}source={require('../images/mentorme.jpeg')}/>
+                <View style={styles.buttonsContainer}> 
+                <Button buttonStyle = {styles.button} textStyle ={styles.text} text='Mentors' onPress={() => { this.navigate('Mentor') }} />
+                <Button buttonStyle = {styles.button} textStyle ={styles.text} text='Students' onPress={() => { this.navigate('Student') }} />
+                </View>
             </View>
         );
     };
@@ -41,15 +43,34 @@ export default class LandingScreen extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 30,
-        backgroundColor: 'blue',
+        
+        backgroundColor: 'rgb(208,230,210)',
         flex: 1,
-        justifyContent: 'center'
+        
+    },
+    image: {
+        resizeMode: 'center',
+        width: 375,
+        height: 200,
+        
+    },
+    buttonsContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        
     },
 
-    text: {
-        textAlign: 'center',
-        fontWeight: 'bold'
+    button: {
+        borderColor: 'rgb(135,204,236)',
+        backgroundColor: 'rgb(135,204,236)',
+        borderRadius: 75,
+        borderWidth: 1,
+        height:125,
+        width:125,
+        margin: 30,
+    },
+    text:{
+        color: 'rgb(95,72,47)'
     }
 
-});
+})
