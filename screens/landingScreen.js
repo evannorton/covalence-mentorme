@@ -14,7 +14,7 @@ export default class LandingScreen extends Component {
 
     //temporary code for testing
 
-    async componentDidMount() {
+    async testFunction() {
         await login('admin', 'Admin', 'Mentor');
         let res = await getMe();
         if (res) {
@@ -36,6 +36,7 @@ export default class LandingScreen extends Component {
                     <Button buttonStyle={styles.button} textStyle={styles.text} text='Mentors' onPress={() => { this.navigate('Mentor') }} />
                     <Button buttonStyle={styles.button} textStyle={styles.text} text='Students' onPress={() => { this.navigate('Student') }} />
                 </View>
+                <Button text='TEST BUTTON' onPress={() => { this.testFunction() }} />
             </View>
         );
     };
