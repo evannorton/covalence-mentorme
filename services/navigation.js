@@ -1,6 +1,6 @@
 const DEFAULT_HEADER_STYLE = {
-    position: 'absolute',
-    backgroundColor: 'transparent',
+    position: 'relative',
+    backgroundColor: 'rgb(208,230,210)',
     zIndex: 100,
     top: 0,
     left: 0,

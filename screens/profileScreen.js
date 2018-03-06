@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Platform } from 'react-native';
 import { getMe, getMentorSkills, getMentorSubjects } from '../services/user';
 import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
 
@@ -60,9 +60,17 @@ export default class ProfileScreen extends Component {
 const styles = StyleSheet.create({
 
     container: {
+        ...Platform.select({
+        ios:{
+        backgroundColor: 'rgb(208,230,210)',
+        flex: 1,
+        flexDirection: 'column',
+    },
+    android:{
         backgroundColor: 'rgb(208,230,210)',
         flex: 1,
         flexDirection: 'column',
     }
-
+})
+    }
 });
