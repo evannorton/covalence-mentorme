@@ -60,17 +60,9 @@ export default class ProfileScreen extends Component {
 const styles = StyleSheet.create({
 
     container: {
-        ...Platform.select({
-        ios:{
         backgroundColor: 'rgb(208,230,210)',
         flex: 1,
         flexDirection: 'column',
-    },
-    android:{
-        backgroundColor: 'blue',
-        flex: 1,
-        flexDirection: 'column',
     }
-})
-    }
+
 });

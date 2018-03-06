@@ -34,7 +34,17 @@ export default class TabScreen extends Component {
         }
     }
 
-    static navigationOptions = DEFAULT_NAVIGATION_NO_ARROW;
+    static navigationOptions = {
+        headerLeft: null,
+        headerStyle: {
+            position: 'relative',
+            backgroundColor: 'rgb(208,230,210)',
+            zIndex: 100,
+            top: 0,
+            left: 0,
+            right: 0
+        }
+    }
 
     async componentDidMount() {
         let me = await getMe();
