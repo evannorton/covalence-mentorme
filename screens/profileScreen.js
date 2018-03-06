@@ -61,11 +61,11 @@ const styles = StyleSheet.create({
 
     container: {
         margin: 20,
-        backgroundColor: 'rgba(255,255,255,0.5)',
+        backgroundColor: 'rgba(135,204,236,0.5)',
         flex: 1,
         flexDirection: 'column',
-        borderColor: 'rgba(255,255,255,0.5)',
-        borderWidth: 1,
+        borderColor: 'rgba(135,204,236,0.5)',
+        borderWidth: 3,
         borderRadius: 100
     }
 
