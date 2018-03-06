@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
         bottom: 33,
         left: 50,
         justifyContent: 'center',
+        marginBottom: -31
     },
 
     plus: {
