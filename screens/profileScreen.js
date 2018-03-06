@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
     },
     android:{
-        backgroundColor: 'rgb(208,230,210)',
+        backgroundColor: 'blue',
         flex: 1,
         flexDirection: 'column',
     }
