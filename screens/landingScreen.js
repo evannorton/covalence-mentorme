@@ -31,10 +31,10 @@ export default class LandingScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Image style={styles.image}source={require('../images/mentorme.jpeg')}/>
-                <View style={styles.buttonsContainer}> 
-                <Button buttonStyle = {styles.button} textStyle ={styles.text} text='Mentors' onPress={() => { this.navigate('Mentor') }} />
-                <Button buttonStyle = {styles.button} textStyle ={styles.text} text='Students' onPress={() => { this.navigate('Student') }} />
+                <Image style={styles.image} source={require('../images/mentorme.jpeg')} />
+                <View style={styles.buttonsContainer}>
+                    <Button buttonStyle={styles.button} textStyle={styles.text} text='Mentors' onPress={() => { this.navigate('Mentor') }} />
+                    <Button buttonStyle={styles.button} textStyle={styles.text} text='Students' onPress={() => { this.navigate('Student') }} />
                 </View>
             </View>
         );
@@ -43,21 +43,21 @@ export default class LandingScreen extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        
+
         backgroundColor: 'rgb(208,230,210)',
         flex: 1,
-        
+
     },
     image: {
         resizeMode: 'center',
         width: 375,
         height: 200,
-        
+
     },
     buttonsContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        
+
     },
 
     button: {
@@ -65,11 +65,11 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgb(135,204,236)',
         borderRadius: 75,
         borderWidth: 1,
-        height:125,
-        width:125,
+        height: 125,
+        width: 125,
         margin: 30,
     },
-    text:{
+    text: {
         color: 'rgb(95,72,47)'
     }
 
