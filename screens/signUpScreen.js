@@ -74,6 +74,7 @@ export default class SignUpScreen extends Component {
 
                 <Button
                     text='submit'
+                    containerStyle={styles.buttonContainer}
                     buttonStyle={styles.button}
                     onPress={() => {
                         this.signup();
@@ -100,6 +101,10 @@ const styles = StyleSheet.create({
         borderRadius: 70,
         borderWidth: 1,
         marginTop: 10
+    },
+
+    buttonContainer: {
+        paddingBottom: 5
     },
 
     button: {

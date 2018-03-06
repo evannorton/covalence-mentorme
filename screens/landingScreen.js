@@ -31,10 +31,12 @@ export default class LandingScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Image style={styles.image} source={require('../images/mentorme.jpeg')} />
+                <View style={styles.imageContainer}>
+                    <Image style={styles.image} source={require('../images/mentorme.jpeg')} />
+                </View>
                 <View style={styles.buttonsContainer}>
-                    <Button buttonStyle={styles.button} textStyle={styles.text} text='Mentors' onPress={() => { this.navigate('Mentor') }} />
-                    <Button buttonStyle={styles.button} textStyle={styles.text} text='Students' onPress={() => { this.navigate('Student') }} />
+                    <Button containerStyle={styles.buttonContainer} buttonStyle={styles.button} textStyle={styles.text} text='Mentors' onPress={() => { this.navigate('Mentor') }} />
+                    <Button containerStyle={styles.buttonContainer} buttonStyle={styles.button} textStyle={styles.text} text='Students' onPress={() => { this.navigate('Student') }} />
                 </View>
                 <Button text='TEST BUTTON' onPress={() => { this.testFunction() }} />
             </View>
@@ -44,33 +46,45 @@ export default class LandingScreen extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        borderRadius: 1,
-        borderColor: 'black',
         backgroundColor: 'rgb(208,230,210)',
-        flex: 1,
-
+        flex: 1
     },
+
+    imageContainer: {
+        paddingRight: 20,
+        paddingLeft: 20,
+        flexDirection: 'row',
+        flex: 0,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
     image: {
-        resizeMode: 'center',
-        width: 375,
-        height: 200,
-
+        flex: 1,
+        resizeMode: 'contain'
     },
+
     buttonsContainer: {
+        flex: 0,
         flexDirection: 'row',
         alignItems: 'center',
 
     },
 
+    buttonContainer: {
+        flex: 1,
+        paddingBottom: 5
+    },
+
     button: {
         borderColor: 'rgb(135,204,236)',
         backgroundColor: 'rgb(135,204,236)',
-        borderRadius: 75,
+        borderRadius: 62,
         borderWidth: 1,
-        height: 125,
-        width: 125,
-        margin: 30,
+        height: 124,
+        width: 124,
     },
+
     text: {
         color: 'rgb(95,72,47)'
     }

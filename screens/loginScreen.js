@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     buttonsContainer: {
         marginTop: 10,
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
     },
 
     button: {
@@ -115,6 +115,7 @@ const styles = StyleSheet.create({
 
     signin: {
         flex: 1,
+        paddingBottom: 5
     }
 
 });
