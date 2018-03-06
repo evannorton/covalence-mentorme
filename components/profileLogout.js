@@ -7,7 +7,7 @@ export default class ProfileLogout extends Component {
 
     async logout() {
         await logout();
-        this.props.screenProps.navigation.navigate('Home');
+        this.props.navigate('Home');
     }
 
     render() {
@@ -31,9 +31,9 @@ const styles = StyleSheet.create({
         borderWidth: 2
     },
 
-    button:{
+    button: {
         backgroundColor: 'rgb(135,204,236)',
-        
+
 
     }
 

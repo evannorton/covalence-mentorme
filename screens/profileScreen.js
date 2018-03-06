@@ -50,7 +50,7 @@ export default class ProfileScreen extends Component {
                 {this.renderWage()}
                 <ProfileBio bio={this.state.me.bio} />
                 <ProfileContact email={this.state.me.email} phone={this.state.me.phone} />
-                <ProfileLogout />
+                <ProfileLogout navigate={this.props.screenProps.navigation.navigate} />
             </View>
         );
     };

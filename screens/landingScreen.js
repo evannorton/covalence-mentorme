@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Text, Image } from 'react-native';
 import { Button } from 'react-native-elements';
 
-import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
+import { DEFAULT_NAVIGATION_NO_ARROW } from '../services/navigation';
 
 //temporary code for testing
 import { login, getMe } from '../services/user';
@@ -10,7 +10,7 @@ import { login, getMe } from '../services/user';
 
 export default class LandingScreen extends Component {
 
-    static navigationOptions = DEFAULT_NAVIGATION_OPTIONS;
+    static navigationOptions = DEFAULT_NAVIGATION_NO_ARROW;
 
     //temporary code for testing
 
