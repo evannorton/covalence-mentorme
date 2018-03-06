@@ -7,6 +7,7 @@ import FinanceScreen from './financeScreen';
 import CalendarScreen from './calendarScreen';
 import MessageScreen from './messageScreen';
 import SearchScreen from './searchScreen';
+import HeaderImage from '../components/headerImage'
 
 import { getMe } from '../services/user';
 import { DEFAULT_NAVIGATION_NO_ARROW } from '../services/navigation';
@@ -36,6 +37,9 @@ export default class TabScreen extends Component {
     }
 
     static navigationOptions = {
+        headerTitle:(
+            <HeaderImage/>
+        ),
         headerLeft: null,
         headerStyle: {
             position: 'relative',
