@@ -18,8 +18,6 @@ export default class ProfileName extends Component {
 const styles = StyleSheet.create({
 
     nameContainer: {
-        borderColor: 'black',
-        borderWidth: 2,
         flex: 0,
     },
 

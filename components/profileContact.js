@@ -24,8 +24,6 @@ export default class ProfileContact extends Component {
 const styles = StyleSheet.create({
 
     contactContainer: {
-        borderColor: 'black',
-        borderWidth: 2,
         flex: 0,
     },
 

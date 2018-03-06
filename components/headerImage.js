@@ -1,21 +1,31 @@
-import React, {Component} from 'react'
-import {Image, StyleSheet} from 'react-native'
+import React, { Component } from 'react'
+import { View, Image, StyleSheet } from 'react-native'
 
 export default class HeaderImage extends Component {
 
+    render() {
+        return (
+            <View style={styles.container}>
+                <Image style={styles.image} source={require('../images/mentorme.jpeg')} />
+            </View>
+        );
+    }
 
-
-
-render(){
-    return(
-        <Image style={styles.Image} source={require('../images/mentorme.jpeg')}/>
-    )
 }
-}
+
 const styles = StyleSheet.create({
-    Image:{
-        height: 45,
-        width: 250,
+
+    container: {
+        paddingTop: 10,
+        paddingBottom: 10,
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
+    image: {
+        flex: 1,
+        resizeMode: 'contain'
     }
 
 });

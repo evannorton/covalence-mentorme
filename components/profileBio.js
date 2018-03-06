@@ -18,8 +18,6 @@ export default class ProfileBio extends Component {
 const styles = StyleSheet.create({
 
     bio: {
-        borderColor: 'black',
-        borderWidth: 2,
         flex: 0,
         paddingLeft: 20,
         paddingRight: 20,

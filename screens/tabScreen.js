@@ -10,7 +10,6 @@ import SearchScreen from './searchScreen';
 import HeaderImage from '../components/headerImage'
 
 import { getMe } from '../services/user';
-import { DEFAULT_NAVIGATION_NO_ARROW } from '../services/navigation';
 
 const MentorTabNavigation = TabNavigator({
     Profile: { screen: ProfileScreen },
@@ -37,8 +36,8 @@ export default class TabScreen extends Component {
     }
 
     static navigationOptions = {
-        headerTitle:(
-            <HeaderImage/>
+        headerTitle: (
+            <HeaderImage />
         ),
         headerLeft: null,
         headerStyle: {

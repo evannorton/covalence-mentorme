@@ -28,8 +28,6 @@ const styles = StyleSheet.create({
     Container: {
         flex: 0,
         alignItems: 'center',
-        borderColor: 'black',
-        borderWidth: 2,
     },
 
     image: {

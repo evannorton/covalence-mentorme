@@ -18,8 +18,6 @@ export default class ProfileWage extends Component {
 const styles = StyleSheet.create({
 
     wageContainer: {
-        borderColor: 'black',
-        borderWidth: 2,
         flex: 0,
     },
 

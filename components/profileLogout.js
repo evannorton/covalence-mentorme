@@ -27,12 +27,10 @@ const styles = StyleSheet.create({
 
     logout: {
         flex: 0,
-        borderColor: 'black',
-        borderWidth: 2
     },
 
     button: {
-        backgroundColor: 'rgb(135,204,236)',
+        backgroundColor: 'rgb(95,72,47)',
     }
 
 });
