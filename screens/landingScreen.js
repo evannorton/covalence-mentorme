@@ -43,7 +43,8 @@ export default class LandingScreen extends Component {
 
 const styles = StyleSheet.create({
     container: {
-
+        borderRadius: 1,
+        borderColor: 'black',
         backgroundColor: 'rgb(208,230,210)',
         flex: 1,
 
