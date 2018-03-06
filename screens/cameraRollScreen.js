@@ -11,6 +11,7 @@ export default class CameraRollScreen extends Component {
     constructor(props) {
         super(props);
         userid = this.props.navigation.state.params.userid;
+        navigate = this.props.navigation.navigate;
     }
 
     static navigationOptions = DEFAULT_NAVIGATION_NO_ARROW;
@@ -30,8 +31,10 @@ export default class CameraRollScreen extends Component {
             method: 'post',
             body: data
         }).then((res) => {
-            console.log(res);
-        })
+            this.navigate('Tab');
+        }).catch((err) => {
+            console.log(err);
+        });
     }
 
     render() {

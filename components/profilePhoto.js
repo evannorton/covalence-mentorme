@@ -12,7 +12,7 @@ export default class ProfilePhoto extends Component {
                 />
                 <View style={styles.plusContainer}>
                     <Text style={styles.plus} onPress={() => {
-                        this.props.navigate('CameraRoll', { userid: this.props.userid })
+                        this.props.navigate('CameraRoll', { userid: this.props.userid, navigate: this.props.navigate })
                     }}>
                         +
                     </Text>
