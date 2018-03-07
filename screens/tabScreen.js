@@ -63,14 +63,14 @@ export default class TabScreen extends Component {
         if (this.state.me.usertype === 'Mentor') {
             return (
                 <View style={styles.container}>
-                    <MentorTabNavigation navigate={this.props.navigation.navigate} screenProps={this.props} />
+                    <MentorTabNavigation screenProps={this.props} />
                 </View>
             );
 
         } else {
             return (
                 <View style={styles.container}>
-                    <StudentTabNavigation navigate={this.props.navigation.navigate} screenProps={this.props} />
+                    <StudentTabNavigation screenProps={this.props} />
                 </View>
             )
         }

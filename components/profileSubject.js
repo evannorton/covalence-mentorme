@@ -13,7 +13,16 @@ export default class ProfileSubject extends Component {
                         if (subject.categoryid === this.props.categoryid) {
                             console.log(subject);
                             return (
-                                <Text onPress={() => { postMentorSubject(this.props.userid, subject.id) }}>{subject.name}</Text>
+                                <Text
+                                    onPress={() => {
+                                        postMentorSubject(this.props.userid, subject.id)
+                                            .then(() => {
+                                                this.props.refresh();
+                                            })
+                                    }}
+                                >
+                                    {subject.name}
+                                </Text>
                             );
                         }
                     })

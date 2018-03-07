@@ -13,14 +13,14 @@ export default class ProfileAttributeButtons extends Component {
                         buttonStyle={styles.button}
                         textStyle={styles.text}
                         text='Subjects'
-                        onPress={() => { this.props.renderSubjects(true) }}
+                        onPress={() => { this.props.renderSubjects() }}
                     />
                     <Button
                         containerStyle={styles.buttonContainer}
                         buttonStyle={styles.button}
                         textStyle={styles.text}
                         text='Skills'
-                        onPress={() => { tthis.props.renderSkills(true) }}
+                        onPress={() => { tthis.props.renderSkills() }}
                     />
                 </View>
 

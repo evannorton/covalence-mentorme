@@ -33,6 +33,9 @@ export default class ProfileScreen extends Component {
     static navigationOptions = DEFAULT_NAVIGATION_OPTIONS;
 
     async componentDidMount() {
+        if (this.props.screenProps.navigation.state.params) {
+            this.setState({ isSubjectsVisible: this.props.screenProps.navigation.state.params.isSubjectsVisible });
+        }
         let me = await getMe();
         let mySubjects = await getMentorSubjects(me.id);
         let mySkills = await getMentorSkills(me.id);
@@ -49,12 +52,12 @@ export default class ProfileScreen extends Component {
         });
     }
 
-    renderSubjects(isSubjectsVisible) {
-        this.setState({ isSubjectsVisible });
+    renderSubjects() {
+        this.setState({ isSubjectsVisible: true });
     }
 
-    renderSkills(isSkillsVisible) {
-        this.setState({ isSkillsVisible })
+    renderSkills() {
+        this.setState({ isSkillsVisible: true });
     }
 
     renderWage() {
@@ -69,8 +72,8 @@ export default class ProfileScreen extends Component {
         if (this.state.me.usertype === 'Mentor') {
             return (
                 <ProfileAttributes
-                    renderSubjects={(isSubjectsVisible) => { this.renderSubjects(isSubjectsVisible) }}
-                    renderSkills={(isSkillsVisible) => { this.renderSkills(isSkillsVisible) }}
+                    renderSubjects={() => { this.renderSubjects() }}
+                    renderSkills={() => { this.renderSkills() }}
                 />
             );
         }
@@ -108,7 +111,12 @@ export default class ProfileScreen extends Component {
                                     }}
                                     renderContent={() => {
                                         return (
-                                            <ProfileSubject userid={this.state.me.id} subjects={this.state.subjects} categoryid={category.id} />
+                                            <ProfileSubject
+                                                refresh={() => { this.props.screenProps.navigation.navigate('Tab', { isSubjectsVisible: true }) }}
+                                                userid={this.state.me.id}
+                                                subjects={this.state.subjects}
+                                                categoryid={category.id}
+                                            />
                                         );
                                     }}
                                 />
