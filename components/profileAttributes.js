@@ -20,7 +20,7 @@ export default class ProfileAttributeButtons extends Component {
                         buttonStyle={styles.button}
                         textStyle={styles.text}
                         text='Skills'
-                        onPress={() => { tthis.props.renderSkills() }}
+                        onPress={() => { this.props.renderSkills() }}
                     />
                 </View>
 

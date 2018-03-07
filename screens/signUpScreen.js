@@ -19,7 +19,6 @@ export default class SignUpScreen extends Component {
 
     async signup() {
         await signup(this.name, this.email.toLowerCase(), this.password, this.userType);
-
     }
 
     navigate(screen) {
@@ -55,7 +54,6 @@ export default class SignUpScreen extends Component {
                             type='feather'
                         />
                     }
-
                 />
 
                 <Input

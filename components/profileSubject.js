@@ -11,7 +11,6 @@ export default class ProfileSubject extends Component {
                 {
                     this.props.subjects.map((subject) => {
                         if (subject.categoryid === this.props.categoryid) {
-                            console.log(subject);
                             return (
                                 <Text
                                     key={subject.id}

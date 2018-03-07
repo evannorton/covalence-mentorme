@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Overlay, Button } from 'react-native-elements';
+import { Overlay, Button, Input } from 'react-native-elements';
 import Accordion from 'react-native-collapsible/Accordion';
 
 import { getMe, getMentorSkills, getMentorSubjects, getCategories, getSubjects, deleteMentorSubject } from '../services/user';
@@ -26,7 +26,7 @@ export default class ProfileScreen extends Component {
             subjects: [],
             categories: [],
             isSubjectsVisible: false,
-            isSkillssVisible: false
+            isSkillsVisible: false
         }
     };
 
@@ -130,6 +130,19 @@ export default class ProfileScreen extends Component {
                             );
                         })
                     }
+                </Overlay>
+
+                <Overlay
+                    containerStyle={styles.overlayContainer}
+                    overlayStyle={styles.overlay}
+                    fullScreen={true}
+                    isVisible={this.state.isSkillsVisible}
+                >
+                    <Button onPress={() => { this.props.screenProps.navigation.navigate('Tab', { isSkillsVisible: false }); }} text='Back to Profile' />
+                    <Text>Add Skills</Text>
+                    <Input
+                    />
+                    <Text>My Skills</Text>
                 </Overlay>
 
                 <ProfilePhoto userid={this.state.me.id} navigate={this.props.screenProps.navigation.navigate} />
