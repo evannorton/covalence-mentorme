@@ -5,14 +5,6 @@ async function isLoggedIn() {
     return checkLogin();
 }
 
-async function getMentorSubjects(userid) {
-    return await RestServices.get(`/api/mentorSubjects/${userid}`);
-}
-
-async function getMentorSkills(userid) {
-    return await RestServices.get(`/api/mentorSkills/${userid}`);
-}
-
 async function checkLogin() {
     await AuthServices.getAuthToken();
 
@@ -54,6 +46,14 @@ async function signup(name, email, password, usertype) {
 
 async function getMe() {
     return RestServices.get('/api/users/me');
+}
+
+async function getMentorSubjects(userid) {
+    return await RestServices.get(`/api/subjects/users/${userid}`);
+}
+
+async function getMentorSkills(userid) {
+    return await RestServices.get(`/api/skills/${userid}`);
 }
 
 export { isLoggedIn, checkLogin, login, logout, signup, getMe, getMentorSkills, getMentorSubjects };
