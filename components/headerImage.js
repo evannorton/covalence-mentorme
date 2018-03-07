@@ -6,7 +6,7 @@ export default class HeaderImage extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Image style={styles.image} source={require('../images/mentorme.jpeg')} />
+                <Image style={styles.image} source={require('../images/mentorme.png')} />
             </View>
         );
     }

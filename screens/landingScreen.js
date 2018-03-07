@@ -32,7 +32,7 @@ export default class LandingScreen extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.imageContainer}>
-                    <Image style={styles.image} source={require('../images/mentorme.jpeg')} />
+                    <Image style={styles.image} source={require('../images/mentorme.png')} />
                 </View>
                 <View style={styles.buttonsContainer}>
                     <Button containerStyle={styles.buttonContainer} buttonStyle={styles.button} textStyle={styles.text} text='Mentors' onPress={() => { this.navigate('Mentor') }} />
