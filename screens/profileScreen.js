@@ -93,7 +93,13 @@ export default class ProfileScreen extends Component {
                     {
                         this.state.mySubjects.map((subject) => {
                             return (
-                                <Text onPress={() => { deleteMentorSubject(this.state.me.id, subject.id) }} key={subject.id}>{subject.name}</Text>
+                                <Text
+                                    onPress={() => {
+                                        deleteMentorSubject(this.state.me.id, subject.id)
+                                        this.props.screenProps.navigation.navigate('Tab', { isSubjectsVisible: true });
+                                    }}
+                                    key={subject.id}>{subject.name}
+                                </Text>
                             );
                         })
                     }
