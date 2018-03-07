@@ -1,16 +1,29 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
 
-export default class ProfileAttributes extends Component {
+export default class ProfileAttributeButtons extends Component {
 
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.buttonsContainer}>
-                    <Button containerStyle={styles.buttonContainer} buttonStyle={styles.button} textStyle={styles.text} text='Subjects' onPress={() => { }} />
-                    <Button containerStyle={styles.buttonContainer} buttonStyle={styles.button} textStyle={styles.text} text='Skills' onPress={() => { }} />
+                    <Button
+                        containerStyle={styles.buttonContainer}
+                        buttonStyle={styles.button}
+                        textStyle={styles.text}
+                        text='Subjects'
+                        onPress={() => { this.props.renderSubjects(true) }}
+                    />
+                    <Button
+                        containerStyle={styles.buttonContainer}
+                        buttonStyle={styles.button}
+                        textStyle={styles.text}
+                        text='Skills'
+                        onPress={() => { tthis.props.renderSkills(true) }}
+                    />
                 </View>
+
             </View>
         );
     }
