@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Overlay } from 'react-native-elements';
+import { Overlay, Button } from 'react-native-elements';
 import Accordion from 'react-native-collapsible/Accordion';
 
 import { getMe, getMentorSkills, getMentorSubjects, getCategories, getSubjects, deleteMentorSubject } from '../services/user';
@@ -89,6 +89,7 @@ export default class ProfileScreen extends Component {
                     fullScreen={true}
                     isVisible={this.state.isSubjectsVisible}
                 >
+                    <Button onPress={() => { this.props.screenProps.navigation.navigate('Tab', { isSubjectsVisible: false }); }} text='Back to Profile' />
                     <Text>My Subjects</Text>
                     {
                         this.state.mySubjects.map((subject) => {
