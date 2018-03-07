@@ -9,8 +9,8 @@ import ProfileName from '../components/profileName';
 import ProfileWage from '../components/profileWage'; //mentor only
 import ProfileBio from '../components/profileBio';
 import ProfileContact from '../components/profileContact';
+import ProfileAttributes from '../components/profileAttributes'; //mentor only
 import ProfileLogout from '../components/profileLogout';
-import ProfileAttributes from '../components/profileAttributes';
 
 export default class ProfileScreen extends Component {
 
@@ -60,8 +60,8 @@ export default class ProfileScreen extends Component {
                 {this.renderWage()}
                 <ProfileBio bio={this.state.me.bio} />
                 <ProfileContact email={this.state.me.email} phone={this.state.me.phone} />
-                <ProfileLogout navigate={this.props.screenProps.navigation.navigate} />
                 {this.renderAttributes()}
+                <ProfileLogout navigate={this.props.screenProps.navigation.navigate} />
             </View>
         );
     };
@@ -77,7 +77,8 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         borderColor: 'rgb(95,72,47)',
         borderWidth: 2,
-        borderRadius: 100
+        borderRadius: 100,
+        paddingTop: 20
     }
 
 });

@@ -6,9 +6,6 @@ export default class ProfileContact extends Component {
     render() {
         return (
             <View style={styles.contactContainer}>
-                <Text style={styles.contact}  >
-                    CONTACT INFO:
-                </Text>
                 <Text style={styles.contact}>
                     email: {this.props.email}
                 </Text>
@@ -30,7 +27,6 @@ const styles = StyleSheet.create({
     contact: {
         textAlign: 'center',
         fontWeight: 'bold',
-        fontSize: 20,
     }
 
 });

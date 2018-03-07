@@ -12,12 +12,10 @@ export default class ProfileLogout extends Component {
 
     render() {
         return (
-            <View style={styles.logout}>
-                <Button buttonStyle={styles.button}
-                    text='Logout'
-                    onPress={() => { this.logout() }}
-                />
-            </View>
+            <Button containerStyle={styles.buttonContainer} buttonStyle={styles.button}
+                text='Logout'
+                onPress={() => { this.logout() }}
+            />
         );
     }
 
@@ -25,11 +23,15 @@ export default class ProfileLogout extends Component {
 
 const styles = StyleSheet.create({
 
-    logout: {
-        flex: 0,
+    buttonContainer: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        marginBottom: 20,
+        paddingBottom: 5
     },
 
     button: {
+        width: 250,
         backgroundColor: 'rgb(95,72,47)',
     }
 
