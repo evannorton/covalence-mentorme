@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Overlay } from 'react-native-elements';
+import Accordion from 'react-native-collapsible/Accordion';
 
-import { getMe, getMentorSkills, getMentorSubjects } from '../services/user';
+import { getMe, getMentorSkills, getMentorSubjects, getCategories, getSubjects, deleteMentorSubject } from '../services/user';
 import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
 
-import ProfileSubject from '../components/profileSubject';
 import ProfilePhoto from '../components/profilePhoto';
 import ProfileName from '../components/profileName';
 import ProfileWage from '../components/profileWage'; //mentor only
 import ProfileBio from '../components/profileBio';
 import ProfileContact from '../components/profileContact';
 import ProfileAttributes from '../components/profileAttributes'; //mentor only
+import ProfileSubject from '../components/profileSubject'; //mentor only
 import ProfileLogout from '../components/profileLogout';
 
 export default class ProfileScreen extends Component {
@@ -20,10 +21,12 @@ export default class ProfileScreen extends Component {
         super(props);
         this.state = {
             me: {},
+            mySubjects: [],
+            mySkills: [],
             subjects: [],
-            skills: [],
+            categories: [],
             isSubjectsVisible: false,
-            isSubjectsVisible: false
+            isSkillssVisible: false
         }
     };
 
@@ -31,15 +34,18 @@ export default class ProfileScreen extends Component {
 
     async componentDidMount() {
         let me = await getMe();
-        let subjects = await getMentorSubjects(me.id);
-        let skills = await getMentorSkills(me.id);
-        subjects = subjects[0];
-        skills = skills[0];
-        console.log(subjects);
+        let mySubjects = await getMentorSubjects(me.id);
+        let mySkills = await getMentorSkills(me.id);
+        let subjects = await getSubjects();
+        let categories = await getCategories();
+        mySubjects = mySubjects[0];
+        mySkills = mySkills[0];
         this.setState({
             me,
+            mySubjects,
+            mySkills,
             subjects,
-            skills
+            categories
         });
     }
 
@@ -80,16 +86,35 @@ export default class ProfileScreen extends Component {
                     fullScreen={true}
                     isVisible={this.state.isSubjectsVisible}
                 >
+                    <Text>My Subjects</Text>
                     {
-                        this.state.subjects.map((subject) => {
+                        this.state.mySubjects.map((subject) => {
                             return (
-                                <ProfileSubject key={subject.id} name={subject.name} id={subject.id} />
+                                <Text onPress={() => { deleteMentorSubject(this.state.me.id, subject.id) }} key={subject.id}>{subject.name}</Text>
                             );
                         })
                     }
-                </Overlay>
-                <Overlay isVisible={this.state.isSkillsVisible}>
-                    <Text>Skills</Text>
+                    <Text>Add Subjects</Text>
+                    {
+                        this.state.categories.map((category) => {
+                            return (
+                                <Accordion
+                                    key={category.id}
+                                    sections={[category.name]}
+                                    renderHeader={() => {
+                                        return (
+                                            <Text>{category.name}</Text>
+                                        );
+                                    }}
+                                    renderContent={() => {
+                                        return (
+                                            <ProfileSubject userid={this.state.me.id} subjects={this.state.subjects} categoryid={category.id} />
+                                        );
+                                    }}
+                                />
+                            );
+                        })
+                    }
                 </Overlay>
 
                 <ProfilePhoto userid={this.state.me.id} navigate={this.props.screenProps.navigation.navigate} />

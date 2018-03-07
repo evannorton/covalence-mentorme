@@ -52,8 +52,30 @@ async function getMentorSubjects(userid) {
     return await RestServices.get(`/api/subjects/users/${userid}`);
 }
 
+async function postMentorSubject(userid, subjectid) {
+    await RestServices.post(`/api/mentorsubjects/`, {
+        userid,
+        subjectid
+    });
+}
+
+async function deleteMentorSubject(userid, subjectid) {
+    await RestServices.destroy(`/api/mentorsubjects/`, {
+        userid,
+        subjectid
+    });
+}
+
+async function getSubjects() {
+    return await RestServices.get(`/api/subjects/`)
+}
+
 async function getMentorSkills(userid) {
     return await RestServices.get(`/api/skills/${userid}`);
 }
 
-export { isLoggedIn, checkLogin, login, logout, signup, getMe, getMentorSkills, getMentorSubjects };
+async function getCategories() {
+    return await RestServices.get('/api/categories');
+}
+
+export { isLoggedIn, checkLogin, login, logout, signup, getMe, getMentorSkills, getMentorSubjects, getSubjects, getCategories, postMentorSubject, deleteMentorSubject };
