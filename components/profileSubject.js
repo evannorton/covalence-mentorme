@@ -14,6 +14,7 @@ export default class ProfileSubject extends Component {
                             console.log(subject);
                             return (
                                 <Text
+                                    key={subject.id}
                                     onPress={() => {
                                         postMentorSubject(this.props.userid, subject.id)
                                             .then(() => {
