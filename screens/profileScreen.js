@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Overlay, Button, Input } from 'react-native-elements';
 import Accordion from 'react-native-collapsible/Accordion';
 
-import { getMe, getMentorSkills, getMentorSubjects, getCategories, getSubjects, deleteMentorSubject, deleteMentorSkill } from '../services/user';
+import { getMe, getMentorSkills, getMentorSubjects, getCategories, getSubjects, deleteMentorSubject, deleteMentorSkill, postSkill, postMentorSkill, getSkillByName } from '../services/user';
 import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
 
 import ProfilePhoto from '../components/profilePhoto';
@@ -28,13 +28,18 @@ export default class ProfileScreen extends Component {
             isSubjectsVisible: false,
             isSkillsVisible: false
         }
+        currentSkill = '';
     };
 
     static navigationOptions = DEFAULT_NAVIGATION_OPTIONS;
 
     async componentDidMount() {
         if (this.props.screenProps.navigation.state.params) {
-            this.setState({ isSubjectsVisible: this.props.screenProps.navigation.state.params.isSubjectsVisible });
+            if (this.props.screenProps.navigation.state.params.isSubjectsVisible) {
+                this.setState({ isSubjectsVisible: this.props.screenProps.navigation.state.params.isSubjectsVisible });
+            } else if (this.props.screenProps.navigation.state.params.isSkillsVisible) {
+                this.setState({ isSkillsVisible: this.props.screenProps.navigation.state.params.isSkillsVisible });
+            }
         }
         let me = await getMe();
         let mySubjects = await getMentorSubjects(me.id);
@@ -97,7 +102,9 @@ export default class ProfileScreen extends Component {
                                 <Text
                                     onPress={() => {
                                         deleteMentorSubject(this.state.me.id, subject.id)
-                                        this.props.screenProps.navigation.navigate('Tab', { isSubjectsVisible: true });
+                                            .then(() => {
+                                                this.props.screenProps.navigation.navigate('Tab', { isSubjectsVisible: true });
+                                            });
                                     }}
                                     key={subject.id}>
                                     {subject.name}
@@ -139,8 +146,35 @@ export default class ProfileScreen extends Component {
                     isVisible={this.state.isSkillsVisible}
                 >
                     <Button onPress={() => { this.props.screenProps.navigation.navigate('Tab', { isSkillsVisible: false }); }} text='Back to Profile' />
-                    <Text>Add a Skill</Text>
                     <Input
+                        onChangeText={(skill) => { this.currentSkill = skill }}
+                        onSubmitEditing={() => {
+                            getSkillByName(this.currentSkill)
+                                .then((res) => {
+                                    if (res.id) {
+                                        postMentorSkill(this.state.me.id, res.id)
+                                            .then(() => {
+                                                this.props.screenProps.navigation.navigate('Tab', { isSkillsVisible: true });
+                                            });
+                                    } else {
+                                        postSkill(this.currentSkill)
+                                            .then((res) => {
+                                                postMentorSkill(this.state.me.id, res.id)
+                                                    .then(() => {
+                                                        this.props.screenProps.navigation.navigate('Tab', { isSkillsVisible: true });
+                                                    });
+                                            }).catch((err) => {
+                                                throw err;
+                                                getSkillByName(this.currentSkill)
+                                                    .then((id) => {
+                                                        console.log(1);
+                                                        console.log(id);
+                                                    });
+                                            });
+                                    }
+                                });
+                        }}
+                        placeholder='Add a skill'
                     />
                     <Text>My Skills</Text>
                     {
@@ -149,8 +183,10 @@ export default class ProfileScreen extends Component {
                                 <Text
                                     key={skill.id}
                                     onPress={() => {
-                                        deleteMentorSkill(this.state.me.id, skill.id);
-                                        this.props.screenProps.navigation.navigate('Tab', { isSkillsVisible: true });
+                                        deleteMentorSkill(this.state.me.id, skill.id)
+                                            .then(() => {
+                                                this.props.screenProps.navigation.navigate('Tab', { isSkillsVisible: true });
+                                            });
                                     }}
                                 >
                                     {skill.name}
