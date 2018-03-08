@@ -10,7 +10,15 @@ export default class FinanceScreen extends Component {
         super(props);
     }
 
-    static navigationOptions = DEFAULT_NAVIGATION_OPTIONS;
+    static navigationOptions = {
+        title: 'Finance',
+        tabBarIcon:
+            <Image
+                source={require('../images/financeicon.png')}
+                style={{ width: 40, height: 40, }}
+            />
+
+    }
 
     navigate(screen) {
         userType = this.props.navigation.state.params.userType;

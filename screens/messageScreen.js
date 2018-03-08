@@ -10,7 +10,14 @@ export default class MessageScreen extends Component {
         super(props);
     }
 
-    static navigationOptions = DEFAULT_NAVIGATION_OPTIONS;
+    static navigationOptions = {
+        title: 'Message',
+        tabBarIcon:
+            <Image
+                source={require('../images/messageicon.png')}
+                style={{ width: 40, height: 40, }}
+            />
+    }
 
     navigate(screen) {
         userType = this.props.navigation.state.params.userType;

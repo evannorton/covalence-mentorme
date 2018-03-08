@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Overlay, Button, Input } from 'react-native-elements';
+import { View, Text, StyleSheet, Image } from 'react-native';
+import { Overlay, Button, Input, Icon } from 'react-native-elements';
 import Accordion from 'react-native-collapsible/Accordion';
 
 import { getMe, getMentorSkills, getMentorSubjects, getCategories, getSubjects, deleteMentorSubject } from '../services/user';
@@ -30,7 +30,15 @@ export default class ProfileScreen extends Component {
         }
     };
 
-    static navigationOptions = DEFAULT_NAVIGATION_OPTIONS;
+    static navigationOptions = {
+        title: 'Profile',
+        tabBarIcon:
+            <Image
+                source={require('../images/usericon.png')}
+                style={{ width: 40, height: 40, }}
+            />
+    }
+
 
     async componentDidMount() {
         if (this.props.screenProps.navigation.state.params) {
@@ -163,7 +171,7 @@ const styles = StyleSheet.create({
 
     container: {
         margin: 20,
-        backgroundColor: 'rgba(135,204,236,0.5)',
+        backgroundColor: 'white',
         flex: 1,
         flexDirection: 'column',
         borderColor: 'rgb(95,72,47)',

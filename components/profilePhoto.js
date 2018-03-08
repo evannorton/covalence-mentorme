@@ -8,7 +8,7 @@ export default class ProfilePhoto extends Component {
             <View style={styles.Container} >
                 <Image
                     style={styles.image}
-                    source={require('../images/profilephoto.jpg')}
+                    source={require('../images/usericon.png')}
                 />
                 <View style={styles.plusContainer}>
                     <Text style={styles.plus} onPress={() => {

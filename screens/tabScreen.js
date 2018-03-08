@@ -16,14 +16,30 @@ const MentorTabNavigation = TabNavigator({
     Finance: { screen: FinanceScreen },
     Calendar: { screen: CalendarScreen },
     Message: { screen: MessageScreen }
-}, { tabBarPosition: 'bottom' });
+}, {
+
+        tabBarPosition: 'bottom',
+        tabBarOptions: {
+            inactiveTintColor: 'gray',
+            style: {
+                backgroundColor: 'white',
+                borderTopWidth: 0,
+
+
+            }
+        }
+
+    });
 
 const StudentTabNavigation = TabNavigator({
     Profile: { screen: ProfileScreen },
     Search: { screen: SearchScreen },
     Calendar: { screen: CalendarScreen },
     Message: { screen: MessageScreen }
-}, { tabBarPosition: 'bottom' });
+}, {
+        tabBarPosition: 'bottom',
+
+    });
 
 
 export default class TabScreen extends Component {
@@ -80,7 +96,7 @@ export default class TabScreen extends Component {
 const styles = StyleSheet.create({
 
     container: {
-        backgroundColor: 'rgb(208,230,210)',
+        backgroundColor: 'white',
         flex: 1,
     }
 
