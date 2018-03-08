@@ -128,7 +128,9 @@ export default class ProfileScreen extends Component {
                                     sections={[category.name]}
                                     renderHeader={() => {
                                         return (
-                                            <Text>{category.name}</Text>
+                                            <View style ={styles.section}>
+                                            <Text >{category.name}</Text>
+                                            </View>
                                         );
                                     }}
                                     renderContent={() => {
@@ -220,7 +222,7 @@ export default class ProfileScreen extends Component {
 const styles = StyleSheet.create({
 
     container: {
-        margin: 20,
+        margin: 0,
         backgroundColor: 'white',
         flex: 1,
         flexDirection: 'column',
@@ -239,6 +241,19 @@ const styles = StyleSheet.create({
     overlay: {
         zIndex: 2,
         backgroundColor: 'rgba(255,255,255,0.5)'
-    }
+    },
+    section:{
+        backgroundColor: 'gold',
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 360,
+        height: 40,
+        borderWidth: 2,
+        borderColor: 'black',
+    },
+   
+
+    
 
 });
