@@ -32,12 +32,27 @@ export default class LandingScreen extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.imageContainer}>
-                    <Image style={styles.image} source={require('../images/mentorme.png')} />
+                    <Image style={styles.image} source={require('../images/mentormeboldwhite.png')} />
                 </View>
-                <View style={styles.buttonsContainer}>
-                    <Button containerStyle={styles.buttonContainer} buttonStyle={styles.button} textStyle={styles.text} text='Mentors' onPress={() => { this.navigate('Mentor') }} />
-                    <Button containerStyle={styles.buttonContainer} buttonStyle={styles.button} textStyle={styles.text} text='Students' onPress={() => { this.navigate('Student') }} />
+
+                <View style={styles.iconContainer}>
+                    <Image
+                        style={styles.icon}
+                        source={require('../images/wateringcanicon.png')}
+                    // onPress={() => { this.props.renderSkills() }
+                    // }
+                    />
+                    <Text> Mentor </Text>
+
+                    <Image
+                        style={styles.icon}
+                        source={require('../images/seedlingyoungicon.png')}
+                    // onPress={() => { this.props.renderSkills() }
+                    // }
+                    />
+                    <Text> Student </Text>
                 </View>
+
                 <Button text='TEST BUTTON' onPress={() => { this.testFunction() }} />
             </View>
         );
@@ -77,7 +92,7 @@ const styles = StyleSheet.create({
 
     button: {
         borderColor: 'rgb(135,204,236)',
-        backgroundColor: 'rgb(135,204,236)',
+        backgroundColor: 'rgb(187,208,157)',
         borderRadius: 62,
         borderWidth: 1,
         height: 124,
@@ -86,6 +101,22 @@ const styles = StyleSheet.create({
 
     text: {
         color: 'rgb(95,72,47)'
-    }
+    },
+
+    iconContainer: {
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        flex: 1,
+        paddingBottom: 5
+    },
+
+    icon: {
+        resizeMode: 'cover',
+        width: 150,
+        height: 150,
+        marginTop: 100,
+
+
+    },
 
 })
