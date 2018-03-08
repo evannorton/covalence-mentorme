@@ -3,7 +3,7 @@ import { ScrollView } from 'react-native';
 
 import CameraRollPicker from 'react-native-camera-roll-picker';
 
-import { postForm } from '../services/rest';
+import { postForm, BASE_URL } from '../services/rest';
 import { DEFAULT_NAVIGATION_NO_ARROW } from '../services/navigation';
 
 export default class CameraRollScreen extends Component {
@@ -28,7 +28,7 @@ export default class CameraRollScreen extends Component {
             type: 'image/jpeg',
             name: 'profile'
         });
-        fetch(`https://en-mentorme.herokuapp.com/api/users/images/${userid}`, {
+        fetch(`${BASE_URL}/api/users/images/${userid}`, {
             method: 'put',
             body: data
         }).then((res) => {
