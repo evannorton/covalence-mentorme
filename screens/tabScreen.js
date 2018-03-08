@@ -17,18 +17,20 @@ const MentorTabNavigation = TabNavigator({
     Calendar: { screen: CalendarScreen },
     Message: { screen: MessageScreen }
 }, {
-
         tabBarPosition: 'bottom',
         tabBarOptions: {
+            activeTintColor: 'blue',
             inactiveTintColor: 'gray',
+            showIcon: true,
+            iconStyle: {
+                height: 40,
+                width: 40
+            },
             style: {
                 backgroundColor: 'white',
                 borderTopWidth: 0,
-
-
             }
         }
-
     });
 
 const StudentTabNavigation = TabNavigator({

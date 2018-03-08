@@ -69,6 +69,7 @@ async function destroy(url, payload) {
 }
 
 export {
+    BASE_URL,
     get,
     post,
     put,

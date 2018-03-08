@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { Overlay, Button, Input, Icon } from 'react-native-elements';
 import Accordion from 'react-native-collapsible/Accordion';
 
@@ -39,7 +39,6 @@ export default class ProfileScreen extends Component {
                 style={{ width: 40, height: 40, }}
             />
     }
-
 
     async componentDidMount() {
         if (this.props.screenProps.navigation.state.params) {
@@ -102,12 +101,15 @@ export default class ProfileScreen extends Component {
                     fullScreen={true}
                     isVisible={this.state.isSubjectsVisible}
                 >
+                <ScrollView contentContainerStyle={styles.scrollView}>
                     <Button onPress={() => { this.props.screenProps.navigation.navigate('Tab', { isSubjectsVisible: false }); }} text='Back to Profile' />
-                    <Text>My Subjects</Text>
+                    <Text style={styles.overlayText}>My Subjects</Text>
+                    <View style={styles.mySubjectsContainer}>
                     {
                         this.state.mySubjects.map((subject) => {
                             return (
-                                <Text
+                                <View style={styles.mySubjects}>
+                                <Text 
                                     onPress={() => {
                                         deleteMentorSubject(this.state.me.id, subject.id)
                                             .then(() => {
@@ -117,19 +119,26 @@ export default class ProfileScreen extends Component {
                                     key={subject.id}>
                                     {subject.name}
                                 </Text>
+                                </View>
                             );
                         })
                     }
-                    <Text>Add Subjects</Text>
+                    </View>
+                    <Text style={styles.overlayText}>Add Subjects</Text>
+                    <View style={styles.accordian}>
                     {
                         this.state.categories.map((category) => {
                             return (
                                 <Accordion
-                                    key={category.id}
                                     sections={[category.name]}
                                     renderHeader={() => {
                                         return (
-                                            <Text>{category.name}</Text>
+                                           <View style= {styles.sectionContainer}>
+                                            <View style ={styles.section}>
+                                            <Text key={category.id} >{category.name}</Text>
+                                            </View>
+                                            </View>
+                                            
                                         );
                                     }}
                                     renderContent={() => {
@@ -146,6 +155,8 @@ export default class ProfileScreen extends Component {
                             );
                         })
                     }
+                    </View>
+                    </ScrollView>
                 </Overlay>
                 <Overlay
                     containerStyle={styles.overlayContainer}
@@ -221,7 +232,7 @@ export default class ProfileScreen extends Component {
 const styles = StyleSheet.create({
 
     container: {
-        margin: 20,
+        margin: 0,
         backgroundColor: 'white',
         flex: 1,
         flexDirection: 'column',
@@ -233,13 +244,60 @@ const styles = StyleSheet.create({
 
     overlayContainer: {
         zIndex: 1,
-        margin: -2,
-        backgroundColor: 'rgba(255,255,255,0.75)'
+        margin: -5,
+        backgroundColor: 'rgba(255,255,255,0.75)',
+        
     },
 
     overlay: {
         zIndex: 2,
-        backgroundColor: 'rgba(255,255,255,0.5)'
+        backgroundColor: 'rgba(255,255,255,0.5)',
+        flex: 1,
+        flexDirection:'column',
+    },
+    section:{
+        backgroundColor: 'gold',
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1,
+        height: 40,
+        borderWidth: 2,
+        borderColor: 'black',
+    },
+    sectionContainer:{
+        flex:0,
+        flexDirection: 'row',
+    },
+    mySubjectsContainer:{
+        flex:1,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+    },
+    mySubjects:{
+        backgroundColor: 'gold',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 110,
+        height: 40,
+        borderWidth: 2,
+        borderColor: 'black',
+        margin: 2,
+    },
+    accordian:{
+        flex: 2,
+        
+    },
+    scrollView:{
+        flex: 1,
+        flexDirection: 'column',
+        paddingBottom: 120,
+    },
+    overlayText:{
+        alignSelf: 'center',
     }
+   
+
+    
 
 });
