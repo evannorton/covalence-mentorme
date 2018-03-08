@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
 
     overlayContainer: {
         zIndex: 1,
-        margin: -2,
+        margin: -5,
         backgroundColor: 'rgba(255,255,255,0.75)'
     },
 

@@ -7,10 +7,10 @@ export default class ProfileContact extends Component {
         return (
             <View style={styles.contactContainer}>
                 <Text style={styles.contact}>
-                    email: {this.props.email}
+                    {this.props.email}
                 </Text>
                 <Text style={styles.contact}>
-                    phone: {this.props.phone}
+                    {this.props.phone}
                 </Text>
             </View>
         );
