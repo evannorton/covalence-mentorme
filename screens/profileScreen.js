@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Overlay, Button, Input } from 'react-native-elements';
 import Accordion from 'react-native-collapsible/Accordion';
 
-import { getMe, getMentorSkills, getMentorSubjects, getCategories, getSubjects, deleteMentorSubject } from '../services/user';
+import { getMe, getMentorSkills, getMentorSubjects, getCategories, getSubjects, deleteMentorSubject, deleteMentorSkill } from '../services/user';
 import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
 
 import ProfilePhoto from '../components/profilePhoto';
@@ -99,7 +99,8 @@ export default class ProfileScreen extends Component {
                                         deleteMentorSubject(this.state.me.id, subject.id)
                                         this.props.screenProps.navigation.navigate('Tab', { isSubjectsVisible: true });
                                     }}
-                                    key={subject.id}>{subject.name}
+                                    key={subject.id}>
+                                    {subject.name}
                                 </Text>
                             );
                         })
@@ -131,7 +132,6 @@ export default class ProfileScreen extends Component {
                         })
                     }
                 </Overlay>
-
                 <Overlay
                     containerStyle={styles.overlayContainer}
                     overlayStyle={styles.overlay}
@@ -139,10 +139,25 @@ export default class ProfileScreen extends Component {
                     isVisible={this.state.isSkillsVisible}
                 >
                     <Button onPress={() => { this.props.screenProps.navigation.navigate('Tab', { isSkillsVisible: false }); }} text='Back to Profile' />
-                    <Text>Add Skills</Text>
+                    <Text>Add a Skill</Text>
                     <Input
                     />
                     <Text>My Skills</Text>
+                    {
+                        this.state.mySkills.map((skill) => {
+                            return (
+                                <Text
+                                    key={skill.id}
+                                    onPress={() => {
+                                        deleteMentorSkill(this.state.me.id, skill.id);
+                                        this.props.screenProps.navigation.navigate('Tab', { isSkillsVisible: true });
+                                    }}
+                                >
+                                    {skill.name}
+                                </Text>
+                            );
+                        })
+                    }
                 </Overlay>
 
                 <ProfilePhoto userid={this.state.me.id} navigate={this.props.screenProps.navigation.navigate} />
