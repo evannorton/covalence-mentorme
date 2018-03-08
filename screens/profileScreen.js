@@ -40,7 +40,6 @@ export default class ProfileScreen extends Component {
             />
     }
 
-
     async componentDidMount() {
         if (this.props.screenProps.navigation.state.params) {
             if (this.props.screenProps.navigation.state.params.isSubjectsVisible) {
