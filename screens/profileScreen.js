@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Overlay, Button, Input, Icon } from 'react-native-elements';
 import Accordion from 'react-native-collapsible/Accordion';
 
@@ -124,13 +124,17 @@ export default class ProfileScreen extends Component {
                         this.state.categories.map((category) => {
                             return (
                                 <Accordion
+                                    
                                     key={category.id}
                                     sections={[category.name]}
                                     renderHeader={() => {
                                         return (
+                                           <View style= {styles.sectionContainer}>
                                             <View style ={styles.section}>
                                             <Text >{category.name}</Text>
                                             </View>
+                                            </View>
+                                            
                                         );
                                     }}
                                     renderContent={() => {
@@ -247,11 +251,15 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
-        width: 360,
+        flex: 1,
         height: 40,
         borderWidth: 2,
         borderColor: 'black',
     },
+    sectionContainer:{
+        flex:0,
+        flexDirection: 'row',
+    }
    
 
     
