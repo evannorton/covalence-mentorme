@@ -101,61 +101,62 @@ export default class ProfileScreen extends Component {
                     fullScreen={true}
                     isVisible={this.state.isSubjectsVisible}
                 >
-                <ScrollView contentContainerStyle={styles.scrollView}>
-                    <Button onPress={() => { this.props.screenProps.navigation.navigate('Tab', { isSubjectsVisible: false }); }} text='Back to Profile' />
-                    <Text style={styles.overlayText}>My Subjects</Text>
-                    <View style={styles.mySubjectsContainer}>
-                    {
-                        this.state.mySubjects.map((subject) => {
-                            return (
-                                <View style={styles.mySubjects}>
-                                <Text 
-                                    onPress={() => {
-                                        deleteMentorSubject(this.state.me.id, subject.id)
-                                            .then(() => {
-                                                this.props.screenProps.navigation.navigate('Tab', { isSubjectsVisible: true });
-                                            });
-                                    }}
-                                    key={subject.id}>
-                                    {subject.name}
-                                </Text>
-                                </View>
-                            );
-                        })
-                    }
-                    </View>
-                    <Text style={styles.overlayText}>Add Subjects</Text>
-                    <View style={styles.accordian}>
-                    {
-                        this.state.categories.map((category) => {
-                            return (
-                                <Accordion
-                                    sections={[category.name]}
-                                    renderHeader={() => {
-                                        return (
-                                           <View style= {styles.sectionContainer}>
-                                            <View style ={styles.section}>
-                                            <Text key={category.id} >{category.name}</Text>
-                                            </View>
-                                            </View>
-                                            
-                                        );
-                                    }}
-                                    renderContent={() => {
-                                        return (
-                                            <ProfileSubject
-                                                refresh={() => { this.props.screenProps.navigation.navigate('Tab', { isSubjectsVisible: true }) }}
-                                                userid={this.state.me.id}
-                                                subjects={this.state.subjects}
-                                                categoryid={category.id}
-                                            />
-                                        );
-                                    }}
-                                />
-                            );
-                        })
-                    }
-                    </View>
+                    <ScrollView contentContainerStyle={styles.scrollView}>
+                        <Button onPress={() => { this.props.screenProps.navigation.navigate('Tab', { isSubjectsVisible: false }); }} text='Back to Profile' />
+                        <Text style={styles.overlayText}>My Subjects</Text>
+                        <View style={styles.mySubjectsContainer}>
+                            {
+                                this.state.mySubjects.map((subject) => {
+                                    return (
+                                        <View style={styles.mySubjects}>
+                                            <Text
+                                                onPress={() => {
+                                                    deleteMentorSubject(this.state.me.id, subject.id)
+                                                        .then(() => {
+                                                            this.props.screenProps.navigation.navigate('Tab', { isSubjectsVisible: true });
+                                                        });
+                                                }}
+                                                key={subject.id}>
+                                                {subject.name}
+                                            </Text>
+                                        </View>
+                                    );
+                                })
+                            }
+                        </View>
+                        <Text style={styles.overlayText}>Add Subjects</Text>
+                        <View style={styles.accordian}>
+                            {
+                                this.state.categories.map((category) => {
+                                    return (
+                                        <Accordion
+                                            sections={[category.name]}
+                                            renderHeader={() => {
+                                                return (
+                                                    <View style={styles.sectionContainer}>
+                                                        <View style={styles.section}>
+                                                            <Text key={category.id} >{category.name}</Text>
+                                                        </View>
+                                                    </View>
+
+                                                );
+                                            }}
+
+                                            renderContent={() => {
+                                                return (
+                                                    <ProfileSubject
+                                                        refresh={() => { this.props.screenProps.navigation.navigate('Tab', { isSubjectsVisible: true }) }}
+                                                        userid={this.state.me.id}
+                                                        subjects={this.state.subjects}
+                                                        categoryid={category.id}
+                                                    />
+                                                );
+                                            }}
+                                        />
+                                    );
+                                })
+                            }
+                        </View>
                     </ScrollView>
                 </Overlay>
                 <Overlay
@@ -246,16 +247,16 @@ const styles = StyleSheet.create({
         zIndex: 1,
         margin: -5,
         backgroundColor: 'rgba(255,255,255,0.75)',
-        
+
     },
 
     overlay: {
         zIndex: 2,
         backgroundColor: 'rgba(255,255,255,0.5)',
         flex: 1,
-        flexDirection:'column',
+        flexDirection: 'column',
     },
-    section:{
+    section: {
         backgroundColor: 'gold',
         alignSelf: 'center',
         alignItems: 'center',
@@ -265,16 +266,18 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: 'black',
     },
-    sectionContainer:{
-        flex:0,
+    sectionContainer: {
+        flex: 0,
         flexDirection: 'row',
     },
-    mySubjectsContainer:{
-        flex:1,
+    mySubjectsContainer: {
+        flex: 1,
         flexDirection: 'row',
         flexWrap: 'wrap',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
-    mySubjects:{
+    mySubjects: {
         backgroundColor: 'gold',
         alignItems: 'center',
         justifyContent: 'center',
@@ -284,20 +287,23 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         margin: 2,
     },
-    accordian:{
+    accordian: {
         flex: 2,
         
+
     },
-    scrollView:{
+    scrollView: {
         flex: 1,
         flexDirection: 'column',
         paddingBottom: 120,
+      
+
     },
-    overlayText:{
+    overlayText: {
         alignSelf: 'center',
     }
-   
 
-    
+
+
 
 });
