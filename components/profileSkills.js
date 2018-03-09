@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, ScrollView, StyleSheet, Text } from 'react-native';
 import { Input, Overlay, Button } from 'react-native-elements';
 
-import { deleteMentorSkill, postSkill, postMentorSkill, getSkillByName } from '../services/user';
+import { SkillServices } from '../services/attribute';
 
 export default class ProfileSkills extends Component {
     render() {
@@ -17,23 +17,23 @@ export default class ProfileSkills extends Component {
                 <Input
                     onChangeText={(skill) => { this.currentSkill = skill }}
                     onSubmitEditing={() => {
-                        getSkillByName(this.currentSkill)
+                        SkillServices.getSkillByName(this.currentSkill)
                             .then((res) => {
                                 if (res.id) {
-                                    postMentorSkill(this.props.me.id, res.id)
+                                    SkillServices.postMentorSkill(this.props.me.id, res.id)
                                         .then(() => {
                                             this.props.screenProps.navigation.navigate('Tab', { isSkillsVisible: true });
                                         });
                                 } else {
-                                    postSkill(this.currentSkill)
+                                    SkillServices.postSkill(this.currentSkill)
                                         .then((res) => {
-                                            postMentorSkill(this.props.me.id, res.id)
+                                            SkillServices.postMentorSkill(this.props.me.id, res.id)
                                                 .then(() => {
                                                     this.props.screenProps.navigation.navigate('Tab', { isSkillsVisible: true });
                                                 });
                                         }).catch((err) => {
                                             throw err;
-                                            getSkillByName(this.currentSkill)
+                                            SkillServices.getSkillByName(this.currentSkill)
                                                 .then((id) => {
                                                     console.log(1);
                                                     console.log(id);
@@ -51,7 +51,7 @@ export default class ProfileSkills extends Component {
                             <Text
                                 key={skill.id}
                                 onPress={() => {
-                                    deleteMentorSkill(this.props.me.id, skill.id)
+                                    SkillServices.deleteMentorSkill(this.props.me.id, skill.id)
                                         .then(() => {
                                             this.props.screenProps.navigation.navigate('Tab', { isSkillsVisible: true });
                                         });

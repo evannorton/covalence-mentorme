@@ -3,7 +3,8 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'rea
 import { Overlay, Button, Input, Icon } from 'react-native-elements';
 import Accordion from 'react-native-collapsible/Accordion';
 
-import { getMe, getMentorSkills, getMentorSubjects, getCategories, getSubjects, deleteMentorSkill, postSkill, postMentorSkill, getSkillByName } from '../services/user';
+import { getMe, getMentorSkills, getMentorSubjects, getCategories, getSubjects } from '../services/user';
+import { CategoryServices, SubjectServices, SkillServices } from '../services/attribute';
 import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
 
 import ProfileSubjects from '../components/profileSubjects'; //mentor only
@@ -50,10 +51,10 @@ export default class ProfileScreen extends Component {
             }
         }
         let me = await getMe();
-        let mySubjects = await getMentorSubjects(me.id);
-        let mySkills = await getMentorSkills(me.id);
-        let subjects = await getSubjects();
-        let categories = await getCategories();
+        let mySubjects = await SubjectServices.getMentorSubjects(me.id);
+        let mySkills = await SkillServices.getMentorSkills(me.id);
+        let subjects = await SubjectServices.getSubjects();
+        let categories = await CategoryServices.getCategories();
         mySubjects = mySubjects[0];
         mySkills = mySkills[0];
         this.setState({

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-import { postMentorSubject } from '../services/user';
+import { SubjectServices } from '../services/attribute';
 
 export default class ProfileSubject extends Component {
 
@@ -15,7 +15,7 @@ export default class ProfileSubject extends Component {
                                 <TouchableOpacity
                                     key={subject.id}
                                     onPress={() => {
-                                        postMentorSubject(this.props.userid, subject.id)
+                                        SubjectServices.postMentorSubject(this.props.userid, subject.id)
                                             .then(() => {
                                                 this.props.refresh();
                                             })

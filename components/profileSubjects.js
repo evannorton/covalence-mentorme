@@ -3,7 +3,7 @@ import { View, ScrollView, StyleSheet, Text } from 'react-native';
 import { Overlay, Button } from 'react-native-elements';
 import Accordion from 'react-native-collapsible/Accordion';
 
-import { deleteMentorSubject } from '../services/user';
+import { SubjectServices } from '../services/attribute';
 
 import ProfileSubject from '../components/profileSubject';
 
@@ -28,7 +28,7 @@ export default class ProfileSubjects extends Component {
                                         style={styles.mySubjects}>
                                         <Text
                                             onPress={() => {
-                                                deleteMentorSubject(this.props.me.id, subject.id)
+                                                SubjectServices.deleteMentorSubject(this.props.me.id, subject.id)
                                                     .then(() => {
                                                         this.props.screenProps.navigation.navigate('Tab', { isSubjectsVisible: true })
                                                     });
