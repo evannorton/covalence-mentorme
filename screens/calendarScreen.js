@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text } from 'react-native';
+import {Calendar, CalenderList, Agenda} from 'react-native-calendars'
 import { Button } from 'react-native-elements';
 import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
 
@@ -31,6 +32,8 @@ export default class CalendarScreen extends Component {
             return (
                 <View style={styles.container}>
                     <Text style={styles.text}>Mentor Calendar Screen</Text>
+                    {/* <Calendar /> */}
+                    <Agenda />
                 </View>
             );
 
@@ -38,6 +41,8 @@ export default class CalendarScreen extends Component {
             return (
                 <View style={styles.container}>
                     <Text style={styles.text}>Student Calendar Screen</Text>
+                    {/* <Calendar /> */}
+                    <Agenda />
                 </View>
             )
         }

@@ -9,6 +9,7 @@
     "dependencies": {
         "react": "16.2.0",
         "react-native": "0.53.3",
+        "react-native-calendars": "^1.17.3",
         "react-native-camera-roll-picker": "^1.2.3",
         "react-native-collapsible": "^0.10.0",
         "react-native-elements": "^1.0.0-beta2",
