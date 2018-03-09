@@ -15,11 +15,7 @@ export default class ProfileAttributeButtons extends Component {
                         />
                     </TouchableOpacity>
                     <Text> My Subjects </Text>
-
                 </View>
-
-
-
                 <View style={styles.iconContainer}>
                     <TouchableOpacity onPress={() => { this.props.renderSkills() }}>
                         <Image
