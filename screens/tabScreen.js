@@ -74,10 +74,6 @@ export default class TabScreen extends Component {
         this.setState({ me });
     }
 
-    navigate(screen) {
-        this.props.navigation.navigate(screen);
-    }
-
     render() {
         if (this.state.me.usertype === 'Mentor') {
             return (

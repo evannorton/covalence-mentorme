@@ -3,16 +3,18 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'rea
 import { Overlay, Button, Input, Icon } from 'react-native-elements';
 import Accordion from 'react-native-collapsible/Accordion';
 
-import { getMe, getMentorSkills, getMentorSubjects, getCategories, getSubjects, deleteMentorSubject, deleteMentorSkill, postSkill, postMentorSkill, getSkillByName } from '../services/user';
+import { getMe, getMentorSkills, getMentorSubjects, getCategories, getSubjects } from '../services/user';
+import { CategoryServices, SubjectServices, SkillServices } from '../services/attribute';
 import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
 
+import ProfileSubjects from '../components/profileSubjects'; //mentor only
+import ProfileSkills from '../components/profileSkills'; //mentor only
 import ProfilePhoto from '../components/profilePhoto';
 import ProfileName from '../components/profileName';
 import ProfileWage from '../components/profileWage'; //mentor only
 import ProfileBio from '../components/profileBio';
 import ProfileContact from '../components/profileContact';
 import ProfileAttributes from '../components/profileAttributes'; //mentor only
-import ProfileSubject from '../components/profileSubject'; //mentor only
 import ProfileLogout from '../components/profileLogout';
 
 export default class ProfileScreen extends Component {
@@ -49,10 +51,10 @@ export default class ProfileScreen extends Component {
             }
         }
         let me = await getMe();
-        let mySubjects = await getMentorSubjects(me.id);
-        let mySkills = await getMentorSkills(me.id);
-        let subjects = await getSubjects();
-        let categories = await getCategories();
+        let mySubjects = await SubjectServices.getMentorSubjects(me.id);
+        let mySkills = await SkillServices.getMentorSkills(me.id);
+        let subjects = await SubjectServices.getSubjects();
+        let categories = await CategoryServices.getCategories();
         mySubjects = mySubjects[0];
         mySkills = mySkills[0];
         this.setState({
@@ -95,128 +97,21 @@ export default class ProfileScreen extends Component {
         return (
             <View style={styles.container}>
 
-                <Overlay
-                    containerStyle={styles.overlayContainer}
-                    overlayStyle={styles.overlay}
-                    fullScreen={true}
-                    isVisible={this.state.isSubjectsVisible}
-                >
-                    <ScrollView contentContainerStyle={styles.scrollView}>
-                        <Button onPress={() => { this.props.screenProps.navigation.navigate('Tab', { isSubjectsVisible: false }); }} text='Back to Profile' />
-                        <Text style={styles.overlayText}>My Subjects</Text>
-                        <View style={styles.mySubjectsContainer}>
-                            {
-                                this.state.mySubjects.map((subject) => {
-                                    return (
-                                        <View style={styles.mySubjects}>
-                                            <Text
-                                                onPress={() => {
-                                                    deleteMentorSubject(this.state.me.id, subject.id)
-                                                        .then(() => {
-                                                            this.props.screenProps.navigation.navigate('Tab', { isSubjectsVisible: true });
-                                                        });
-                                                }}
-                                                key={subject.id}>
-                                                {subject.name}
-                                            </Text>
-                                        </View>
-                                    );
-                                })
-                            }
-                        </View>
-                        <Text style={styles.overlayText}>Add Subjects</Text>
-                        <View style={styles.accordian}>
-                            {
-                                this.state.categories.map((category) => {
-                                    return (
-                                        <Accordion
-                                            sections={[category.name]}
-                                            renderHeader={() => {
-                                                return (
-                                                    <View style={styles.sectionContainer}>
-                                                        <View style={styles.section}>
-                                                            <Text key={category.id} >{category.name}</Text>
-                                                        </View>
-                                                    </View>
-
-                                                );
-                                            }}
-
-                                            renderContent={() => {
-                                                return (
-                                                    <ProfileSubject
-                                                        refresh={() => { this.props.screenProps.navigation.navigate('Tab', { isSubjectsVisible: true }) }}
-                                                        userid={this.state.me.id}
-                                                        subjects={this.state.subjects}
-                                                        categoryid={category.id}
-                                                    />
-                                                );
-                                            }}
-                                        />
-                                    );
-                                })
-                            }
-                        </View>
-                    </ScrollView>
-                </Overlay>
-                <Overlay
-                    containerStyle={styles.overlayContainer}
-                    overlayStyle={styles.overlay}
-                    fullScreen={true}
-                    isVisible={this.state.isSkillsVisible}
-                >
-                    <Button onPress={() => { this.props.screenProps.navigation.navigate('Tab', { isSkillsVisible: false }); }} text='Back to Profile' />
-                    <Input
-                        onChangeText={(skill) => { this.currentSkill = skill }}
-                        onSubmitEditing={() => {
-                            getSkillByName(this.currentSkill)
-                                .then((res) => {
-                                    if (res.id) {
-                                        postMentorSkill(this.state.me.id, res.id)
-                                            .then(() => {
-                                                this.props.screenProps.navigation.navigate('Tab', { isSkillsVisible: true });
-                                            });
-                                    } else {
-                                        postSkill(this.currentSkill)
-                                            .then((res) => {
-                                                postMentorSkill(this.state.me.id, res.id)
-                                                    .then(() => {
-                                                        this.props.screenProps.navigation.navigate('Tab', { isSkillsVisible: true });
-                                                    });
-                                            }).catch((err) => {
-                                                throw err;
-                                                getSkillByName(this.currentSkill)
-                                                    .then((id) => {
-                                                        console.log(1);
-                                                        console.log(id);
-                                                    });
-                                            });
-                                    }
-                                });
-                        }}
-                        placeholder='Add a skill'
-                    />
-                    <Text>My Skills</Text>
-                    {
-                        this.state.mySkills.map((skill) => {
-                            return (
-                                <Text
-                                    key={skill.id}
-                                    onPress={() => {
-                                        deleteMentorSkill(this.state.me.id, skill.id)
-                                            .then(() => {
-                                                this.props.screenProps.navigation.navigate('Tab', { isSkillsVisible: true });
-                                            });
-                                    }}
-                                >
-                                    {skill.name}
-                                </Text>
-                            );
-                        })
-                    }
-                </Overlay>
-
-                <ProfilePhoto userid={this.state.me.id} navigate={this.props.screenProps.navigation.navigate} />
+                <ProfileSubjects
+                    isSubjectsVisible={this.state.isSubjectsVisible}
+                    screenProps={this.props.screenProps}
+                    me={this.state.me}
+                    mySubjects={this.state.mySubjects}
+                    categories={this.state.categories}
+                    subjects={this.state.subjects}
+                />
+                <ProfileSkills
+                    isSkillsVisible={this.state.isSkillsVisible}
+                    screenProps={this.props.screenProps}
+                    me={this.state.me}
+                    mySkills={this.state.mySkills}
+                />
+                <ProfilePhoto userid={this.state.me.id} image={this.state.me.image} navigate={this.props.screenProps.navigation.navigate} />
                 <ProfileName name={this.state.me.name} />
                 {this.renderWage()}
                 <ProfileBio bio={this.state.me.bio} />
@@ -242,68 +137,5 @@ const styles = StyleSheet.create({
         borderRadius: 100,
         paddingTop: 20
     },
-
-    overlayContainer: {
-        zIndex: 1,
-        margin: -5,
-        backgroundColor: 'rgba(255,255,255,0.75)',
-
-    },
-
-    overlay: {
-        zIndex: 2,
-        backgroundColor: 'rgba(255,255,255,0.5)',
-        flex: 1,
-        flexDirection: 'column',
-    },
-    section: {
-        backgroundColor: 'gold',
-        alignSelf: 'center',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flex: 1,
-        height: 40,
-        borderWidth: 2,
-        borderColor: 'black',
-    },
-    sectionContainer: {
-        flex: 0,
-        flexDirection: 'row',
-    },
-    mySubjectsContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    mySubjects: {
-        backgroundColor: 'gold',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 110,
-        height: 40,
-        borderWidth: 2,
-        borderColor: 'black',
-        margin: 2,
-    },
-    accordian: {
-        flex: 2,
-        
-
-    },
-    scrollView: {
-        flex: 1,
-        flexDirection: 'column',
-        paddingBottom: 120,
-      
-
-    },
-    overlayText: {
-        alignSelf: 'center',
-    }
-
-
-
 
 });
