@@ -83,9 +83,8 @@ export default class ProfileSubjects extends Component {
 const styles = StyleSheet.create({
 
     scrollView: {
-        flex: 1,
         flexDirection: 'column',
-        paddingBottom: 120,
+        height: 2000,
     },
 
     overlayContainer: {
@@ -142,7 +141,7 @@ const styles = StyleSheet.create({
     },
 
     accordian: {
-        flex: 2,
+        flex: 6,
     }
 
 });
