@@ -130,19 +130,14 @@ const styles = StyleSheet.create({
         paddingRight: 20,
         paddingLeft: 20,
         flexDirection: 'row',
-        flex: 0,
-        alignItems: 'flex-start',
-        justifyContent: 'center',
-        borderRadius: 10,
-        borderWidth: 1,
-        borderColor: 'blue',
-        paddingBottom: 0
+        flex: 0
     },
 
     image: {
         flex: 1,
         resizeMode: 'contain',
-
+        height: 100,
+        width: 300
     },
 
     buttonContainer: {
@@ -171,17 +166,14 @@ const styles = StyleSheet.create({
     iconContainer: {
         alignItems: 'center',
         justifyContent: 'flex-end',
-        flex: 1,
-        paddingBottom: 5
+        flex: 0,
+        marginTop: 40
     },
 
     icon: {
         resizeMode: 'contain',
         width: 150,
-        height: 150,
-        paddingBottom: 1
-
-
-    },
+        height: 150
+    }
 
 })
