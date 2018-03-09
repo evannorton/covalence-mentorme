@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
         width: 150,
         height: 150,
-        marginTop: 100,
+        paddingBottom: 1
 
 
     },
