@@ -19,7 +19,7 @@ export default class ProfileEditList extends Component {
 
     render() {
         return (
-            <View style={margin = 0}>
+            <View>
                 <Overlay
                     containerStyle={styles.overlayContainer}
                     overlayStyle={styles.overlay}
