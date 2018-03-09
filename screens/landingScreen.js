@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-elements';
+import { TimerMixin } from 'react-timer-mixin';
+
 
 import { DEFAULT_NAVIGATION_NO_ARROW } from '../services/navigation';
 
@@ -8,7 +10,23 @@ import { DEFAULT_NAVIGATION_NO_ARROW } from '../services/navigation';
 import { login, getMe } from '../services/user';
 //end temporary code
 
+const wateringCan = require('../images/wateringcanicon.png');
+
+const wateringCanWater = require('../images/wateringcaniconwater.png');
+
+const seedling = require('../images/seedlingicon.png');
+
+const seedlingLeaves = require('../images/seedlingiconleaves.png');
+
+
+
 export default class LandingScreen extends Component {
+
+    constructor() {
+        super();
+        this.state = { showWateringCan: true, showSeedling: true };
+
+    }
 
     static navigationOptions = DEFAULT_NAVIGATION_NO_ARROW;
 
@@ -24,9 +42,44 @@ export default class LandingScreen extends Component {
 
     //end temporary code
 
-    navigate(userType) {
-        this.props.navigation.navigate('Login', { userType });
+    studentNavigate(userType) {
+        setTimeout(() => {
+            this.setState({ showSeedling: !this.state.showSeedlingLeaves });
+            this.props.navigation.navigate('Login', { userType })
+        }, 800);
     }
+
+    mentorNavigate(userType) {
+        setTimeout(() => {
+            this.setState({ showWateringCan: !this.state.showWateringCan });
+            this.props.navigation.navigate('Login', { userType })
+        }, 800);
+    }
+
+    renderMentor() {
+        let mentorSource = this.state.showWateringCan ?
+            wateringCan : wateringCanWater;
+
+        return (
+            <Image
+                style={styles.icon}
+                source={mentorSource}
+            />
+        );
+    }
+
+    renderStudent() {
+        let studentSource = this.state.showSeedling ?
+            seedling : seedlingLeaves;
+
+        return (
+            <Image
+                style={styles.icon}
+                source={studentSource}
+            />
+        );
+    }
+
 
     render() {
         return (
@@ -36,27 +89,31 @@ export default class LandingScreen extends Component {
                 </View>
 
                 <View style={styles.iconContainer}>
-                    <TouchableOpacity onPress={() => { this.navigate('Mentor') }}>
-                        <Image
-                            style={styles.icon}
-                            source={require('../images/wateringcanicon.png')}
-                        />
+                    <TouchableOpacity
+                        onPress={() => {
+                            this.setState({ showWateringCan: !this.state.showWateringCan })
+                            this.mentorNavigate('Mentor')
+                        }}>
+                        {this.renderMentor()}
                     </TouchableOpacity>
 
                     <Text> Mentor </Text>
                 </View>
 
                 <View style={styles.iconContainer}>
-                    <TouchableOpacity onPress={() => { this.navigate('Student') }}>
-                        <Image
-                            style={styles.icon}
-                            source={require('../images/seedlingyoungicon.png')}
-                        />
+                    <TouchableOpacity
+                        onPress={() => {
+                            this.setState({ showSeedling: !this.state.showSeedling })
+                            this.studentNavigate('Student')
+                        }}>
+                        {this.renderStudent()}
                     </TouchableOpacity>
                     <Text> Student </Text>
                 </View>
 
-                <Button text='TEST BUTTON' onPress={() => { this.testFunction() }} />
+                <View style={styles.buttonContainer}>
+                    <Button text='TEST BUTTON' onPress={() => { this.testFunction() }} />
+                </View>
 
             </View >
         );
@@ -74,24 +131,28 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
         flexDirection: 'row',
         flex: 0,
-        alignItems: 'center',
-        justifyContent: 'center'
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: 'blue',
+        paddingBottom: 0
     },
 
     image: {
         flex: 1,
-        resizeMode: 'contain'
-    },
+        resizeMode: 'contain',
 
-    buttonsContainer: {
-        flex: 0,
-        flexDirection: 'row',
-        alignItems: 'center',
     },
 
     buttonContainer: {
-        flex: 1,
-        paddingBottom: 5
+        paddingRight: 20,
+        paddingLeft: 20,
+        flexDirection: 'row',
+        flex: 0,
+        alignItems: 'center',
+        justifyContent: 'center',
+
     },
 
     button: {
@@ -115,10 +176,10 @@ const styles = StyleSheet.create({
     },
 
     icon: {
-        resizeMode: 'cover',
+        resizeMode: 'contain',
         width: 150,
         height: 150,
-        marginTop: 100,
+        paddingBottom: 1
 
 
     },
