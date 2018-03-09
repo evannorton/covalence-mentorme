@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Image } from 'react-native';
+import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-elements';
 
 export default class ProfileAttributeButtons extends Component {
@@ -8,29 +8,30 @@ export default class ProfileAttributeButtons extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.iconContainer}>
-                    <Image
-                        style={styles.icon}
-                        source={require('../images/subjectsicon.png')}
-                        onPress={() => { this.props.renderSubjects() }
-                        }
-                    />
+                    <TouchableOpacity onPress={() => { this.props.renderSubjects() }}>
+                        <Image
+                            style={styles.icon}
+                            source={require('../images/subjectsicon.png')}
+                        />
+                    </TouchableOpacity>
                     <Text> My Subjects </Text>
 
                 </View>
-                <View style={styles.iconContainer}>
-                    <Image
-                        style={styles.icon}
-                        source={require('../images/skillsicon.png')}
-                        onPress={() => { this.props.renderSkills() }
-                        }
-                    />
-                    <Text> My Skills </Text>
-                </View>
-            </View>
 
+
+
+                <View style={styles.iconContainer}>
+                    <TouchableOpacity onPress={() => { this.props.renderSkills() }}>
+                        <Image
+                            style={styles.icon}
+                            source={require('../images/skillsicon.png')}
+                        />
+                    </TouchableOpacity>
+                    <Text> My Skills </Text>
+                </View >
+            </View>
         );
     }
-
 }
 
 const styles = StyleSheet.create({

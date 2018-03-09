@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, Image } from 'react-native';
+import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-elements';
 
 import { DEFAULT_NAVIGATION_NO_ARROW } from '../services/navigation';
@@ -36,25 +36,29 @@ export default class LandingScreen extends Component {
                 </View>
 
                 <View style={styles.iconContainer}>
-                    <Image
-                        style={styles.icon}
-                        source={require('../images/wateringcanicon.png')}
-                    // onPress={() => { this.props.renderSkills() }
-                    // }
-                    />
-                    <Text> Mentor </Text>
+                    <TouchableOpacity onPress={() => { this.navigate('Mentor') }}>
+                        <Image
+                            style={styles.icon}
+                            source={require('../images/wateringcanicon.png')}
+                        />
+                    </TouchableOpacity>
 
-                    <Image
-                        style={styles.icon}
-                        source={require('../images/seedlingyoungicon.png')}
-                    // onPress={() => { this.props.renderSkills() }
-                    // }
-                    />
+                    <Text> Mentor </Text>
+                </View>
+
+                <View style={styles.iconContainer}>
+                    <TouchableOpacity onPress={() => { this.navigate('Student') }}>
+                        <Image
+                            style={styles.icon}
+                            source={require('../images/seedlingyoungicon.png')}
+                        />
+                    </TouchableOpacity>
                     <Text> Student </Text>
                 </View>
 
                 <Button text='TEST BUTTON' onPress={() => { this.testFunction() }} />
-            </View>
+
+            </View >
         );
     };
 }

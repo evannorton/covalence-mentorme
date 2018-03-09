@@ -7,7 +7,7 @@ export default class ProfileSubject extends Component {
 
     render() {
         return (
-            <View >
+            <View>
                 {
                     this.props.subjects.map((subject) => {
                         if (subject.categoryid === this.props.categoryid) {
@@ -18,10 +18,12 @@ export default class ProfileSubject extends Component {
                                             this.props.refresh();
                                         })
                                 }}>
+                                <View style={styles.contentContainer}>
                                 <View key={subject.id} style={styles.content} >
                                 <Text>
                                     {subject.name}
                                 </Text>
+                                </View>
                                 </View>
                                 </TouchableOpacity>
                                 
@@ -29,7 +31,7 @@ export default class ProfileSubject extends Component {
                         }
                     })
                 }
-            </View>
+          </View>
         );
     }
 
@@ -41,9 +43,13 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
-        width: 360,
+        flex: 1,
         height: 40,
         borderWidth: 2,
         borderColor: 'black',
+    },
+    contentContainer:{
+        flex: 0,
+        flexDirection: 'row',
     }
 })
