@@ -15,8 +15,9 @@ export default class FinanceScreen extends Component {
         tabBarIcon:
             <Image
                 source={require('../images/financeicon.png')}
-                style={{ width: 40, height: 40, }}
-            />
+                style={{ width: 40, height: 40 }}
+            />,
+
 
     }
 
