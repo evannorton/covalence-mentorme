@@ -48,4 +48,8 @@ async function getMe() {
     return RestServices.get('/api/users/me');
 }
 
-export { isLoggedIn, checkLogin, login, logout, signup, getMe };
+async function updateMe(id, row) {
+    return RestServices.put(`/api/users/${id}`, row);
+}
+
+export { isLoggedIn, checkLogin, login, logout, signup, getMe, updateMe };
