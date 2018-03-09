@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text } from 'react-native';
+import { View, ScrollView, StyleSheet, Text } from 'react-native';
+import { Overlay, Button } from 'react-native-elements';
+import Accordion from 'react-native-collapsible/Accordion';
 
+import { deleteMentorSubject } from '../services/user';
+
+import ProfileSubject from '../components/profileSubject';
 
 export default class ProfileSubjects extends Component {
     render() {
@@ -9,21 +14,23 @@ export default class ProfileSubjects extends Component {
                 containerStyle={styles.overlayContainer}
                 overlayStyle={styles.overlay}
                 fullScreen={true}
-                isVisible={this.state.isSubjectsVisible}
+                isVisible={this.props.isSubjectsVisible}
             >
                 <ScrollView contentContainerStyle={styles.scrollView}>
-                    <Button onPress={() => { this.props.screenProps.navigation.navigate('Tab', { isSubjectsVisible: false }); }} text='Back to Profile' />
+                    <Button onPress={() => { this.props.screenProps.navigation.navigate('Tab', { isSubjectsVisible: false }) }} text='Back to Profile' />
                     <Text style={styles.overlayText}>My Subjects</Text>
                     <View style={styles.mySubjectsContainer}>
                         {
-                            this.state.mySubjects.map((subject) => {
+                            this.props.mySubjects.map((subject, key) => {
                                 return (
-                                    <View style={styles.mySubjects}>
+                                    <View
+                                        key={key}
+                                        style={styles.mySubjects}>
                                         <Text
                                             onPress={() => {
-                                                deleteMentorSubject(this.state.me.id, subject.id)
+                                                deleteMentorSubject(this.props.me.id, subject.id)
                                                     .then(() => {
-                                                        this.props.screenProps.navigation.navigate('Tab', { isSubjectsVisible: true });
+                                                        this.props.screenProps.navigation.navigate('Tab', { isSubjectsVisible: true })
                                                     });
                                             }}
                                             key={subject.id}>
@@ -37,9 +44,10 @@ export default class ProfileSubjects extends Component {
                     <Text style={styles.overlayText}>Add Subjects</Text>
                     <View style={styles.accordian}>
                         {
-                            this.state.categories.map((category) => {
+                            this.props.categories.map((category) => {
                                 return (
                                     <Accordion
+                                        key={category.id}
                                         sections={[category.name]}
                                         renderHeader={() => {
                                             return (
@@ -55,8 +63,8 @@ export default class ProfileSubjects extends Component {
                                             return (
                                                 <ProfileSubject
                                                     refresh={() => { this.props.screenProps.navigation.navigate('Tab', { isSubjectsVisible: true }) }}
-                                                    userid={this.state.me.id}
-                                                    subjects={this.state.subjects}
+                                                    userid={this.props.me.id}
+                                                    subjects={this.props.subjects}
                                                     categoryid={category.id}
                                                 />
                                             );
@@ -72,3 +80,69 @@ export default class ProfileSubjects extends Component {
     }
 }
 
+const styles = StyleSheet.create({
+
+    scrollView: {
+        flex: 1,
+        flexDirection: 'column',
+        paddingBottom: 120,
+    },
+
+    overlayContainer: {
+        zIndex: 1,
+        margin: -5,
+        backgroundColor: 'rgba(255,255,255,0.75)',
+
+    },
+
+    overlay: {
+        zIndex: 2,
+        backgroundColor: 'rgba(255,255,255,0.5)',
+        flex: 1,
+        flexDirection: 'column',
+    },
+
+    overlayText: {
+        alignSelf: 'center',
+    },
+
+    mySubjectsContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+    mySubjects: {
+        backgroundColor: 'gold',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 110,
+        height: 40,
+        borderWidth: 2,
+        borderColor: 'black',
+        margin: 2,
+    },
+
+    sectionContainer: {
+        flex: 0,
+        flexDirection: 'row',
+    },
+
+    section: {
+        backgroundColor: 'gold',
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1,
+        height: 40,
+        borderWidth: 2,
+        borderColor: 'black',
+    },
+
+    accordian: {
+        flex: 2,
+    }
+
+});
