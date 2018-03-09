@@ -111,7 +111,7 @@ export default class ProfileScreen extends Component {
                     me={this.state.me}
                     mySkills={this.state.mySkills}
                 />
-                <ProfilePhoto userid={this.state.me.id} navigate={this.props.screenProps.navigation.navigate} />
+                <ProfilePhoto userid={this.state.me.id} image={this.state.me.image} navigate={this.props.screenProps.navigation.navigate} />
                 <ProfileName name={this.state.me.name} />
                 {this.renderWage()}
                 <ProfileBio bio={this.state.me.bio} />
