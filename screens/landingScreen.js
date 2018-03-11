@@ -40,6 +40,14 @@ export default class LandingScreen extends Component {
         }
     }
 
+    async testFunction2() {
+        await login('1', '1', 'Student');
+        let res = await getMe();
+        if (res) {
+            this.props.navigation.navigate('Tab');
+        }
+    }
+
     //end temporary code
 
     studentNavigate(userType) {
@@ -110,10 +118,15 @@ export default class LandingScreen extends Component {
                     </TouchableOpacity>
                     <Text> Student </Text>
                 </View>
-
+                {/* Temporary test code */}
                 <View style={styles.buttonContainer}>
                     <Button text='TEST BUTTON' onPress={() => { this.testFunction() }} />
                 </View>
+
+                <View style={styles.buttonContainer}>
+                    <Button text='TEST BUTTON2' onPress={() => { this.testFunction2() }} />
+                </View>
+                {/* end test code */}
 
             </View >
         );
