@@ -4,9 +4,16 @@ import { Button } from 'react-native-elements';
 import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
 
 import { getUser } from '../services/user';
+import { SubjectServices, SkillServices } from '../services/attribute';
 import { getMentorSubjectsBySubject } from '../services/search';
 import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
 
+// import photo
+import ProfileName from '../components/profileName';
+import ProfileWage from '../components/profileWage';
+import ProfileBio from '../components/profileBio';
+import MentorListSubjects from '../components/mentorListSubjects';
+import MentorListSkills from '../components/mentorListSkills';
 
 export default class MentorListScreen extends Component {
 
@@ -17,6 +24,8 @@ export default class MentorListScreen extends Component {
         this.state = {
             mentorSubjects: [],
             mentor: {},
+            subjects: [],
+            skills: [],
             index: 0
         }
     }
@@ -25,8 +34,9 @@ export default class MentorListScreen extends Component {
         let mentorSubjects = await getMentorSubjectsBySubject(this.props.navigation.state.params.subjectid);
         let userid = mentorSubjects[this.state.index].userid;
         let mentor = await getUser(userid);
-        console.log(mentor);
-        this.setState({ mentorSubjects, mentor });
+        let subjects = await SubjectServices.getMentorSubjects(userid);
+        let skills = await SkillServices.getMentorSkills(userid);
+        this.setState({ mentorSubjects, mentor, subjects, skills });
     }
 
     onSwipeUp(state) {
@@ -63,7 +73,9 @@ export default class MentorListScreen extends Component {
         let index = this.state.index + 1;
         let userid = this.state.mentorSubjects[index].userid;
         let mentor = await getUser(userid);
-        this.setState({ index, mentor });
+        let subjects = await SubjectServices.getMentorSubjects(userid);
+        let skills = await SkillServices.getMentorSkills(userid);
+        this.setState({ index, mentor, subjects, skills });
     }
 
     render() {
@@ -83,10 +95,17 @@ export default class MentorListScreen extends Component {
                 config={config}
                 style={styles.container}
             >
-                <Text style={styles.text}>{this.state.mentor.name}</Text>
-                <Text style={styles.text}>{this.state.mentor.email}</Text>
-                <Text style={styles.text}>{this.state.mentor.phone}</Text>
-                <Text style={styles.text}>{this.state.mentor.bio}</Text>
+                <Image
+                    style={styles.image}
+                    source={{ uri: this.state.mentor.image }}
+                />
+                <ProfileName name={this.state.mentor.name} />
+                <ProfileWage wage={this.state.mentor.wage} />
+                <ProfileBio bio={this.state.mentor.bio} />
+                <View style={styles.attributesContainer}>
+                    <MentorListSubjects subjects={this.state.subjects} />
+                    <MentorListSkills skills={this.state.skills} />
+                </View>
             </GestureRecognizer>
         );
 
@@ -96,7 +115,21 @@ export default class MentorListScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
+    attributesContainer: {
+        marginTop: 10,
+        flex: 1,
+        flexDirection: 'row',
+    },
+
+    image: {
+        resizeMode: 'cover',
+        width: 150,
+        height: 150,
+        borderRadius: 75
     },
 
     text: {

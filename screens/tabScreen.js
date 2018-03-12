@@ -46,6 +46,25 @@ const StudentTabNavigation = TabNavigator({
     Message: { screen: MessageScreen }
 }, {
         tabBarPosition: 'bottom',
+        tabBarOptions: {
+            activeTintColor: 'blue',
+            inactiveTintColor: 'gray',
+            activeBackgroundColor: '#D4E5D3',
+            inactiveBackgroundColor: '#BAC9BB',
+            showIcon: true,
+            iconStyle: {
+                height: 40,
+                width: 40,
+
+            },
+            style: {
+                backgroundColor: 'white',
+                translucent: 'yes',
+                borderTopWidth: 0,
+                height: 70,
+
+            }
+        }
     });
 
 

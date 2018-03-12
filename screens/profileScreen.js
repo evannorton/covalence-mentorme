@@ -56,8 +56,6 @@ export default class ProfileScreen extends Component {
         let mySkills = await SkillServices.getMentorSkills(me.id);
         let subjects = await SubjectServices.getSubjects();
         let categories = await CategoryServices.getCategories();
-        mySubjects = mySubjects[0];
-        mySkills = mySkills[0];
         this.setState({
             me,
             mySubjects,
@@ -144,9 +142,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         flex: 1,
         flexDirection: 'column',
-        borderColor: 'rgb(95,72,47)',
-        borderWidth: 2,
-        borderRadius: 100,
         paddingTop: 20
     },
 
