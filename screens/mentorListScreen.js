@@ -52,7 +52,7 @@ export default class MentorListScreen extends Component {
     }
 
     onSwipeRight(state) {
-        return;
+        this.previousMentor();
     }
 
     onSwipe(gestureName, gestureState) {
@@ -71,6 +71,15 @@ export default class MentorListScreen extends Component {
 
     async nextMentor() {
         let index = this.state.index + 1;
+        let userid = this.state.mentorSubjects[index].userid;
+        let mentor = await getUser(userid);
+        let subjects = await SubjectServices.getMentorSubjects(userid);
+        let skills = await SkillServices.getMentorSkills(userid);
+        this.setState({ index, mentor, subjects, skills });
+    }
+
+    async previousMentor() {
+        let index = this.state.index - 1;
         let userid = this.state.mentorSubjects[index].userid;
         let mentor = await getUser(userid);
         let subjects = await SubjectServices.getMentorSubjects(userid);
