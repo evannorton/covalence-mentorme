@@ -119,6 +119,7 @@ const styles = StyleSheet.create({
     },
 
     iconContainer: {
+        top: 19,
         alignSelf: 'flex-end',
         right: 50,
         marginBottom: -50,

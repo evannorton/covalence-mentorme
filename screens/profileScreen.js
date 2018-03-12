@@ -141,8 +141,7 @@ const styles = StyleSheet.create({
         margin: 0,
         backgroundColor: 'white',
         flex: 1,
-        flexDirection: 'column',
-        paddingTop: 20
-    },
+        flexDirection: 'column'
+    }
 
 });
