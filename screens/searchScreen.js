@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, ScrollView, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 import { Overlay, Button } from 'react-native-elements';
 import Accordion from 'react-native-collapsible/Accordion';
 
@@ -18,7 +18,15 @@ export default class SearchScreen extends Component {
         }
     }
 
-    static navigationOptions = DEFAULT_NAVIGATION_OPTIONS;
+    static navigationOptions = {
+        title: 'Search',
+        tabBarIcon:
+            <Image
+                source={require('../images/searchicon.png')}
+                style={{ width: 40, height: 40 }}
+            />
+    }
+
 
     async componentDidMount() {
         let me = await getMe();
