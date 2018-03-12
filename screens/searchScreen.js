@@ -59,7 +59,7 @@ export default class SearchScreen extends Component {
                                                     <TouchableOpacity
                                                         key={subject.id}
                                                         onPress={() => {
-
+                                                            this.props.screenProps.navigation.navigate('MentorList', { subjectid: subject.id });
                                                         }}>
                                                         <View style={styles.contentContainer}>
                                                             <View key={subject.id} style={styles.content} >
