@@ -37,7 +37,7 @@ const MentorTabNavigation = TabNavigator({
             labelStyle: {
                 fontSize: 15,
                 fontWeight: '200',
-                fontFamily: 'Helvetica'
+
             },
         }
     });

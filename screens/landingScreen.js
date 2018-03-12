@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
         color: 'rgb(95,72,47)',
         fontSize: 18,
         fontWeight: '200',
-        fontFamily: 'Helvetica'
+
 
     },
 

@@ -6,6 +6,8 @@ import SignUpScreen from './screens/signUpScreen';
 import TabScreen from './screens/tabScreen';
 import MentorListScreen from './screens/mentorListScreen';
 import CameraRollScreen from './screens/cameraRollScreen';
+import { setCustomText } from 'react-native-global-props';
+import { Platform } from 'react-native';
 
 const RootNavigator = StackNavigator({
     Home: { screen: LandingScreen },
@@ -16,6 +18,14 @@ const RootNavigator = StackNavigator({
     CameraRoll: { screen: CameraRollScreen }
 }, { intitialRouteName: 'Home' }
 );
+
+const customTextProps = {
+    style: {
+        fontFamily: Platform.OS === 'ios' ? 'Futura-CondensedMedium' : 'Roboto'
+    }
+};
+
+setCustomText(customTextProps);
 
 export default class App extends Component {
     render() {
