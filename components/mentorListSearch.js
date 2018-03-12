@@ -13,10 +13,12 @@ export default class MentorListSearch extends Component {
         }
     }
 
-    checkGap(checked1, checked3) {
+    checkGap(checked1, checked2, checked3) {
         if (checked1 && checked3) {
+            checked2 = true;
             this.setState({ checked2: true });
         }
+        this.props.setWage(checked1, checked2, checked3);
     }
 
     render() {
@@ -47,9 +49,8 @@ export default class MentorListSearch extends Component {
                             let checked1 = !this.state.checked1;
                             let checked2 = this.state.checked2;
                             let checked3 = this.state.checked3;
-                            this.props.setWage(checked1, checked2, checked3);
                             this.setState({ checked1 });
-                            this.checkGap(checked1, checked3);
+                            this.checkGap(checked1, checked2, checked3);
                         }}
                         containerStyle={styles.checkboxContainer}
                         title='$'
@@ -60,9 +61,8 @@ export default class MentorListSearch extends Component {
                             let checked1 = this.state.checked1;
                             let checked2 = !this.state.checked2;
                             let checked3 = this.state.checked3;
-                            this.props.setWage(checked1, checked2, checked3);
                             this.setState({ checked2 });
-                            this.checkGap(checked1, checked3);
+                            this.checkGap(checked1, checked2, checked3);
                         }}
                         containerStyle={styles.checkboxContainer}
                         title='$$'
@@ -73,9 +73,8 @@ export default class MentorListSearch extends Component {
                             let checked1 = this.state.checked1;
                             let checked2 = this.state.checked2;
                             let checked3 = !this.state.checked3;
-                            this.props.setWage(checked1, checked2, checked3);
                             this.setState({ checked3 });
-                            this.checkGap(checked1, checked3);
+                            this.checkGap(checked1, checked2, checked3);
                         }}
                         containerStyle={styles.checkboxContainer}
                         title='$$$'
