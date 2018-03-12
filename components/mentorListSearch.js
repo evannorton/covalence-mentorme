@@ -13,6 +13,14 @@ export default class MentorListSearch extends Component {
         }
     }
 
+    checkGap(checked1, checked2, checked3) {
+        if (checked1 && checked3) {
+            checked2 = true;
+            this.setState({ checked2: true });
+        }
+        this.props.setWage(checked1, checked2, checked3);
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -37,19 +45,37 @@ export default class MentorListSearch extends Component {
                 <Text>Refine search by hourly rate:</Text>
                 <View style={styles.checkboxesContainer}>
                     <CheckBox
-                        onIconPress={() => { this.setState({ checked1: !this.state.checked1 }) }}
+                        onIconPress={() => {
+                            let checked1 = !this.state.checked1;
+                            let checked2 = this.state.checked2;
+                            let checked3 = this.state.checked3;
+                            this.setState({ checked1 });
+                            this.checkGap(checked1, checked2, checked3);
+                        }}
                         containerStyle={styles.checkboxContainer}
                         title='$'
                         checked={this.state.checked1}
                     />
                     <CheckBox
-                        onIconPress={() => { this.setState({ checked2: !this.state.checked2 }) }}
+                        onIconPress={() => {
+                            let checked1 = this.state.checked1;
+                            let checked2 = !this.state.checked2;
+                            let checked3 = this.state.checked3;
+                            this.setState({ checked2 });
+                            this.checkGap(checked1, checked2, checked3);
+                        }}
                         containerStyle={styles.checkboxContainer}
                         title='$$'
                         checked={this.state.checked2}
                     />
                     <CheckBox
-                        onIconPress={() => { this.setState({ checked3: !this.state.checked3 }) }}
+                        onIconPress={() => {
+                            let checked1 = this.state.checked1;
+                            let checked2 = this.state.checked2;
+                            let checked3 = !this.state.checked3;
+                            this.setState({ checked3 });
+                            this.checkGap(checked1, checked2, checked3);
+                        }}
                         containerStyle={styles.checkboxContainer}
                         title='$$$'
                         checked={this.state.checked3}

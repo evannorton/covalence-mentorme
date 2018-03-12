@@ -101,8 +101,31 @@ export default class MentorListScreen extends Component {
         this.setMentor(mentor, index);
     }
 
-    setWage() {
-
+    setWage(checked1, checked2, checked3) {
+        let minWage = 0;
+        let maxWage = null;
+        if (checked3) {
+            minWage = 30;
+        } else if (checked2) {
+            maxWage = 30;
+        }
+        if (checked2) {
+            minWage = 15;
+        } else if (checked1) {
+            maxWage = 15;
+        }
+        if (checked1) {
+            minWage = 0;
+        } else if (checked3) {
+            maxWage = null;
+        }
+        console.log(minWage + " " + maxWage);
+        this.setState({ minWage, maxWage});
+        if (this.state.mentors[this.state.index].wage < minWage || (this.state.mentors[this.state.index].wage > maxWage && maxWage !== null)) {
+            console.log('here');
+            this.setState({ index: 0 });
+            this.nextMentor();
+        }
     }
 
     render() {
@@ -123,7 +146,7 @@ export default class MentorListScreen extends Component {
                 style={styles.container}
             >
                 <MentorListSearch
-                    setWage={() => { this.setWage() }}
+                    setWage={(checked1, checked2, checked3) => { this.setWage(checked1, checked2, checked3) }}
                 />
                 <Image
                     style={styles.image}
