@@ -20,11 +20,18 @@ export default class SearchScreen extends Component {
 
     static navigationOptions = {
         title: 'Search',
-        tabBarIcon:
+        tabBarIcon: ({ tintColor }) => (tintColor == 'blue' ?
             <Image
                 source={require('../images/searchicon.png')}
-                style={{ width: 40, height: 40 }}
+                style={{ width: 40, height: 40, }}
             />
+            :
+            <Image
+                source={require('../images/searchiconBW.png')}
+                style={{ width: 40, height: 40, }}
+            />
+
+        ),
     }
 
 

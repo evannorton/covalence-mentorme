@@ -21,8 +21,6 @@ const MentorTabNavigation = TabNavigator({
         tabBarOptions: {
             activeTintColor: 'blue',
             inactiveTintColor: 'gray',
-            activeBackgroundColor: '#D4E5D3',
-            inactiveBackgroundColor: '#BAC9BB',
             showIcon: true,
             iconStyle: {
                 height: 40,
@@ -49,8 +47,6 @@ const StudentTabNavigation = TabNavigator({
         tabBarOptions: {
             activeTintColor: 'blue',
             inactiveTintColor: 'gray',
-            activeBackgroundColor: '#D4E5D3',
-            inactiveBackgroundColor: '#BAC9BB',
             showIcon: true,
             iconStyle: {
                 height: 40,
