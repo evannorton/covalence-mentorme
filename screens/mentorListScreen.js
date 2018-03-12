@@ -13,7 +13,7 @@ export default class MentorListScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            mentors: [],
+            mentorSubjects: [],
             mentor: {},
             index: 0
         }
@@ -24,7 +24,7 @@ export default class MentorListScreen extends Component {
         let userid = mentorSubjects[this.state.index].userid;
         let mentor = await getUser(userid);
         console.log(mentor);
-        this.setState({ mentors, mentor });
+        this.setState({ mentorSubjects, mentor });
     }
 
     render() {

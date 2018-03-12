@@ -9,6 +9,7 @@ async function makeFetch(url, info) {
 }
 
 async function json(url, method = 'GET', payload = {}) {
+    console.log(url);
     const authToken = await getAuthToken();
     const headers = {
         'Content-Type': 'application/json',

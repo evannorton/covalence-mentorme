@@ -45,8 +45,7 @@ async function signup(name, email, password, usertype) {
 }
 
 async function getUser(id) {
-    console.log(id);
-    return await RestServices.get(`api/users/${id}`);
+    return await RestServices.get(`/api/users/${id}`);
 }
 
 async function getMe() {
