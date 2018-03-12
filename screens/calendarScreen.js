@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
+import { View, StyleSheet, Image, Text, } from 'react-native';
 import {Calendar, CalenderList, Agenda} from 'react-native-calendars'
 import { Button } from 'react-native-elements';
 import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
@@ -41,13 +41,36 @@ export default class CalendarScreen extends Component {
 
     renderItem(item) {
         return (
-          <View style={styles.item}><Text>{item.text.usertype} {item.text.name}</Text></View>
+          <View style={styles.item}>
+          <View style={styles.layout2}>
+          <View style={styles.layout}>
+          <Text>Class:</Text>
+          </View>
+          <View style={styles.layout}>
+          <Text>Time:</Text>
+          </View>
+          <View style={styles.layout}>
+          <Text>Student:</Text>
+          </View>
+          </View>
+          <View style={styles.layout2}>
+          <View style={styles.layout}>
+          <Text>Piloting</Text>
+          </View>
+          <View style={styles.layout}>
+          <Text>4:30</Text>
+          </View>
+          <View style={styles.layout}>
+          <Text>Luke</Text>
+          </View>
+          </View>
+          </View>
         );
       }
     
       renderEmptyDate() {
         return (
-          <View style={styles.emptyDate}><Text>This is empty date!</Text></View>
+          <View style={styles.emptyDate}><Text></Text></View>
         );
       }
 
@@ -62,8 +85,8 @@ export default class CalendarScreen extends Component {
                         {'2018-03-12': [],
                          '2018-03-13': [],
                          '2018-03-14': [],
-                         '2018-03-15': [],
-                         '2018-03-16': [{text:this.state.me}],
+                         '2018-03-15': [{text: this.state.me},{text:this.state.me}],
+                         '2018-03-16': [{text:this.state.me},{text:this.state.me}],
                         }}
                         renderItem={this.renderItem.bind(this)}
                         renderEmptyDate={this.renderEmptyDate.bind(this)}
@@ -83,7 +106,7 @@ export default class CalendarScreen extends Component {
                         {'2018-03-12': [],
                          '2018-03-13': [],
                          '2018-03-14': [],
-                         '2018-03-15': [],
+                         '2018-03-15': [{text: this.state.me}],
                          '2018-03-16': [{text:this.state.me}],
                         }}
                         renderItem={this.renderItem.bind(this)}
@@ -114,12 +137,23 @@ const styles = StyleSheet.create({
         padding: 10,
         marginRight: 10,
         marginTop: 17,
-        height: 15,
+        
       },
       emptyDate: {
         height: 15,
         flex:1,
         paddingTop: 30
-      }
+      },
+      layout:{
+          flex:1,
+          padding: 5,
+          
+      },
+     layout2:{
+        flex:1,
+        flexDirection: 'row',
+      },
+    
+  
 
 });
