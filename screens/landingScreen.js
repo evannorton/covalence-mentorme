@@ -105,7 +105,7 @@ export default class LandingScreen extends Component {
                         {this.renderMentor()}
                     </TouchableOpacity>
 
-                    <Text> Mentor </Text>
+                    <Text style={styles.text}> Mentor </Text>
                 </View>
 
                 <View style={styles.iconContainer}>
@@ -116,7 +116,7 @@ export default class LandingScreen extends Component {
                         }}>
                         {this.renderStudent()}
                     </TouchableOpacity>
-                    <Text> Student </Text>
+                    <Text style={styles.text}> Student </Text>
                 </View>
                 {/* Temporary test code */}
                 <View style={styles.buttonContainer}>
@@ -173,7 +173,11 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        color: 'rgb(95,72,47)'
+        color: 'rgb(95,72,47)',
+        fontSize: 18,
+        fontWeight: '200',
+        fontFamily: 'Helvetica'
+
     },
 
     iconContainer: {
