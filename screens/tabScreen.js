@@ -33,7 +33,12 @@ const MentorTabNavigation = TabNavigator({
                 borderTopWidth: 0,
                 height: 70,
 
-            }
+            },
+            labelStyle: {
+                fontSize: 15,
+                fontWeight: '200',
+                fontFamily: 'Helvetica'
+            },
         }
     });
 
@@ -59,7 +64,13 @@ const StudentTabNavigation = TabNavigator({
                 borderTopWidth: 0,
                 height: 70,
 
-            }
+            },
+
+            labelStyle: {
+                fontSize: 15,
+                fontWeight: '200',
+                fontFamily: 'Helvetica'
+            },
         }
     });
 
