@@ -6,6 +6,13 @@ export default class MentorListSubjects extends Component {
         return (
             <ScrollView contentContainerStyle={styles.container}>
                 <Text>Subjects:</Text>
+                {
+                    this.props.subjects.map((subject) => {
+                        return (
+                            <Text key={subject.id}>{subject.name}</Text>
+                        );
+                    })
+                }
             </ScrollView>
         );
     }

@@ -8,7 +8,7 @@ import { SubjectServices, SkillServices } from '../services/attribute';
 import { getMentorSubjectsBySubject } from '../services/search';
 import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
 
-// import photo
+import MentorListSearch from '../components/mentorListSearch';
 import ProfileName from '../components/profileName';
 import ProfileWage from '../components/profileWage';
 import ProfileBio from '../components/profileBio';
@@ -95,6 +95,7 @@ export default class MentorListScreen extends Component {
                 config={config}
                 style={styles.container}
             >
+                <MentorListSearch />
                 <Image
                     style={styles.image}
                     source={{ uri: this.state.mentor.image }}

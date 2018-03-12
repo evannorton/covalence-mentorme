@@ -6,6 +6,13 @@ export default class MentorListSkills extends Component {
         return (
             <ScrollView contentContainerStyle={styles.container}>
                 <Text>Skills:</Text>
+                {
+                    this.props.skills.map((skill) => {
+                        return (
+                            <Text key={skill.id}>{skill.name}</Text>
+                        );
+                    })
+                }
             </ScrollView>
         );
     }
