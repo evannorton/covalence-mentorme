@@ -27,6 +27,13 @@ export default class MentorListScreen extends Component {
         this.setState({ mentorSubjects, mentor });
     }
 
+    async nextMentor() {
+        let index = this.state.index + 1;
+        let userid = this.state.mentorSubjects[index].userid;
+        let mentor = await getUser(userid);
+        this.setState({ index, mentor });
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -34,6 +41,7 @@ export default class MentorListScreen extends Component {
                 <Text style={styles.text}>{this.state.mentor.email}</Text>
                 <Text style={styles.text}>{this.state.mentor.phone}</Text>
                 <Text style={styles.text}>{this.state.mentor.bio}</Text>
+                <Button text='next mentor' onPress={() => { this.nextMentor() }} />
             </View>
         )
     };
