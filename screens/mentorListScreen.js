@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text } from 'react-native';
 import { Button } from 'react-native-elements';
-import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
+import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
 
 import { getUser } from '../services/user';
 import { getMentorSubjectsBySubject } from '../services/search';
+import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
+
 
 export default class MentorListScreen extends Component {
 
@@ -27,6 +29,36 @@ export default class MentorListScreen extends Component {
         this.setState({ mentorSubjects, mentor });
     }
 
+    onSwipeUp(state) {
+        return;
+    }
+
+    onSwipeDown(state) {
+        return;
+    }
+
+    onSwipeLeft(state) {
+        this.nextMentor();
+    }
+
+    onSwipeRight(state) {
+        return;
+    }
+
+    onSwipe(gestureName, gestureState) {
+        const { SWIPE_UP, SWIPE_DOWN, SWIPE_RIGHT, SWIPE_LEFT } = swipeDirections;
+        switch (gestureName) {
+            case SWIPE_UP:
+                break;
+            case SWIPE_DOWN:
+                break;
+            case SWIPE_LEFT:
+                break;
+            case SWIPE_RIGHT:
+                break;
+        }
+    }
+
     async nextMentor() {
         let index = this.state.index + 1;
         let userid = this.state.mentorSubjects[index].userid;
@@ -35,16 +67,30 @@ export default class MentorListScreen extends Component {
     }
 
     render() {
+
+        const config = {
+            velocityThreshold: 0.3,
+            directionalOffsetThreshold: 80
+        };
+
         return (
-            <View style={styles.container}>
+            <GestureRecognizer
+                onSwipe={(direction, state) => this.onSwipe(direction, state)}
+                onSwipeUp={(state) => this.onSwipeUp(state)}
+                onSwipeDown={(state) => this.onSwipeDown(state)}
+                onSwipeLeft={(state) => this.onSwipeLeft(state)}
+                onSwipeRight={(state) => this.onSwipeRight(state)}
+                config={config}
+                style={styles.container}
+            >
                 <Text style={styles.text}>{this.state.mentor.name}</Text>
                 <Text style={styles.text}>{this.state.mentor.email}</Text>
                 <Text style={styles.text}>{this.state.mentor.phone}</Text>
                 <Text style={styles.text}>{this.state.mentor.bio}</Text>
-                <Button text='next mentor' onPress={() => { this.nextMentor() }} />
-            </View>
-        )
-    };
+            </GestureRecognizer>
+        );
+
+    }
 }
 
 const styles = StyleSheet.create({
