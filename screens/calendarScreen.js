@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text, } from 'react-native';
-import {Calendar, CalenderList, Agenda} from 'react-native-calendars'
+import { Calendar, CalenderList, Agenda } from 'react-native-calendars'
 import { Button } from 'react-native-elements';
 import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
 import { getMe } from '../services/user';
@@ -19,15 +19,21 @@ export default class CalendarScreen extends Component {
 
     static navigationOptions = {
         title: 'Calendar',
-        tabBarIcon:
+        tabBarIcon: ({ tintColor }) => (tintColor == 'blue' ?
             <Image
                 source={require('../images/calendaricon.png')}
                 style={{ width: 40, height: 40, }}
             />
+            :
+            <Image
+                source={require('../images/calendariconBW.png')}
+                style={{ width: 40, height: 40, }}
+            />
 
+        ),
     }
 
-    async componentDidMount(){
+    async componentDidMount() {
         let me = await getMe();
         this.setState({
             me,
@@ -41,38 +47,38 @@ export default class CalendarScreen extends Component {
 
     renderItem(item) {
         return (
-          <View style={styles.item}>
-          <View style={styles.layout2}>
-          <View style={styles.layout}>
-          <Text>Class:</Text>
-          </View>
-          <View style={styles.layout}>
-          <Text>Time:</Text>
-          </View>
-          <View style={styles.layout}>
-          <Text>Student:</Text>
-          </View>
-          </View>
-          <View style={styles.layout2}>
-          <View style={styles.layout}>
-          <Text>Piloting</Text>
-          </View>
-          <View style={styles.layout}>
-          <Text>4:30</Text>
-          </View>
-          <View style={styles.layout}>
-          <Text>Luke</Text>
-          </View>
-          </View>
-          </View>
+            <View style={styles.item}>
+                <View style={styles.layout2}>
+                    <View style={styles.layout}>
+                        <Text>Class:</Text>
+                    </View>
+                    <View style={styles.layout}>
+                        <Text>Time:</Text>
+                    </View>
+                    <View style={styles.layout}>
+                        <Text>Student:</Text>
+                    </View>
+                </View>
+                <View style={styles.layout2}>
+                    <View style={styles.layout}>
+                        <Text>Piloting</Text>
+                    </View>
+                    <View style={styles.layout}>
+                        <Text>4:30</Text>
+                    </View>
+                    <View style={styles.layout}>
+                        <Text>Luke</Text>
+                    </View>
+                </View>
+            </View>
         );
-      }
-    
-      renderEmptyDate() {
+    }
+
+    renderEmptyDate() {
         return (
-          <View style={styles.emptyDate}><Text></Text></View>
+            <View style={styles.emptyDate}><Text></Text></View>
         );
-      }
+    }
 
     render() {
 
@@ -80,19 +86,20 @@ export default class CalendarScreen extends Component {
             return (
                 <View style={styles.container}>
                     <Text style={styles.text}>Mentor Calendar Screen</Text>
-                    <Agenda 
-                    items={
-                        {'2018-03-12': [],
-                         '2018-03-13': [],
-                         '2018-03-14': [],
-                         '2018-03-15': [{text: this.state.me},{text:this.state.me}],
-                         '2018-03-16': [{text:this.state.me},{text:this.state.me}],
-                        }}
+                    <Agenda
+                        items={
+                            {
+                                '2018-03-12': [],
+                                '2018-03-13': [],
+                                '2018-03-14': [],
+                                '2018-03-15': [{ text: this.state.me }, { text: this.state.me }],
+                                '2018-03-16': [{ text: this.state.me }, { text: this.state.me }],
+                            }}
                         renderItem={this.renderItem.bind(this)}
                         renderEmptyDate={this.renderEmptyDate.bind(this)}
-                       
-                    
-                        rowHasChanged={(r1, r2) => {return r1.text !== r2.text}}
+
+
+                        rowHasChanged={(r1, r2) => { return r1.text !== r2.text }}
                     />
                 </View>
             );
@@ -101,17 +108,18 @@ export default class CalendarScreen extends Component {
             return (
                 <View style={styles.container}>
                     <Text style={styles.text}>Student Calendar Screen</Text>
-                    <Agenda 
-                    items={
-                        {'2018-03-12': [],
-                         '2018-03-13': [],
-                         '2018-03-14': [],
-                         '2018-03-15': [{text: this.state.me}],
-                         '2018-03-16': [{text:this.state.me}],
-                        }}
+                    <Agenda
+                        items={
+                            {
+                                '2018-03-12': [],
+                                '2018-03-13': [],
+                                '2018-03-14': [],
+                                '2018-03-15': [{ text: this.state.me }],
+                                '2018-03-16': [{ text: this.state.me }],
+                            }}
                         renderItem={this.renderItem.bind(this)}
                         renderEmptyDate={this.renderEmptyDate.bind(this)}
-                        rowHasChanged={(r1, r2) => {return r1.text !== r2.text}}
+                        rowHasChanged={(r1, r2) => { return r1.text !== r2.text }}
                     />
                 </View>
             )
@@ -137,23 +145,23 @@ const styles = StyleSheet.create({
         padding: 10,
         marginRight: 10,
         marginTop: 17,
-        
-      },
-      emptyDate: {
+
+    },
+    emptyDate: {
         height: 15,
-        flex:1,
+        flex: 1,
         paddingTop: 30
-      },
-      layout:{
-          flex:1,
-          padding: 5,
-          
-      },
-     layout2:{
-        flex:1,
+    },
+    layout: {
+        flex: 1,
+        padding: 5,
+
+    },
+    layout2: {
+        flex: 1,
         flexDirection: 'row',
-      },
-    
-  
+    },
+
+
 
 });
