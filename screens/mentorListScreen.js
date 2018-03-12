@@ -8,7 +8,7 @@ import { SubjectServices, SkillServices } from '../services/attribute';
 import { getMentorSubjectsBySubject } from '../services/search';
 import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
 
-// import photo
+import MentorListSearch from '../components/mentorListSearch';
 import ProfileName from '../components/profileName';
 import ProfileWage from '../components/profileWage';
 import ProfileBio from '../components/profileBio';
@@ -52,7 +52,7 @@ export default class MentorListScreen extends Component {
     }
 
     onSwipeRight(state) {
-        return;
+        this.previousMentor();
     }
 
     onSwipe(gestureName, gestureState) {
@@ -78,6 +78,15 @@ export default class MentorListScreen extends Component {
         this.setState({ index, mentor, subjects, skills });
     }
 
+    async previousMentor() {
+        let index = this.state.index - 1;
+        let userid = this.state.mentorSubjects[index].userid;
+        let mentor = await getUser(userid);
+        let subjects = await SubjectServices.getMentorSubjects(userid);
+        let skills = await SkillServices.getMentorSkills(userid);
+        this.setState({ index, mentor, subjects, skills });
+    }
+
     render() {
 
         const config = {
@@ -95,6 +104,7 @@ export default class MentorListScreen extends Component {
                 config={config}
                 style={styles.container}
             >
+                <MentorListSearch />
                 <Image
                     style={styles.image}
                     source={{ uri: this.state.mentor.image }}
