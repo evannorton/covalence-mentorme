@@ -3,7 +3,6 @@ import { View, StyleSheet, Image, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
 
-import { getUser } from '../services/user';
 import { SubjectServices, SkillServices } from '../services/attribute';
 import { getMentorSubjectsBySubject } from '../services/search';
 import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
@@ -22,21 +21,24 @@ export default class MentorListScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            mentorSubjects: [],
+            mentors: [],
             mentor: {},
             subjects: [],
             skills: [],
+            minWage: 0,
+            maxWage: null,
             index: 0
         }
     }
 
     async componentDidMount() {
-        let mentorSubjects = await getMentorSubjectsBySubject(this.props.navigation.state.params.subjectid);
-        let userid = mentorSubjects[this.state.index].userid;
-        let mentor = await getUser(userid);
-        let subjects = await SubjectServices.getMentorSubjects(userid);
-        let skills = await SkillServices.getMentorSkills(userid);
-        this.setState({ mentorSubjects, mentor, subjects, skills });
+        let mentors = await getMentorSubjectsBySubject(this.props.navigation.state.params.subjectid);
+        this.setState({ mentors });
+        this.setMentor(mentors[this.state.index], this.state.index);
+    }
+
+    log(mentors) {
+        console.log(mentors[0]);
     }
 
     onSwipeUp(state) {
@@ -69,22 +71,38 @@ export default class MentorListScreen extends Component {
         }
     }
 
+    async setMentor(mentor, index) {
+        let subjects = await SubjectServices.getMentorSubjects(mentor.id);
+        let skills = await SkillServices.getMentorSkills(mentor.id);
+        this.setState({ mentor, subjects, skills, index });
+    }
+
     async nextMentor() {
-        let index = this.state.index + 1;
-        let userid = this.state.mentorSubjects[index].userid;
-        let mentor = await getUser(userid);
-        let subjects = await SubjectServices.getMentorSubjects(userid);
-        let skills = await SkillServices.getMentorSkills(userid);
-        this.setState({ index, mentor, subjects, skills });
+        let index = this.state.index;
+        let mentors = this.state.mentors;
+        let mentor;
+        do {
+            index++;
+            console.log(index);
+            mentor = mentors[index];
+        } while (mentors[index].wage < this.state.minWage || (mentors[index].wage > this.state.maxWage && this.state.maxWage !== null))
+        this.setMentor(mentor, index);
     }
 
     async previousMentor() {
-        let index = this.state.index - 1;
-        let userid = this.state.mentorSubjects[index].userid;
-        let mentor = await getUser(userid);
-        let subjects = await SubjectServices.getMentorSubjects(userid);
-        let skills = await SkillServices.getMentorSkills(userid);
-        this.setState({ index, mentor, subjects, skills });
+        let index = this.state.index;
+        let mentors = this.state.mentors;
+        let mentor;
+        do {
+            index--;
+            console.log(index);
+            mentor = mentors[index];
+        } while (mentors[index].wage < this.state.minWage || (mentors[index].wage > this.state.maxWage && this.state.maxWage !== null))
+        this.setMentor(mentor, index);
+    }
+
+    setWage() {
+
     }
 
     render() {
@@ -104,7 +122,9 @@ export default class MentorListScreen extends Component {
                 config={config}
                 style={styles.container}
             >
-                <MentorListSearch />
+                <MentorListSearch
+                    setWage={() => { this.setWage() }}
+                />
                 <Image
                     style={styles.image}
                     source={{ uri: this.state.mentor.image }}
