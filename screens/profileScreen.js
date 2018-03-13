@@ -7,6 +7,7 @@ import { getMe, getMentorSkills, getMentorSubjects, getCategories, getSubjects }
 import { CategoryServices, SubjectServices, SkillServices } from '../services/attribute';
 import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
 
+import ProfileButtonsTop from '../components/profileButtonsTop';
 import ProfileEditList from '../components/profileEditList';
 import ProfileSubjects from '../components/profileSubjects'; //mentor only
 import ProfileSkills from '../components/profileSkills'; //mentor only
@@ -29,7 +30,8 @@ export default class ProfileScreen extends Component {
             subjects: [],
             categories: [],
             isSubjectsVisible: false,
-            isSkillsVisible: false
+            isSkillsVisible: false,
+            isEditListVisible: false
         }
         currentSkill = '';
     };
@@ -102,7 +104,9 @@ export default class ProfileScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <ProfileEditList me={this.state.me} navigate={this.props.screenProps.navigation.navigate} />
+                <ProfileButtonsTop renderEditList={() => { this.setState({ isEditListVisible: true }) }} navigate={this.props.screenProps.navigation.navigate} />
+                <ProfileEditList me={this.state.me} navigate={this.props.screenProps.navigation.navigate} visibility={this.state.isEditListVisible} />
+
                 <ProfileSubjects
                     isSubjectsVisible={this.state.isSubjectsVisible}
                     screenProps={this.props.screenProps}
