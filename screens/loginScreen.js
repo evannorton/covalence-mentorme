@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 30,
-        backgroundColor: 'rgb(208,230,210)',
+        backgroundColor: '#465C62',
         justifyContent: 'center',
         alignItems: 'center'
     },
@@ -102,8 +102,8 @@ const styles = StyleSheet.create({
     },
 
     button: {
-        borderColor: 'rgb(135,204,236)',
-        backgroundColor: 'rgb(135,204,236)',
+        borderColor: 'black',
+        backgroundColor: '#465C62',
         borderRadius: 70,
         borderWidth: 1,
     },
@@ -115,7 +115,8 @@ const styles = StyleSheet.create({
 
     signin: {
         flex: 1,
-        paddingBottom: 5
+        paddingBottom: 5,
+
     }
 
 });
