@@ -10,8 +10,8 @@ export default class CameraRollScreen extends Component {
 
     constructor(props) {
         super(props);
-        userid = this.props.navigation.state.params.userid;
-        navigate = this.props.navigation.navigate;
+        this.userid = this.props.navigation.state.params.userid;
+        this.navigation = this.props.navigation;
     }
 
     static navigationOptions = DEFAULT_NAVIGATION_NO_ARROW;
@@ -32,7 +32,7 @@ export default class CameraRollScreen extends Component {
             method: 'put',
             body: data
         }).then((res) => {
-            this.navigate('Tab');
+            this.navigation.navigate('Tab');
         }).catch((err) => {
             console.log(err);
         });
@@ -41,7 +41,7 @@ export default class CameraRollScreen extends Component {
     render() {
         return (
             <CameraRollPicker
-                callback={this.getImage}
+                callback={(images) => { this.getImage(images); }}
                 maximum={1}
             />
         );

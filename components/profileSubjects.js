@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, StyleSheet, Text } from 'react-native';
+import { View, ScrollView, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 import { Overlay, Button } from 'react-native-elements';
 import Accordion from 'react-native-collapsible/Accordion';
 
@@ -17,7 +17,15 @@ export default class ProfileSubjects extends Component {
                 isVisible={this.props.isSubjectsVisible}
             >
                 <ScrollView contentContainerStyle={styles.scrollView}>
-                    <Button onPress={() => { this.props.screenProps.navigation.navigate('Tab', { isSubjectsVisible: false }) }} text='Back to Profile' />
+                <View style={styles.iconContainer}>
+                    <TouchableOpacity onPress={() => { this.props.screenProps.navigation.navigate('Tab', { isSubjectsVisible: false }) }}>
+                        <Image
+                            style={styles.icon}
+                            source={require('../images/Back.png')}
+                        />
+                    </TouchableOpacity>
+                    <Text> Back  </Text>
+                </View>
                     <Text style={styles.overlayText}>My Subjects</Text>
                     <View style={styles.mySubjectsContainer}>
                         {
@@ -27,6 +35,7 @@ export default class ProfileSubjects extends Component {
                                         key={key}
                                         style={styles.mySubjects}>
                                         <Text
+                                        style={styles.subjectText}
                                             onPress={() => {
                                                 SubjectServices.deleteMentorSubject(this.props.me.id, subject.id)
                                                     .then(() => {
@@ -53,7 +62,7 @@ export default class ProfileSubjects extends Component {
                                             return (
                                                 <View style={styles.sectionContainer}>
                                                     <View style={styles.section}>
-                                                        <Text key={category.id} >{category.name}</Text>
+                                                        <Text style={styles.categoryText} key={category.id} >{category.name}</Text>
                                                     </View>
                                                 </View>
 
@@ -103,6 +112,17 @@ const styles = StyleSheet.create({
 
     overlayText: {
         alignSelf: 'center',
+        fontWeight: 'bold',
+        fontSize: 20,
+    },
+
+    categoryText:{
+        fontWeight: 'bold',
+        fontSize: 20,
+    },
+    subjectText:{
+        fontWeight: 'bold',
+        fontSize: 15,
     },
 
     mySubjectsContainer: {
@@ -114,11 +134,11 @@ const styles = StyleSheet.create({
     },
 
     mySubjects: {
-        backgroundColor: 'gold',
+        backgroundColor: '#F8E191',
         alignItems: 'center',
         justifyContent: 'center',
         width: 110,
-        height: 40,
+        height: 60,
         borderWidth: 2,
         borderColor: 'black',
         margin: 2,
@@ -130,18 +150,26 @@ const styles = StyleSheet.create({
     },
 
     section: {
-        backgroundColor: 'gold',
+        backgroundColor: '#F8E191',
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1,
-        height: 40,
+        height: 60,
         borderWidth: 2,
         borderColor: 'black',
+        fontWeight: 'bold',
     },
 
     accordian: {
         flex: 6,
+    },
+    icon:{
+        height: 40,
+        width: 40,
+    },
+    iconContainer:{
+        alignItems: 'flex-end',
     }
 
 });

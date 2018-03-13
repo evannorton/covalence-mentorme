@@ -102,6 +102,13 @@ export default class TabScreen extends Component {
     }
 
     render() {
+        if (!this.state.me.usertype) {
+            return (
+                <View style={styles.container}>
+
+                </View>
+            );
+        }
         if (this.state.me.usertype === 'Mentor') {
             return (
                 <View style={styles.container}>
@@ -114,7 +121,7 @@ export default class TabScreen extends Component {
                 <View style={styles.container}>
                     <StudentTabNavigation screenProps={this.props} />
                 </View>
-            )
+            );
         }
     };
 }

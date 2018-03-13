@@ -22,7 +22,7 @@ export default class ProfileSubject extends Component {
                                     }}>
                                     <View style={styles.contentContainer}>
                                         <View key={subject.id} style={styles.content} >
-                                            <Text>
+                                            <Text style={styles.subjectText}>
                                                 {subject.name}
                                             </Text>
                                         </View>
@@ -41,17 +41,22 @@ export default class ProfileSubject extends Component {
 
 const styles = StyleSheet.create({
     content: {
-        backgroundColor: 'blue',
+        backgroundColor: '#465C62',
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1,
-        height: 40,
+        height: 60,
         borderWidth: 2,
         borderColor: 'black',
     },
     contentContainer: {
         flex: 0,
         flexDirection: 'row',
+    },
+    subjectText:{
+        fontWeight: 'bold',
+        color: '#F8E191',
+        fontSize: 20,
     }
 })
