@@ -7,6 +7,7 @@ import { SubjectServices, SkillServices } from '../services/attribute';
 import { getMentorSubjectsBySubject } from '../services/search';
 import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
 
+import MentorListAvailabilities from '../components/mentorListAvailabilities';
 import MentorListSearch from '../components/mentorListSearch';
 import ProfileName from '../components/profileName';
 import ProfileWage from '../components/profileWage';
@@ -33,7 +34,8 @@ export default class MentorListScreen extends Component {
             skill1: '',
             skill2: '',
             skill3: '',
-            refreshSearch: false
+            refreshSearch: false,
+            overlayVisibility: false
         }
         this.config = {
             velocityThreshold: 0.3,
@@ -202,6 +204,11 @@ export default class MentorListScreen extends Component {
         this.nextMentor();
     }
 
+    renderOverlay() {
+        console.log('here');
+        this.setState({ overlayVisibility: true });
+    }
+
     render() {
 
         return (
@@ -214,6 +221,7 @@ export default class MentorListScreen extends Component {
                 config={this.config}
                 style={styles.container}
             >
+                <MentorListAvailabilities visibility={this.state.overlayVisibility} />
                 <MentorListSearch
                     setWage={(checked1, checked2, checked3) => { this.setWage(checked1, checked2, checked3) }}
                     setSkills={(skill1, skill2, skill3) => { this.setSkills(skill1, skill2, skill3) }}
@@ -230,7 +238,7 @@ export default class MentorListScreen extends Component {
                     <MentorListSubjects subjects={this.state.subjects} />
                     <MentorListSkills skills={this.state.skills} />
                 </View>
-                <MentorListMakeAppointment />
+                <MentorListMakeAppointment renderOverlay={() => { this.renderOverlay() }} />
             </GestureRecognizer>
         );
 

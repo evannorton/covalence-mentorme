@@ -5,7 +5,7 @@ export default class MentorListMakeAppointment extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Button containerStyle={styles.buttonContainer} title="Make Appointment" />
+                <Button onPress={() => { this.props.renderOverlay() }} containerStyle={styles.buttonContainer} title="Make Appointment" />
             </View>
         );
     }

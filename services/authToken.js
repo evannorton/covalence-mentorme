@@ -17,5 +17,5 @@ async function getAuthToken() {
 export {
     setAuthToken,
     getAuthToken,
-    clearAuthToken,
+    clearAuthToken
 };
