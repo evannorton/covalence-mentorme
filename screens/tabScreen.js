@@ -29,7 +29,6 @@ const MentorTabNavigation = TabNavigator({
             },
             style: {
                 backgroundColor: 'white',
-                translucent: 'yes',
                 borderTopWidth: 0,
                 height: 70,
 
@@ -60,7 +59,6 @@ const StudentTabNavigation = TabNavigator({
             },
             style: {
                 backgroundColor: 'white',
-                translucent: 'yes',
                 borderTopWidth: 0,
                 height: 70,
 

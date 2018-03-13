@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Button } from 'react-native-elements';
 import { logout } from '../services/user';
 
@@ -12,10 +12,16 @@ export default class ProfileLogout extends Component {
 
     render() {
         return (
-            <Button containerStyle={styles.buttonContainer} buttonStyle={styles.button}
-                text='Logout'
-                onPress={() => { this.logout() }}
-            />
+            <View style={styles.iconContainer}>
+                    <TouchableOpacity onPress={() => { this.logout() }}>
+                        <Image
+                            style={styles.icon}
+                            source={require('../images/exiticon.png')}
+                        />
+                    </TouchableOpacity>
+                    <Text> Log Out </Text>
+                </View>
+          
         );
     }
 
@@ -23,16 +29,17 @@ export default class ProfileLogout extends Component {
 
 const styles = StyleSheet.create({
 
-    buttonContainer: {
+    iconContainer: {
+        alignItems: 'center',
+        justifyContent: 'flex-start',
         flex: 1,
-        justifyContent: 'flex-end',
-        marginBottom: 20,
         paddingBottom: 5
     },
 
-    button: {
-        width: 250,
-        backgroundColor: 'rgb(95,72,47)',
-    }
+    icon: {
+        resizeMode: 'cover',
+        width: 50,
+        height: 50,
+    },
 
 });

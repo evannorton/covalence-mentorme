@@ -9,7 +9,10 @@ export default class MentorListSearch extends Component {
         this.state = {
             checked1: false,
             checked2: false,
-            checked3: false
+            checked3: false,
+            text1: '',
+            text2: '',
+            text3: ''
         }
     }
 
@@ -27,19 +30,31 @@ export default class MentorListSearch extends Component {
                 <Text>Refine search by skill(s):</Text>
                 <View style={styles.inputsContainer}>
                     <Input
+                        onChangeText={async (text1) => {
+                            await this.setState({ text1 });
+                        }}
+                        onEndEditing={() => { this.props.setSkills(this.state.text1, this.state.text2, this.state.text3) }}
+                        style={styles.input}
                         containerStyle={styles.inputContainer}
                         placeholder="skill 1"
-                        onChangeText={(skill1) => { }}
                     />
                     <Input
+                        onChangeText={async (text2) => {
+                            await this.setState({ text2 });
+                        }}
+                        onEndEditing={() => { this.props.setSkills(this.state.text1, this.state.text2, this.state.text3) }}
+                        style={styles.input}
                         containerStyle={styles.inputContainer}
                         placeholder="skill 2"
-                        onChangeText={(skill2) => { }}
                     />
                     <Input
+                        onChangeText={async (text3) => {
+                            await this.setState({ text3 });
+                        }}
+                        onEndEditing={() => { this.props.setSkills(this.state.text1, this.state.text2, this.state.text3) }}
+                        style={styles.input}
                         containerStyle={styles.inputContainer}
                         placeholder="skill 3"
-                        onChangeText={(skill3) => { }}
                     />
                 </View>
                 <Text>Refine search by hourly rate:</Text>
@@ -108,6 +123,11 @@ const styles = StyleSheet.create({
         flex: 0,
         width: 120,
         height: 30
+    },
+
+    input: {
+        height: 40,
+        width: 120
     },
 
     checkboxesContainer: {

@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Button, Overlay, List, ListItem } from 'react-native-elements'
 
 import { updateMe } from '../services/user';
+import { logout } from '../services/user';
 
 export default class ProfileEditList extends Component {
 
@@ -16,10 +17,14 @@ export default class ProfileEditList extends Component {
             bio: ''
         }
     }
+    async logout() {
+        await logout();
+        this.props.navigate('Home');
+    }
 
     render() {
         return (
-            <View style={{zIndex:1}}>
+            <View style={{ zIndex: 1 }}>
                 <Overlay
                     containerStyle={styles.overlayContainer}
                     overlayStyle={styles.overlay}
@@ -85,14 +90,25 @@ export default class ProfileEditList extends Component {
                         }}
                     />
                 </Overlay>
-                <View style={styles.iconContainer}>
-                    <TouchableOpacity onPress={() => { this.setState({ isEditListVisible: true }) }}>
-                        <Image
-                            style={styles.icon}
-                            source={require('../images/editicon.png')}
-                        />
-                    </TouchableOpacity>
-                    <Text>Edit</Text>
+                <View style={styles.buttonContainer}>
+                    <View style={styles.logoutContainer}>
+                        <TouchableOpacity onPress={() => { this.logout() }}>
+                            <Image
+                                style={styles.icon}
+                                source={require('../images/exiticon.png')}
+                            />
+                        </TouchableOpacity>
+                        <Text> Log Out </Text>
+                 </View>
+                    <View style={styles.editContainer}>
+                        <TouchableOpacity onPress={() => { this.setState({ isEditListVisible: true }) }}>
+                            <Image
+                                style={styles.icon}
+                                source={require('../images/editicon.png')}
+                            />
+                        </TouchableOpacity>
+                        <Text>Edit</Text>
+                    </View>
                 </View>
             </View>
         );
@@ -119,39 +135,64 @@ const styles = StyleSheet.create({
         flex: 0
     },
 
-    iconContainer: {
-        top: 19,
-        alignSelf: 'flex-end',
-        right: 50,
-        alignItems: 'center'
+    buttonContainer: {
+        flex: 0,
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: -50,
+        
+
     },
 
-    icon: {
+    editContainer: {
+        flex:1  ,
+        width: 50,
+        alignItems: 'center',
+        top: 20,
+        left: 50,
+       
+        
+    },
+
+    logoutContainer: {
+        flex:1,
+        width: 50,
+        alignItems: 'center',
+        top: 20,
+        right: 50,
+        
+       
+        
+    },
+
+    icon:{
         width: 50,
         height: 50,
+       
+    
     },
 
     textContainer: {
         height: 40,
-        flex : 2,
-        
+        flex: 2,
+
     },
 
     textContainerBio: {
         height: 120,
         paddingBottom: 0,
         flex: 2,
-    
+
     },
-    title:{
+    title: {
         width: 60,
         flex: 1
     },
-    listItem:{
+    listItem: {
         flex: 0,
         flexDirection: 'column',
     }
 
- 
+
 
 })
