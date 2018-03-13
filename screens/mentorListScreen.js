@@ -13,6 +13,7 @@ import ProfileWage from '../components/profileWage';
 import ProfileBio from '../components/profileBio';
 import MentorListSubjects from '../components/mentorListSubjects';
 import MentorListSkills from '../components/mentorListSkills';
+import MentorListMakeAppointment from '../components/mentorListMakeAppointment';
 
 export default class MentorListScreen extends Component {
 
@@ -229,6 +230,7 @@ export default class MentorListScreen extends Component {
                     <MentorListSubjects subjects={this.state.subjects} />
                     <MentorListSkills skills={this.state.skills} />
                 </View>
+                <MentorListMakeAppointment />
             </GestureRecognizer>
         );
 
@@ -238,7 +240,6 @@ export default class MentorListScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
         alignItems: 'center'
     },
 
