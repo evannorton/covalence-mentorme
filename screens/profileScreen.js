@@ -134,7 +134,7 @@ export default class ProfileScreen extends Component {
                     phone={this.state.me.phone}
                 />
                 {this.renderAttributes()}
-                <ProfileLogout navigate={this.props.screenProps.navigation.navigate} />
+
 
             </View>
         );
