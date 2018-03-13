@@ -12,14 +12,14 @@ export default class FinanceScreen extends Component {
 
     static navigationOptions = {
         title: 'Finance',
-        tabBarIcon: ({ tintColor }) => (tintColor == 'blue' ?
+        tabBarIcon: ({ tintColor }) => (tintColor == '#F8E191' ?
             <Image
                 source={require('../images/financeicon.png')}
                 style={{ width: 40, height: 40, }}
             />
             :
             <Image
-                source={require('../images/financeiconBW.png')}
+                source={require('../images/financeicongray.png')}
                 style={{ width: 40, height: 40, }}
             />
 
