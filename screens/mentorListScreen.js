@@ -27,7 +27,14 @@ export default class MentorListScreen extends Component {
             skills: [],
             minWage: 0,
             maxWage: null,
-            index: 0
+            index: 0,
+            skill1: '',
+            skill2: '',
+            skill3: ''
+        }
+        this.config = {
+            velocityThreshold: 0.3,
+            directionalOffsetThreshold: 80
         }
     }
 
@@ -35,10 +42,6 @@ export default class MentorListScreen extends Component {
         let mentors = await getMentorSubjectsBySubject(this.props.navigation.state.params.subjectid);
         this.setState({ mentors });
         this.setMentor(mentors[this.state.index], this.state.index);
-    }
-
-    log(mentors) {
-        console.log(mentors[0]);
     }
 
     onSwipeUp(state) {
@@ -72,10 +75,36 @@ export default class MentorListScreen extends Component {
     }
 
     async setMentor(mentor, index) {
-        console.log(arguments);
         let subjects = await SubjectServices.getMentorSubjects(mentor.id);
         let skills = await SkillServices.getMentorSkills(mentor.id);
-        this.setState({ mentor, subjects, skills, index });
+        let skill1 = this.state.skill1;
+        let skill2 = this.state.skill2;
+        let skill3 = this.state.skill3;
+        let isSkill1 = !skill1;
+        let isSkill2 = !skill2;
+        let isSkill3 = !skill3;
+        if (isSkill1) skill1 = '';
+        if (isSkill2) skill2 = '';
+        if (isSkill3) skill3 = '';
+        skills.forEach((skill) => {
+            if (skill.name.toLowerCase().indexOf(skill1.toLowerCase()) >= 0) {
+                isSkill1 = true;
+            }
+            if (skill.name.toLowerCase().indexOf(skill2.toLowerCase()) >= 0) {
+                isSkill2 = true;
+            }
+            if (skill.name.toLowerCase().indexOf(skill3.toLowerCase()) >= 0) {
+                isSkill3 = true;
+            }
+        });
+        console.log(isSkill1 + " " + isSkill2 + " " + isSkill3);
+        if (!isSkill1 || !isSkill2 || !isSkill3) {
+            console.log(index);
+            this.setState({ index });
+            this.nextMentor();
+        } else {
+            this.setState({ mentor, subjects, skills, index });
+        }
     }
 
     async nextMentor() {
@@ -87,7 +116,6 @@ export default class MentorListScreen extends Component {
         do {
             index++;
             mentor = mentors[index];
-            console.log(this.state.minWage);
             isLessThanMin = mentor.wage < this.state.minWage;
             isMoreThanMax = mentor.wage > this.state.maxWage && this.state.maxWage !== null;
         } while (isLessThanMin || isMoreThanMax);
@@ -110,7 +138,6 @@ export default class MentorListScreen extends Component {
     }
 
     async setWage(checked1, checked2, checked3) {
-        console.log(checked1 + " " + checked2 + " " + checked3)
         let index = 0;
         let minWage = 0;
         let maxWage = null;
@@ -133,12 +160,12 @@ export default class MentorListScreen extends Component {
         this.nextMentor();
     }
 
-    render() {
+    async setSkills(skill1, skill2, skill3) {
+        await this.setState({ skill1, skill2, skill3, index: -1 });
+        this.nextMentor();
+    }
 
-        const config = {
-            velocityThreshold: 0.3,
-            directionalOffsetThreshold: 80
-        };
+    render() {
 
         return (
             <GestureRecognizer
@@ -147,11 +174,12 @@ export default class MentorListScreen extends Component {
                 onSwipeDown={(state) => this.onSwipeDown(state)}
                 onSwipeLeft={(state) => this.onSwipeLeft(state)}
                 onSwipeRight={(state) => this.onSwipeRight(state)}
-                config={config}
+                config={this.config}
                 style={styles.container}
             >
                 <MentorListSearch
                     setWage={(checked1, checked2, checked3) => { this.setWage(checked1, checked2, checked3) }}
+                    setSkills={(skill1, skill2, skill3) => { this.setSkills(skill1, skill2, skill3) }}
                 />
                 <Image
                     style={styles.image}
