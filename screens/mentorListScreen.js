@@ -72,6 +72,7 @@ export default class MentorListScreen extends Component {
     }
 
     async setMentor(mentor, index) {
+        console.log(arguments);
         let subjects = await SubjectServices.getMentorSubjects(mentor.id);
         let skills = await SkillServices.getMentorSkills(mentor.id);
         this.setState({ mentor, subjects, skills, index });
@@ -80,28 +81,37 @@ export default class MentorListScreen extends Component {
     async nextMentor() {
         let index = this.state.index;
         let mentors = this.state.mentors;
+        let isLessThanMin = false;
+        let isMoreThanMax = false;
         let mentor;
         do {
             index++;
-            console.log(index);
             mentor = mentors[index];
-        } while (mentors[index].wage < this.state.minWage || (mentors[index].wage > this.state.maxWage && this.state.maxWage !== null))
+            console.log(this.state.minWage);
+            isLessThanMin = mentor.wage < this.state.minWage;
+            isMoreThanMax = mentor.wage > this.state.maxWage && this.state.maxWage !== null;
+        } while (isLessThanMin || isMoreThanMax);
         this.setMentor(mentor, index);
     }
 
     async previousMentor() {
         let index = this.state.index;
         let mentors = this.state.mentors;
+        let isLessThanMin = false;
+        let isMoreThanMax = false;
         let mentor;
         do {
             index--;
-            console.log(index);
             mentor = mentors[index];
-        } while (mentors[index].wage < this.state.minWage || (mentors[index].wage > this.state.maxWage && this.state.maxWage !== null))
+            isLessThanMin = mentors[index].wage < this.state.minWage;
+            isMoreThanMax = mentors[index].wage > this.state.maxWage && this.state.maxWage !== null;
+        } while (isLessThanMin || isMoreThanMax);
         this.setMentor(mentor, index);
     }
 
-    setWage(checked1, checked2, checked3) {
+    async setWage(checked1, checked2, checked3) {
+        console.log(checked1 + " " + checked2 + " " + checked3)
+        let index = 0;
         let minWage = 0;
         let maxWage = null;
         if (checked3) {
@@ -119,13 +129,8 @@ export default class MentorListScreen extends Component {
         } else if (checked3) {
             maxWage = null;
         }
-        console.log(minWage + " " + maxWage);
-        this.setState({ minWage, maxWage});
-        if (this.state.mentors[this.state.index].wage < minWage || (this.state.mentors[this.state.index].wage > maxWage && maxWage !== null)) {
-            console.log('here');
-            this.setState({ index: 0 });
-            this.nextMentor();
-        }
+        await this.setState({ minWage, maxWage, index: -1 });
+        this.nextMentor();
     }
 
     render() {
