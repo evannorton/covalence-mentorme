@@ -33,7 +33,8 @@ export default class LoginScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.message}>Login Screen {this.props.navigation.state.params.userType}</Text>
+                <Text style={styles.message}>{this.props.navigation.state.params.userType} Login
+                </Text>
 
                 <Input
                     onChangeText={(email) => { this.email = email.toLowerCase() }}
@@ -90,6 +91,7 @@ const styles = StyleSheet.create({
 
     input: {
         borderColor: 'black',
+        backgroundColor: '#A2D5E1',
         borderRadius: 70,
         borderWidth: 1,
         marginTop: 10
