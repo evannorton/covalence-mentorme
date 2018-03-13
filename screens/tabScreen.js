@@ -90,7 +90,7 @@ export default class TabScreen extends Component {
         headerLeft: null,
         headerStyle: {
             position: 'relative',
-            backgroundColor: 'rgb(208,230,210)',
+            backgroundColor: '#405E63',
             zIndex: 100,
             top: 0,
             left: 0,

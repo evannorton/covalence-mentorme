@@ -10,13 +10,13 @@ import { DEFAULT_NAVIGATION_NO_ARROW } from '../services/navigation';
 import { login, getMe } from '../services/user';
 //end temporary code
 
-const wateringCan = require('../images/wateringcanicon.png');
+const wateringCan = require('../images/wateringcaniconblue.png');
 
-const wateringCanWater = require('../images/wateringcaniconwater.png');
+const wateringCanWater = require('../images/wateringcaniconwaterblue.png');
 
-const seedling = require('../images/seedlingicon.png');
+const seedling = require('../images/seedlingiconyoungblue2.png');
 
-const seedlingLeaves = require('../images/seedlingiconleaves.png');
+const seedlingLeaves = require('../images/seedlingiconmatureblue2.png');
 
 
 
@@ -136,7 +136,7 @@ export default class LandingScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         // backgroundColor: 'rgb(208,230,210)',
-        backgroundColor: '#A3CEAC',
+        backgroundColor: '#405E63',
         flex: 1
     },
 
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        color: 'rgb(95,72,47)',
+        // color: 'rgb(95,72,47)',
         fontSize: 18,
         fontWeight: '500',
 
