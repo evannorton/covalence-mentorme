@@ -93,7 +93,7 @@ export default class LandingScreen extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.imageContainer}>
-                    <Image style={styles.image} source={require('../images/mentormeboldwhite.png')} />
+                    <Image style={styles.image} source={require('../images/mentormeboldyellow2.png')} />
                 </View>
 
                 <View style={styles.iconContainer}>
@@ -135,7 +135,8 @@ export default class LandingScreen extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'rgb(208,230,210)',
+        // backgroundColor: 'rgb(208,230,210)',
+        backgroundColor: '#A3CEAC',
         flex: 1
     },
 
@@ -175,7 +176,7 @@ const styles = StyleSheet.create({
     text: {
         color: 'rgb(95,72,47)',
         fontSize: 18,
-        fontWeight: '200',
+        fontWeight: '500',
 
 
     },

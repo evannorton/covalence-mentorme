@@ -21,7 +21,7 @@ const RootNavigator = StackNavigator({
 
 const customTextProps = {
     style: {
-        fontFamily: Platform.OS === 'ios' ? 'Futura-CondensedMedium' : 'Roboto'
+        fontFamily: Platform.OS === 'ios' ? 'AvenirNextCondensed-UltraLight' : 'Roboto'
     }
 };
 
