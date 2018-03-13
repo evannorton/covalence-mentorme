@@ -16,6 +16,20 @@ export default class MentorListSearch extends Component {
         }
     }
 
+    componentWillReceiveProps() {
+        console.log('component received props');
+        if (this.props.clearInputs) {
+            this.setState({
+                checked1: false,
+                checked2: false,
+                checked3: false,
+            });
+            this.input1.clear();
+            this.input2.clear();
+            this.input3.clear();
+        }
+    }
+
     checkGap(checked1, checked2, checked3) {
         if (checked1 && checked3) {
             checked2 = true;
@@ -30,6 +44,7 @@ export default class MentorListSearch extends Component {
                 <Text>Refine search by skill(s):</Text>
                 <View style={styles.inputsContainer}>
                     <Input
+                        ref={input => this.input1 = input}
                         onChangeText={async (text1) => {
                             await this.setState({ text1 });
                         }}
@@ -39,6 +54,7 @@ export default class MentorListSearch extends Component {
                         placeholder="skill 1"
                     />
                     <Input
+                        ref={input => this.input2 = input}
                         onChangeText={async (text2) => {
                             await this.setState({ text2 });
                         }}
@@ -48,6 +64,7 @@ export default class MentorListSearch extends Component {
                         placeholder="skill 2"
                     />
                     <Input
+                        ref={input => this.input3 = input}
                         onChangeText={async (text3) => {
                             await this.setState({ text3 });
                         }}
