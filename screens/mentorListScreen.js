@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
+import { View, StyleSheet, Image, Text, Alert } from 'react-native';
 import { Button } from 'react-native-elements';
 import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
 
@@ -28,9 +28,11 @@ export default class MentorListScreen extends Component {
             minWage: 0,
             maxWage: null,
             index: 0,
+            maxIndex: '',
             skill1: '',
             skill2: '',
-            skill3: ''
+            skill3: '',
+            refreshSearch: false
         }
         this.config = {
             velocityThreshold: 0.3,
@@ -40,7 +42,8 @@ export default class MentorListScreen extends Component {
 
     async componentDidMount() {
         let mentors = await getMentorSubjectsBySubject(this.props.navigation.state.params.subjectid);
-        this.setState({ mentors });
+        let maxIndex = mentors.length - 1;
+        this.setState({ mentors, maxIndex });
         this.setMentor(mentors[this.state.index], this.state.index);
     }
 
@@ -112,14 +115,46 @@ export default class MentorListScreen extends Component {
         let mentors = this.state.mentors;
         let isLessThanMin = false;
         let isMoreThanMax = false;
-        let mentor;
-        do {
+        let mentor = this.state.mentor;
+        if (index < this.state.maxIndex) {
+            do {
+                index++;
+                if (index <= this.state.maxIndex) {
+                    mentor = mentors[index];
+                    isLessThanMin = mentor.wage < this.state.minWage;
+                    isMoreThanMax = mentor.wage > this.state.maxWage && this.state.maxWage !== null;
+                }
+            } while ((isLessThanMin || isMoreThanMax) && index <= this.state.maxIndex);
+        } else {
             index++;
-            mentor = mentors[index];
-            isLessThanMin = mentor.wage < this.state.minWage;
-            isMoreThanMax = mentor.wage > this.state.maxWage && this.state.maxWage !== null;
-        } while (isLessThanMin || isMoreThanMax);
-        this.setMentor(mentor, index);
+        }
+        if (index > this.state.maxIndex) {
+            Alert.alert(
+                'No More Mentors',
+                'You have swiped through all mentors which match your search criteria.',
+                [
+                    {
+                        text: 'OK',
+                        onPress: async () => {
+                            await this.setState({
+                                minWage: 0,
+                                maxWage: null,
+                                index: -1,
+                                skill1: '',
+                                skill2: '',
+                                skill3: ''
+                            });
+                            this.setState({ refreshSearch: true });
+                            this.setState({ refreshSearch: false });
+                            this.nextMentor();
+                        }
+                    },
+                ],
+                { cancelable: false }
+            )
+        } else {
+            this.setMentor(mentor, index);
+        }
     }
 
     async previousMentor() {
@@ -133,7 +168,7 @@ export default class MentorListScreen extends Component {
             mentor = mentors[index];
             isLessThanMin = mentors[index].wage < this.state.minWage;
             isMoreThanMax = mentors[index].wage > this.state.maxWage && this.state.maxWage !== null;
-        } while (isLessThanMin || isMoreThanMax);
+        } while ((isLessThanMin || isMoreThanMax) && index > 0);
         this.setMentor(mentor, index);
     }
 
@@ -180,6 +215,7 @@ export default class MentorListScreen extends Component {
                 <MentorListSearch
                     setWage={(checked1, checked2, checked3) => { this.setWage(checked1, checked2, checked3) }}
                     setSkills={(skill1, skill2, skill3) => { this.setSkills(skill1, skill2, skill3) }}
+                    clearInputs={this.state.refreshSearch}
                 />
                 <Image
                     style={styles.image}
