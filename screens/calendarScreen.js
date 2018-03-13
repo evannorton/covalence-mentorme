@@ -19,14 +19,14 @@ export default class CalendarScreen extends Component {
 
     static navigationOptions = {
         title: 'Calendar',
-        tabBarIcon: ({ tintColor }) => (tintColor == 'blue' ?
+        tabBarIcon: ({ tintColor }) => (tintColor == '#F8E191' ?
             <Image
                 source={require('../images/calendaricon.png')}
                 style={{ width: 40, height: 40, }}
             />
             :
             <Image
-                source={require('../images/calendariconBW.png')}
+                source={require('../images/calendaricongray.png')}
                 style={{ width: 40, height: 40, }}
             />
 

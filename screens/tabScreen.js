@@ -19,7 +19,7 @@ const MentorTabNavigation = TabNavigator({
 }, {
         tabBarPosition: 'bottom',
         tabBarOptions: {
-            activeTintColor: 'blue',
+            activeTintColor: '#F8E191',
             inactiveTintColor: 'gray',
             showIcon: true,
             iconStyle: {
@@ -28,14 +28,14 @@ const MentorTabNavigation = TabNavigator({
 
             },
             style: {
-                backgroundColor: 'white',
+                backgroundColor: '#465C62',
                 borderTopWidth: 0,
                 height: 70,
 
             },
             labelStyle: {
                 fontSize: 15,
-                fontWeight: '200',
+                fontWeight: 'bold',
 
             },
         }
@@ -49,7 +49,7 @@ const StudentTabNavigation = TabNavigator({
 }, {
         tabBarPosition: 'bottom',
         tabBarOptions: {
-            activeTintColor: 'blue',
+            activeTintColor: '#F8E191',
             inactiveTintColor: 'gray',
             showIcon: true,
             iconStyle: {
@@ -58,7 +58,7 @@ const StudentTabNavigation = TabNavigator({
 
             },
             style: {
-                backgroundColor: 'white',
+                backgroundColor: '#465C62',
                 borderTopWidth: 0,
                 height: 70,
 
@@ -66,7 +66,7 @@ const StudentTabNavigation = TabNavigator({
 
             labelStyle: {
                 fontSize: 15,
-                fontWeight: '200',
+                fontWeight: 'bold',
             },
         }
     });

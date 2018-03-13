@@ -12,14 +12,14 @@ export default class MessageScreen extends Component {
 
     static navigationOptions = {
         title: 'Message',
-        tabBarIcon: ({ tintColor }) => (tintColor == 'blue' ?
+        tabBarIcon: ({ tintColor }) => (tintColor == '#F8E191' ?
             <Image
                 source={require('../images/messageicon.png')}
                 style={{ width: 40, height: 40, }}
             />
             :
             <Image
-                source={require('../images/messageiconBW.png')}
+                source={require('../images/messageicongray.png')}
                 style={{ width: 40, height: 40, }}
             />
 

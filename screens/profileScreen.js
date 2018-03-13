@@ -38,14 +38,14 @@ export default class ProfileScreen extends Component {
 
     static navigationOptions = {
         title: 'Profile',
-        tabBarIcon: ({ tintColor }) => (tintColor == 'blue' ?
+        tabBarIcon: ({ tintColor }) => (tintColor == '#F8E191' ?
             <Image
                 source={require('../images/usericon.png')}
                 style={{ width: 40, height: 40, }}
             />
             :
             <Image
-                source={require('../images/usericonBW.png')}
+                source={require('../images/usericongray.png')}
                 style={{ width: 40, height: 40, }}
             />
         ),
