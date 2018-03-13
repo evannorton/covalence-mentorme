@@ -19,7 +19,7 @@ export default class ProfileEditList extends Component {
 
     render() {
         return (
-            <View>
+            <View style={{zIndex:1}}>
                 <Overlay
                     containerStyle={styles.overlayContainer}
                     overlayStyle={styles.overlay}
@@ -31,6 +31,7 @@ export default class ProfileEditList extends Component {
                             containerStyle={styles.listItem}
                             textInputContainerStyle={styles.textContainer}
                             textInput={true}
+                            textInputPlaceholder={this.props.me.name}
                             title="Name"
                             textInputMultiline={true}
                             textInputOnChangeText={(name) => { this.setState({ name }) }}
@@ -38,7 +39,9 @@ export default class ProfileEditList extends Component {
                         <ListItem
                             containerStyle={styles.listItem}
                             textInputContainerStyle={styles.textContainer}
+                            titleContainerStyle={styles.title}
                             textInput={true}
+                            textInputPlaceholder={this.props.me.email}
                             title="Email"
                             textInputMultiline={true}
                             textInputOnChangeText={(email) => { this.setState({ email: email.toLowerCase() }) }}
@@ -47,6 +50,7 @@ export default class ProfileEditList extends Component {
                             containerStyle={styles.listItem}
                             textInputContainerStyle={styles.textContainer}
                             textInput={true}
+                            textInputPlaceholder={this.props.me.phone}
                             title="Phone"
                             textInputMultiline={true}
                             textInputOnChangeText={(phone) => { this.setState({ phone }) }}
@@ -55,6 +59,7 @@ export default class ProfileEditList extends Component {
                             containerStyle={styles.listItem}
                             textInputContainerStyle={styles.textContainerBio}
                             textInput={true}
+                            textInputPlaceholder={this.props.me.bio}
                             title="Bio"
                             textInputMultiline={true}
                             textInputOnChangeText={(bio) => { this.setState({ bio }) }}
@@ -114,15 +119,10 @@ const styles = StyleSheet.create({
         flex: 0
     },
 
-    listItem: {
-
-    },
-
     iconContainer: {
         top: 19,
         alignSelf: 'flex-end',
         right: 50,
-        marginBottom: -50,
         alignItems: 'center'
     },
 
@@ -133,12 +133,25 @@ const styles = StyleSheet.create({
 
     textContainer: {
         height: 40,
-        paddingBottom: 0
+        flex : 2,
+        
     },
 
     textContainerBio: {
         height: 120,
-        paddingBottom: 0
+        paddingBottom: 0,
+        flex: 2,
+    
+    },
+    title:{
+        width: 60,
+        flex: 1
+    },
+    listItem:{
+        flex: 0,
+        flexDirection: 'column',
     }
+
+ 
 
 })
