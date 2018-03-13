@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, TouchableOpacity, Image, Text } from 'react-native';
+import { logout } from '../services/user';
 
 export default class ProfileButtonsTop extends Component {
+
+    async logout() {
+        await logout();
+        this.props.navigate('Home');
+    }
+    
     render() {
         return (
             <View style={styles.buttonContainer}>
@@ -31,6 +38,7 @@ export default class ProfileButtonsTop extends Component {
 const styles = StyleSheet.create({
 
     buttonContainer: {
+        zIndex: 1,
         flex: 0,
         flexDirection: 'row',
         alignItems: 'center',
