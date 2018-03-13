@@ -17,7 +17,6 @@ export default class MentorListSearch extends Component {
     }
 
     componentWillReceiveProps() {
-        console.log('component received props');
         if (this.props.clearInputs) {
             this.setState({
                 checked1: false,

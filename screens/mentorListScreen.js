@@ -100,9 +100,7 @@ export default class MentorListScreen extends Component {
                 isSkill3 = true;
             }
         });
-        console.log(isSkill1 + " " + isSkill2 + " " + isSkill3);
         if (!isSkill1 || !isSkill2 || !isSkill3) {
-            console.log(index);
             this.setState({ index });
             this.nextMentor();
         } else {
@@ -162,13 +160,16 @@ export default class MentorListScreen extends Component {
         let mentors = this.state.mentors;
         let isLessThanMin = false;
         let isMoreThanMax = false;
-        let mentor;
-        do {
-            index--;
-            mentor = mentors[index];
-            isLessThanMin = mentors[index].wage < this.state.minWage;
-            isMoreThanMax = mentors[index].wage > this.state.maxWage && this.state.maxWage !== null;
-        } while ((isLessThanMin || isMoreThanMax) && index > 0);
+        let mentor = this.state.mentor;
+        if (index > 0) {
+            do {
+                index--;
+                mentor = mentors[index];
+                isLessThanMin = mentors[index].wage < this.state.minWage;
+                isMoreThanMax = mentors[index].wage > this.state.maxWage && this.state.maxWage !== null;
+            } while ((isLessThanMin || isMoreThanMax) && index > 0);
+
+        }
         this.setMentor(mentor, index);
     }
 
