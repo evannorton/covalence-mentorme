@@ -63,7 +63,8 @@ export default class ProfileSkills extends Component {
                                     <View
                                         key={key}
                                         style={styles.mySkills}>
-                                        <Text
+                                        <Text 
+                                        style={styles.mySkillsText}
                                             key={skill.id}
                                             onPress={() => {
                                                 SkillServices.deleteMentorSkill(this.props.me.id, skill.id)
@@ -110,6 +111,12 @@ const styles = StyleSheet.create({
 
     overlayText: {
         alignSelf: 'center',
+        fontWeight: 'bold',
+        fontSize: 20,
+    },
+    mySkillsText:{
+        fontWeight: 'bold',
+        fontSize: 15,
     },
     icon: {
         height: 40,
@@ -120,18 +127,20 @@ const styles = StyleSheet.create({
     },
     skillContainer: {
         alignItems: 'center',
-        borderWidth: 1,
-        borderColor: 'black',
+        
+        flex: 1,
+    },
+    inputContainer:{
+        flex:1,
+
     },
 
     mySkillsContainer: {
-        flex: 1,
+        flex: 7,
         flexDirection: 'row',
         flexWrap: 'wrap',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderWidth: 1,
-        borderColor: 'black',
+       
+        justifyContent: 'flex-start'
 
     },
 
