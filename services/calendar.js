@@ -1,7 +1,7 @@
-import RestServices from './rest';
+import * as RestServices from './rest';
 
-async function getAvailabilities(userid) {
-    await RestServices.get(`/api/availabilities/${userid}`);
+async function getAvailability(userid) {
+    return await RestServices.get(`/api/availability/${userid}`);
 }
 
-export { getAvailabilities }
+export { getAvailability }

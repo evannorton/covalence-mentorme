@@ -4,10 +4,11 @@ import { Button } from 'react-native-elements';
 import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
 
 import { SubjectServices, SkillServices } from '../services/attribute';
+import { getAvailability } from '../services/calendar';
 import { getMentorSubjectsBySubject } from '../services/search';
 import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
 
-import MentorListAvailabilities from '../components/mentorListAvailabilities';
+import MentorListAvailability from '../components/mentorListAvailability';
 import MentorListSearch from '../components/mentorListSearch';
 import ProfileName from '../components/profileName';
 import ProfileWage from '../components/profileWage';
@@ -27,6 +28,7 @@ export default class MentorListScreen extends Component {
             mentor: {},
             subjects: [],
             skills: [],
+            availability: [],
             minWage: 0,
             maxWage: null,
             index: 0,
@@ -45,6 +47,7 @@ export default class MentorListScreen extends Component {
 
     async componentDidMount() {
         let mentors = await getMentorSubjectsBySubject(this.props.navigation.state.params.subjectid);
+        console.log(mentors[0]);
         let maxIndex = mentors.length - 1;
         this.setState({ mentors, maxIndex });
         this.setMentor(mentors[this.state.index], this.state.index);
@@ -83,6 +86,7 @@ export default class MentorListScreen extends Component {
     async setMentor(mentor, index) {
         let subjects = await SubjectServices.getMentorSubjects(mentor.id);
         let skills = await SkillServices.getMentorSkills(mentor.id);
+        let availability = await getAvailability(mentor.id);
         let skill1 = this.state.skill1;
         let skill2 = this.state.skill2;
         let skill3 = this.state.skill3;
@@ -107,7 +111,7 @@ export default class MentorListScreen extends Component {
             this.setState({ index });
             this.nextMentor();
         } else {
-            this.setState({ mentor, subjects, skills, index });
+            this.setState({ mentor, subjects, skills, availability, index });
         }
     }
 
@@ -205,7 +209,6 @@ export default class MentorListScreen extends Component {
     }
 
     renderOverlay() {
-        console.log('here');
         this.setState({ overlayVisibility: true });
     }
 
@@ -221,7 +224,7 @@ export default class MentorListScreen extends Component {
                 config={this.config}
                 style={styles.container}
             >
-                <MentorListAvailabilities visibility={this.state.overlayVisibility} />
+                <MentorListAvailability availability={this.state.availability} visibility={this.state.overlayVisibility} />
                 <MentorListSearch
                     setWage={(checked1, checked2, checked3) => { this.setWage(checked1, checked2, checked3) }}
                     setSkills={(skill1, skill2, skill3) => { this.setSkills(skill1, skill2, skill3) }}

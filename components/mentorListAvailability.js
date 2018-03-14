@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet, Text } from 'react-native';
 import { Overlay } from 'react-native-elements';
 
-export default class MentorListAvailablities extends Component {
-
-    componentDidMount() {
-
-    }
+export default class MentorListAvailablity extends Component {
 
     render() {
         return (
@@ -17,7 +13,16 @@ export default class MentorListAvailablities extends Component {
                 isVisible={this.props.visibility}
             >
                 <ScrollView contentContainerStyle={styles.scrollView}>
-                    <Text></Text>
+                    <Text>Availability</Text>
+                    {
+                        this.props.availability.map((availability) => {
+                            return (
+                                <Text key={availability.id}>
+                                    {availability.date.substring(0, 10)} {availability.starttime}-{availability.endtime}
+                                </Text>
+                            );
+                        })
+                    }
                 </ScrollView>
             </Overlay>
         );
@@ -28,19 +33,20 @@ export default class MentorListAvailablities extends Component {
 const styles = StyleSheet.create({
 
     scrollView: {
+        zIndex: 100,
         flexDirection: 'column',
         height: 2000,
     },
 
     overlayContainer: {
-        zIndex: 1,
+        zIndex: 300,
         margin: -5,
         backgroundColor: 'rgba(255,255,255,0.75)',
 
     },
 
     overlay: {
-        zIndex: 2,
+        zIndex: 200,
         backgroundColor: 'rgba(255,255,255,0.5)',
         flex: 1,
         flexDirection: 'column',
