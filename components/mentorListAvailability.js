@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import { ScrollView, StyleSheet, Text } from 'react-native';
+import { View, ScrollView, StyleSheet, Text } from 'react-native';
 import { Overlay } from 'react-native-elements';
+import Accordion from 'react-native-collapsible/Accordion';
+
+import MentorListHours from './mentorListHours';
 
 export default class MentorListAvailablity extends Component {
 
@@ -13,13 +16,30 @@ export default class MentorListAvailablity extends Component {
                 isVisible={this.props.visibility}
             >
                 <ScrollView contentContainerStyle={styles.scrollView}>
-                    <Text>Availability</Text>
+                    <Text>{this.props.mentor.name}'s Availability</Text>
+
                     {
                         this.props.availability.map((availability) => {
                             return (
-                                <Text key={availability.id}>
-                                    {availability.date.substring(0, 10)} {availability.starttime}-{availability.endtime}
-                                </Text>
+                                <Accordion
+                                    key={availability.id}
+                                    sections={[availability.date.substring(0, 10)]}
+                                    renderHeader={() => {
+                                        return (
+                                            <View style={styles.availabilityContainer}>
+                                                <Text style={{ fontSize: 40 }}>
+                                                    {availability.date.substring(0, 10)}
+                                                </Text>
+                                            </View>
+
+                                        );
+                                    }}
+                                    renderContent={() => {
+                                        return (
+                                            <MentorListHours start={availability.starttime} end={availability.endtime} />
+                                        );
+                                    }}
+                                />
                             );
                         })
                     }
@@ -34,22 +54,33 @@ const styles = StyleSheet.create({
 
     scrollView: {
         zIndex: 100,
-        flexDirection: 'column',
         height: 2000,
+        alignItems: 'center'
     },
 
     overlayContainer: {
+        paddingTop: 50,
         zIndex: 300,
         margin: -5,
         backgroundColor: 'rgba(255,255,255,0.75)',
-
     },
 
     overlay: {
         zIndex: 200,
         backgroundColor: 'rgba(255,255,255,0.5)',
         flex: 1,
-        flexDirection: 'column',
+    },
+
+    availabilityContainer: {
+        alignSelf: 'center',
+        backgroundColor: '#F8E191',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 300,
+        height: 60,
+        borderWidth: 1,
+        borderColor: 'black',
+        margin: 2,
     }
 
 });
