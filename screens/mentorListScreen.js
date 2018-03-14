@@ -223,7 +223,12 @@ export default class MentorListScreen extends Component {
                 config={this.config}
                 style={styles.container}
             >
-                <MentorListAvailability mentor={this.state.mentor} availability={this.state.availability} visibility={this.state.overlayVisibility} />
+                <MentorListAvailability
+                    navigate={this.props.navigation.navigate}
+                    mentor={this.state.mentor}
+                    availability={this.state.availability}
+                    visibility={this.state.overlayVisibility}
+                />
                 <MentorListSearch
                     setWage={(checked1, checked2, checked3) => { this.setWage(checked1, checked2, checked3) }}
                     setSkills={(skill1, skill2, skill3) => { this.setSkills(skill1, skill2, skill3) }}

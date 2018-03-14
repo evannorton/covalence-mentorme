@@ -36,7 +36,14 @@ export default class MentorListAvailablity extends Component {
                                     }}
                                     renderContent={() => {
                                         return (
-                                            <MentorListHours start={availability.starttime} end={availability.endtime} />
+                                            <MentorListHours
+                                                navigate={this.props.navigate}
+                                                mentor={this.props.mentor}
+                                                date={availability.date.substring(0, 10)}
+                                                exceptions={availability.exceptions}
+                                                start={availability.starttime}
+                                                end={availability.endtime}
+                                            />
                                         );
                                     }}
                                 />
