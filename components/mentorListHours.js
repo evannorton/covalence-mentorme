@@ -55,13 +55,14 @@ const styles = StyleSheet.create({
     },
 
     hour: {
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#465C62',
         borderWidth: 1,
         borderColor: 'black',
         height: 50,
-        width: 100
+        minWidth: 100
     }
 
 });
