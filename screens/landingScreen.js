@@ -135,23 +135,22 @@ export default class LandingScreen extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        // backgroundColor: 'rgb(208,230,210)',
         backgroundColor: '#405E63',
-        flex: 1
+        flex: 1,
     },
 
     imageContainer: {
         paddingRight: 20,
         paddingLeft: 20,
         flexDirection: 'row',
-        flex: 0
+        flex: 0,
     },
 
     image: {
         flex: 1,
         resizeMode: 'contain',
         height: 100,
-        width: 300
+        width: 300,
     },
 
     buttonContainer: {
@@ -161,7 +160,6 @@ const styles = StyleSheet.create({
         flex: 0,
         alignItems: 'center',
         justifyContent: 'center',
-
     },
 
     button: {
@@ -174,18 +172,15 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        // color: 'rgb(95,72,47)',
         fontSize: 18,
         fontWeight: '500',
-
-
     },
 
     iconContainer: {
         alignItems: 'center',
         justifyContent: 'flex-end',
         flex: 0,
-        marginTop: 40
+        marginTop: 40,
     },
 
     icon: {
