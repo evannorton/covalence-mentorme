@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, StyleSheet, Image, Text } from 'react-native';
+import { View, ScrollView, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-elements';
 import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
 
@@ -82,11 +82,19 @@ export default class MessageScreen extends Component {
                     this.state.appointments.map((appointment) => {
                         this.handleAppointment(appointment);
                         return (
-                            <View style={styles.appointmentContainer}>
-                                <Text>{this.state.appointment.user.name}</Text>
-                                <Text>{this.state.appointment.subject.name}</Text>
-                                <Text>{this.state.appointment.date}</Text>
-                                <Text>{this.state.appointment.time}</Text>
+                            <View key={appointment.id} style={styles.appointmentContainer}>
+                                <View style={styles.textContainer}>
+                                    <Text>{this.state.appointment.user.name}</Text>
+                                    <Text>{this.state.appointment.subject.name}</Text>
+                                    <Text>{this.state.appointment.date}</Text>
+                                    <Text>{this.state.appointment.time}</Text>
+                                </View>
+                                <TouchableOpacity style={styles.iconContainer}>
+                                    <Image style={styles.icon} source={require('../images/success.png')} />
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.iconContainer}>
+                                    <Image style={styles.icon} source={require('../images/error.png')} />
+                                </TouchableOpacity>
                             </View>
                         );
                     })
@@ -98,14 +106,35 @@ export default class MessageScreen extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        paddingTop: 20,
+        paddingLeft: 30,
+        paddingRight: 30
     },
 
     appointmentContainer: {
+        margin: 2,
         alignItems: 'center',
+        justifyContent: 'center',
         borderWidth: 1,
         borderColor: 'black',
-        flex: 0
+        flex: 0,
+        flexDirection: 'row',
+        backgroundColor: '#F8E191'
+    },
+
+    textContainer: {
+        flex: 3,
+        alignItems: 'center'
+    },
+
+    iconContainer: {
+        flex: 1
+    },
+
+    icon: {
+        width: 50,
+        height: 50
     }
 
 });
