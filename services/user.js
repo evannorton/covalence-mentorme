@@ -56,4 +56,8 @@ async function updateMe(id, row) {
     return await RestServices.put(`/api/users/${id}`, row);
 }
 
-export { isLoggedIn, checkLogin, login, logout, signup, getUser, getMe, updateMe };
+async function getCharges() {
+    return await RestServices.get(`/api/users/charges`);
+}
+
+export { isLoggedIn, checkLogin, login, logout, signup, getUser, getMe, updateMe, getCharges };

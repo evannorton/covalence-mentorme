@@ -18,7 +18,11 @@ export default class SignUpScreen extends Component {
     static navigationOptions = DEFAULT_NAVIGATION_OPTIONS;
 
     async signup() {
-        await signup(this.name, this.email.toLowerCase(), this.password, this.userType);
+        try {
+            await signup(this.name, this.email.toLowerCase(), this.password, this.userType);
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     navigate(screen) {

@@ -2,12 +2,27 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
-
+import { BASE_URL } from '../services/rest';
+import { getMe, getCharges } from '../services/user';
 
 export default class FinanceScreen extends Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            charges: [],
+            me: ''
+        }
+    }
+
+    async componentDidMount() {
+        try {
+            let charges = await getCharges();
+            console.log(charges);
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     static navigationOptions = {
