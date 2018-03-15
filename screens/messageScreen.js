@@ -3,7 +3,7 @@ import { View, ScrollView, StyleSheet, Image, Text, TouchableOpacity } from 'rea
 import { Button } from 'react-native-elements';
 import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
 
-import { getAppointments, confirmAppointment } from '../services/calendar';
+import { getAppointments, confirmAppointment, deleteAppointment } from '../services/calendar';
 import { SubjectServices } from '../services/attribute';
 import { getMe, getUser } from '../services/user';
 
@@ -34,7 +34,6 @@ export default class MessageScreen extends Component {
     }
 
     async componentDidMount() {
-        console.log('mount');
         let me = await getMe();
         let appointments = await getAppointments(me.usertype, me.id, 0);
 
@@ -76,14 +75,23 @@ export default class MessageScreen extends Component {
         return { user, date, time, subject };
     }
 
-    renderConfirm() {
+    renderConfirm(appointment) {
         if (this.state.me.usertype === 'Mentor') {
             return (
                 <TouchableOpacity
                     onPress={async () => {
-                        console.log('onpress');
                         await confirmAppointment(appointment.id);
                         let appointments = await getAppointments(this.state.me.usertype, this.state.me.id, 0);
+                        for (let i = 0; i < appointments.length; i++) {
+                            let appointment = appointments[i];
+                            let appt = await this.handleAppointment(appointment);
+
+                            appointment.user = appt.user;
+                            appointment.date = appt.date;
+                            appointment.time = appt.time;
+                            appointment.subject = appt.subject;
+                        }
+
                         this.setState({ appointments });
                     }}
                     style={styles.iconContainer}
@@ -107,8 +115,22 @@ export default class MessageScreen extends Component {
                                     <Text>{appointment.date}</Text>
                                     <Text>{appointment.time}</Text>
                                 </View>
-                                {this.renderConfirm()}
+                                {this.renderConfirm(appointment)}
                                 <TouchableOpacity
+                                    onPress={async () => {
+                                        await deleteAppointment(appointment.id);
+                                        let appointments = await getAppointments(this.state.me.usertype, this.state.me.id, 0);
+                                        for (let i = 0; i < appointments.length; i++) {
+                                            let appointment = appointments[i];
+                                            let appt = await this.handleAppointment(appointment);
+
+                                            appointment.user = appt.user;
+                                            appointment.date = appt.date;
+                                            appointment.time = appt.time;
+                                            appointment.subject = appt.subject;
+                                        }
+                                        this.setState({ appointments });
+                                    }}
                                     style={styles.iconContainer}
                                 >
                                     <Image style={styles.icon} source={require('../images/error.png')} />
