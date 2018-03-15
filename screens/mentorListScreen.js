@@ -224,6 +224,7 @@ export default class MentorListScreen extends Component {
                 style={styles.container}
             >
                 <MentorListAvailability
+                    subjectid={this.props.navigation.state.params.subjectid}
                     navigate={this.props.navigation.navigate}
                     mentor={this.state.mentor}
                     availability={this.state.availability}

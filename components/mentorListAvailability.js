@@ -37,6 +37,8 @@ export default class MentorListAvailablity extends Component {
                                     renderContent={() => {
                                         return (
                                             <MentorListHours
+                                                subjectid={this.props.subjectid}
+                                                id={availability.id}
                                                 navigate={this.props.navigate}
                                                 mentor={this.props.mentor}
                                                 date={availability.date.substring(0, 10)}

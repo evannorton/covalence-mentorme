@@ -4,12 +4,12 @@ async function getAvailability(userid) {
     return await RestServices.get(`/api/availability/${userid}`);
 }
 
-async function deleteAvailability(id) {
-    return await RestServices.destroy(`/api/availability/${id}`);
+async function addException(id, exceptions) {
+    return await RestServices.put(`/api/availability/${id}`, { exceptions });
 }
 
-async function createAppointment(date, mentorid, studentid, subjectid, starttime, endtime) {
-    return await RestServices.destroy('/api/appointment/');
+async function createAppointment(date, mentorid, studentid, subjectid, hour) {
+    return await RestServices.post('/api/appointments/', { date, mentorid, studentid, subjectid, hour });
 }
 
-export { getAvailability, deleteAvailability, createAppointment }
+export { getAvailability, addException, createAppointment }

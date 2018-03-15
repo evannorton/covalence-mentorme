@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
 
+import { addException, createAppointment } from '../services/calendar';
+import { getMe } from '../services/user';
+
 export default class MentorListHours extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            hours: []
+            me: {},
+            hours: [],
+            exceptions: ''
         };
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        let me = await getMe();
+        this.setState({ me });
         let exceptionsString = this.props.exceptions;
         exceptionsString = exceptionsString.split('.');
         let exceptions = [];
@@ -28,7 +35,7 @@ export default class MentorListHours extends Component {
                     isException = true;
                 }
             }
-            if (isException) {
+            if (!isException) {
                 if (i < 12) {
                     hours.push(`${i}am`);
                 } else if (i === 12) {
@@ -38,7 +45,7 @@ export default class MentorListHours extends Component {
                 }
             }
         }
-        this.setState({ hours });
+        this.setState({ hours, exceptions });
     }
 
     render() {
@@ -48,7 +55,9 @@ export default class MentorListHours extends Component {
                     this.state.hours.map((hour, key) => {
                         return (
                             <TouchableOpacity style={styles.hour} key={key} onPress={() => {
-
+                                console.log(`${this.state.exceptions}.${hour.substring(0, 1)}`);
+                                addException(this.props.id, `${this.state.exceptions}.${hour.substring(0, 1)}`);
+                                createAppointment(this.props.date, this.props.mentor.id, this.state.me.id, this.props.subjectid, hour);
                                 Alert.alert(
                                     'Appointment Requested!',
                                     `Your request for an appointment with ${this.props.mentor.name} at ${hour} on ${this.props.date} has been sent.`,
