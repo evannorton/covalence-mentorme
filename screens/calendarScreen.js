@@ -147,6 +147,12 @@ export default class CalendarScreen extends Component {
             </View>
         
         );}else{
+            getUser(item.mentorid).then((user)=>{
+                this.setState({
+                  user,
+                });
+            });
+                return(
             <View style={styles.item}>
             <View style={styles.layout2}>
                 <View style={styles.layout}>
@@ -161,18 +167,18 @@ export default class CalendarScreen extends Component {
             </View>
             <View style={styles.layout2}>
                 <View style={styles.layout}>
-                    <Text>{item.subjectid}</Text>
+                    <Text>{this.state.subject.name}</Text>
                 </View>
                 <View style={styles.layout}>
                     <Text>{item.hour}</Text>
                 </View>
                 <View style={styles.layout}>
-                    <Text>{item.mentorid}</Text>
+                    <Text>{this.state.user.name}</Text>
                 </View>
             </View>
         </View>
 
-        }
+                )}
     }
 
     renderEmptyDate() {
