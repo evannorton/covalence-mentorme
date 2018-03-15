@@ -12,8 +12,13 @@ let CategoryServices = {
 
 //Subjects
 
+
+async function getSubject(id) {
+    return await RestServices.get(`/api/subjects/${id}`);
+}
+
 async function getSubjects() {
-    return await RestServices.get(`/api/subjects/`)
+    return await RestServices.get(`/api/subjects/`);
 }
 
 async function getMentorSubjects(userid) {
@@ -35,6 +40,7 @@ async function deleteMentorSubject(userid, subjectid) {
 }
 
 let SubjectServices = {
+    getSubject,
     getSubjects,
     getMentorSubjects,
     postMentorSubject,

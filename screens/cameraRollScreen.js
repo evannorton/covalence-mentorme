@@ -31,7 +31,7 @@ export default class CameraRollScreen extends Component {
         fetch(`${BASE_URL}/api/users/images/${userid}`, {
             method: 'put',
             body: data
-        }).then((res) => {
+        }).then(() => {
             this.navigation.navigate('Tab');
         }).catch((err) => {
             console.log(err);
