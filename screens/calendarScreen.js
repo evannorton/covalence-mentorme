@@ -45,6 +45,9 @@ export default class CalendarScreen extends Component {
 
     async componentDidMount() {
         let me = await getMe();
+        this.setState({
+            me,
+        })
         let appointments = await getAppointments(me.usertype, me.id, 1);
         let calendarDates = {}
         let appointmentsForSpecificDate = [];
@@ -62,13 +65,12 @@ export default class CalendarScreen extends Component {
                 lastDate = appointments[i].date.substring(0,10);
             
             }
-            console.log(calendarDates);
+    
         }
         this.setState({
-            me,
             calendarDates,
-        }
-        )
+        });
+        
         
     }
 
@@ -124,7 +126,7 @@ export default class CalendarScreen extends Component {
             <View style={styles.item}>
                 <View style={styles.layout2}>
                     <View style={styles.layout}>
-                        <Text>Class:</Text>
+                        <Text>Subject:</Text>
                     </View>
                     <View style={styles.layout}>
                         <Text>Time:</Text>
@@ -156,7 +158,7 @@ export default class CalendarScreen extends Component {
             <View style={styles.item}>
             <View style={styles.layout2}>
                 <View style={styles.layout}>
-                    <Text>Class:</Text>
+                    <Text>Subject:</Text>
                 </View>
                 <View style={styles.layout}>
                     <Text>Time:</Text>
