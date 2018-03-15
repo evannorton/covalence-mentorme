@@ -1,9 +1,12 @@
+//messagescreen
+
+
 import React, { Component } from 'react';
 import { View, ScrollView, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-elements';
 import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
 
-import { getAppointments } from '../services/calendar';
+import { getAppointments, confirmAppointment, deleteAppointment } from '../services/calendar';
 import { SubjectServices } from '../services/attribute';
 import { getMe, getUser } from '../services/user';
 
@@ -13,17 +16,7 @@ export default class MessageScreen extends Component {
         super(props);
         this.state = {
             me: {},
-            appointments: [],
-            appointment: {
-                user: {
-                    name: ''
-                },
-                subject: {
-                    name: ''
-                },
-                date: '',
-                time: ''
-            }
+            appointments: []
         }
     }
 
@@ -46,6 +39,17 @@ export default class MessageScreen extends Component {
     async componentDidMount() {
         let me = await getMe();
         let appointments = await getAppointments(me.usertype, me.id, 0);
+
+        for (let i = 0; i < appointments.length; i++) {
+            let appointment = appointments[i];
+            let appt = await this.handleAppointment(appointment);
+
+            appointment.user = appt.user;
+            appointment.date = appt.date;
+            appointment.time = appt.time;
+            appointment.subject = appt.subject;
+        }
+
         this.setState({ me, appointments });
     }
 
@@ -71,8 +75,34 @@ export default class MessageScreen extends Component {
         //subject
         let subject = await SubjectServices.getSubject(appointment.subjectid);
 
-        appointment = { user, date, time, subject };
-        this.setState({ appointment });
+        return { user, date, time, subject };
+    }
+
+    renderConfirm(appointment) {
+        if (this.state.me.usertype === 'Mentor') {
+            return (
+                <TouchableOpacity
+                    onPress={async () => {
+                        await confirmAppointment(appointment.id);
+                        let appointments = await getAppointments(this.state.me.usertype, this.state.me.id, 0);
+                        for (let i = 0; i < appointments.length; i++) {
+                            let appointment = appointments[i];
+                            let appt = await this.handleAppointment(appointment);
+
+                            appointment.user = appt.user;
+                            appointment.date = appt.date;
+                            appointment.time = appt.time;
+                            appointment.subject = appt.subject;
+                        }
+
+                        this.setState({ appointments });
+                    }}
+                    style={styles.iconContainer}
+                >
+                    <Image style={styles.icon} source={require('../images/success.png')} />
+                </TouchableOpacity>
+            );
+        }
     }
 
     render() {
@@ -80,19 +110,32 @@ export default class MessageScreen extends Component {
             <ScrollView style={styles.container}>
                 {
                     this.state.appointments.map((appointment) => {
-                        this.handleAppointment(appointment);
                         return (
                             <View key={appointment.id} style={styles.appointmentContainer}>
                                 <View style={styles.textContainer}>
-                                    <Text>{this.state.appointment.user.name}</Text>
-                                    <Text>{this.state.appointment.subject.name}</Text>
-                                    <Text>{this.state.appointment.date}</Text>
-                                    <Text>{this.state.appointment.time}</Text>
+                                    <Text>{appointment.user.name}</Text>
+                                    <Text>{appointment.subject.name}</Text>
+                                    <Text>{appointment.date}</Text>
+                                    <Text>{appointment.time}</Text>
                                 </View>
-                                <TouchableOpacity style={styles.iconContainer}>
-                                    <Image style={styles.icon} source={require('../images/success.png')} />
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.iconContainer}>
+                                {this.renderConfirm(appointment)}
+                                <TouchableOpacity
+                                    onPress={async () => {
+                                        await deleteAppointment(appointment.id);
+                                        let appointments = await getAppointments(this.state.me.usertype, this.state.me.id, 0);
+                                        for (let i = 0; i < appointments.length; i++) {
+                                            let appointment = appointments[i];
+                                            let appt = await this.handleAppointment(appointment);
+
+                                            appointment.user = appt.user;
+                                            appointment.date = appt.date;
+                                            appointment.time = appt.time;
+                                            appointment.subject = appt.subject;
+                                        }
+                                        this.setState({ appointments });
+                                    }}
+                                    style={styles.iconContainer}
+                                >
                                     <Image style={styles.icon} source={require('../images/error.png')} />
                                 </TouchableOpacity>
                             </View>
@@ -113,6 +156,9 @@ const styles = StyleSheet.create({
     },
 
     appointmentContainer: {
+        paddingTop: 5,
+        paddingBottom: 5,
+        paddingRight: 30,
         margin: 2,
         alignItems: 'center',
         justifyContent: 'center',
@@ -124,17 +170,19 @@ const styles = StyleSheet.create({
     },
 
     textContainer: {
-        flex: 3,
+        flex: 1,
         alignItems: 'center'
     },
 
     iconContainer: {
-        flex: 1
+        flex: 1,
+        marginRight: -30,
+        alignItems: 'center',
     },
 
     icon: {
-        width: 50,
-        height: 50
+        width: 60,
+        height: 60
     }
 
 });

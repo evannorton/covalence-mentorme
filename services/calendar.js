@@ -1,3 +1,5 @@
+//calendar.js
+
 import * as RestServices from './rest';
 
 async function getAvailability(userid) {
@@ -20,4 +22,12 @@ async function createAppointment(date, mentorid, studentid, subjectid, hour) {
     return await RestServices.post('/api/appointments/', { date, mentorid, studentid, subjectid, hour });
 }
 
-export { getAvailability, addException, getAppointments, createAppointment }
+async function confirmAppointment(id) {
+    return await RestServices.put(`/api/appointments/${id}`, { confirmed: 1 });
+}
+
+async function deleteAppointment(id) {
+    return await RestServices.destroy(`/api/appointments/${id}`);
+}
+
+export { getAvailability, addException, getAppointments, createAppointment, confirmAppointment, deleteAppointment };
