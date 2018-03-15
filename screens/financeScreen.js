@@ -46,7 +46,7 @@ export default class FinanceScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         padding: 30,
-        backgroundColor: 'blue',
+        backgroundColor: 'white',
         flex: 1,
         justifyContent: 'center'
     },
