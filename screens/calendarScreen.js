@@ -135,7 +135,7 @@ export default class CalendarScreen extends Component {
                 </View>
                 <View style={styles.layout2}>
                     <View style={styles.layout}>
-                        <Text>{item.subjectid}</Text>
+                        <Text>{this.state.subject.name}</Text>
                     </View>
                     <View style={styles.layout}>
                         <Text>{item.hour}</Text>
