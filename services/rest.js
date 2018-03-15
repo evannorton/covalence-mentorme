@@ -3,8 +3,7 @@ import { AsyncStorage } from 'react-native';
 import { getAuthToken } from './authToken';
 
 const BASE_URL =
-    'https://usukqkopql.localtunnel.me';
-//'https://en-mentorme.herokuapp.com';
+    'https://en-mentorme.herokuapp.com';
 
 
 async function makeFetch(url, info) {
