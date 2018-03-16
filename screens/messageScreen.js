@@ -108,6 +108,7 @@ export default class MessageScreen extends Component {
     render() {
         return (
             <ScrollView style={styles.container}>
+                <Text style={{ fontSize: 30 }}>Requests</Text>
                 {
                     this.state.appointments.map((appointment) => {
                         return (
