@@ -46,16 +46,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1,
-        height: 60,
+        height: 40,
         borderWidth: 2,
         borderColor: 'black',
     },
     contentContainer: {
         flex: 0,
         flexDirection: 'row',
+        paddingLeft: 40,
+        paddingRight: 40
     },
-    subjectText:{
-        fontWeight: 'bold',
+    subjectText: {
         color: '#F8E191',
         fontSize: 20,
     }

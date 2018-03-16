@@ -112,7 +112,11 @@ export default class MessageScreen extends Component {
     render() {
         return (
             <ScrollView style={styles.container}>
-                <Text style={{ fontSize: 30 }}>Requests</Text>
+                <View style={{ alignItems: 'center' }}>
+                    <Text style={{ fontSize: 30, fontWeight: 'bold' }}>
+                        Requests
+                    </Text>
+                </View>
                 {
                     this.state.appointments.map((appointment) => {
                         return (
@@ -200,6 +204,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center'
     },
+
 
     iconContainer: {
         flex: 1,
