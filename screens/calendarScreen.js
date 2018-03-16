@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, Text, } from 'react-native';
+import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 import { Calendar, CalenderList, Agenda } from 'react-native-calendars'
 import { Button } from 'react-native-elements';
 import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
 import { getMe, getUser } from '../services/user';
-import { getAgenda } from '../services/calendar';
+import { getAgenda, deleteAppointment } from '../services/calendar';
 import { SubjectServices } from '../services/attribute';
+import AvailabilityPicker from '../components/availabilityPicker';
+
 
 
 
@@ -17,6 +19,7 @@ export default class CalendarScreen extends Component {
 
         this.state = {
             me: {},
+            isAvailabilityVisible: false,
             time: '',
             calendarDates: {},
             user: {
@@ -46,32 +49,39 @@ export default class CalendarScreen extends Component {
 
     async componentDidMount() {
         let me = await getMe();
-        this.setState({
+        await this.setState({
             me,
-        })
+        });
+        this.setCalendarDates();        
+
+    }
+
+    async setCalendarDates() {
+        let me = this.state.me;
         let appointments = await getAgenda(me.usertype, me.id);
         let calendarDates = {}
         let appointmentsForSpecificDate = [];
-        let lastDate = appointments[0].date.substring(0, 10);
-        for (let i = 0; i <= appointments.length; i++) {
-            if (i === appointments.length) {
-                calendarDates[lastDate] = appointmentsForSpecificDate;
-            } else {
-                if (appointments[i].date.substring(0, 10) === lastDate) {
-                    appointmentsForSpecificDate.push(appointments[i]);
-                } else {
+        if (appointments.length > 0) {
+            let lastDate = appointments[0].date.substring(0, 10);
+            for (let i = 0; i <= appointments.length; i++) {
+                if (i === appointments.length) {
                     calendarDates[lastDate] = appointmentsForSpecificDate;
-                    appointmentsForSpecificDate = [appointments[i]];
+                } else {
+                    if (appointments[i].date.substring(0, 10) === lastDate) {
+                        appointmentsForSpecificDate.push(appointments[i]);
+                    } else {
+                        calendarDates[lastDate] = appointmentsForSpecificDate;
+                        appointmentsForSpecificDate = [appointments[i]];
+                    }
+                    lastDate = appointments[i].date.substring(0, 10);
+
                 }
-                lastDate = appointments[i].date.substring(0, 10);
 
             }
-
         }
         this.setState({
             calendarDates,
         });
-
 
     }
 
@@ -154,11 +164,19 @@ export default class CalendarScreen extends Component {
                             <Text>{item.student}</Text>
                         </View>
                     </View>
+                    <TouchableOpacity
+                    onPress={() => { deleteAppointment(item.id); this.setCalendarDates() }}
+                    >
+                        <Image 
+                        style={styles.icon} source={require('../images/error.png')}
+
+                         />
+                        </TouchableOpacity>
                 </View>
 
             );
         } else {
-           
+
             return (
                 <View style={styles.item}>
                     <View style={styles.layout2}>
@@ -198,7 +216,9 @@ export default class CalendarScreen extends Component {
     renderButton() {
         if (this.state.me.usertype === 'Mentor') {
             return (
-                <Button text='My Availability' />
+                <Button text='My Availability'
+                    onPress={() => { this.setState({ isAvailabilityVisible: true, }) }}
+                />
             )
         }
     }
@@ -206,6 +226,7 @@ export default class CalendarScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
+                <AvailabilityPicker me={this.state.me} visibility={this.state.isAvailabilityVisible} />
                 {this.renderButton()}
 
                 <Agenda
@@ -258,6 +279,11 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
     },
+    icon:{
+        height:25,
+        width: 25,
+        alignSelf: 'flex-end'
+    }
 
 
 

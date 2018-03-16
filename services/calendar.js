@@ -2,6 +2,10 @@
 
 import * as RestServices from './rest';
 
+async function createAvailability(date, userid, starttime, endtime) {
+    return await RestServices.post('/api/availability/', { date, userid, starttime, endtime });
+}
+
 async function getAvailability(userid) {
     return await RestServices.get(`/api/availability/${userid}`);
 }
