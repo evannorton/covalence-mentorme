@@ -69,6 +69,8 @@ export default class ProfileEditList extends Component {
                     />
                 </List>
                 <Button
+                    containerStyle={styles.btnContainer}
+                    buttonStyle={styles.button}
                     text='Submit'
                     onPress={() => {
                         updateMe(this.props.me.id, {
@@ -82,6 +84,8 @@ export default class ProfileEditList extends Component {
                     }}
                 />
                 <Button
+                    containerStyle={styles.btnContainer}
+                    buttonStyle={styles.button}
                     text='Discard Changes'
                     onPress={() => {
                         this.props.navigate('Tab');
@@ -134,6 +138,15 @@ const styles = StyleSheet.create({
     listItem: {
         flex: 0,
         flexDirection: 'column',
+    },
+
+    btnContainer: {
+        paddingTop: 5,
+        paddingBottom: 5
+    },
+
+    button: {
+        backgroundColor: '#F4E19A'
     }
 
 })

@@ -74,18 +74,20 @@ export default class FinanceScreen extends Component {
             <View style={styles.container}>
                 <View>
                     <View>
-                        <Text style={styles.text}>Confirmed Payments</Text>
+                        <Text style={styles.headerText}>Confirmed Payments</Text>
                     </View>
                     {
                         this.state.charges.map((data, index) => {
                             console.log(data);
 
                             return (
-                                <View key={index}>
-                                    <Text>{formatter.format(data.amount / 100)}</Text>
-                                    <Text>{data.description}</Text>
-                                    <Text>{moment().format("YYYY-MM-DD hh:mm:ss")}</Text>
+                                <View key={index} style={styles.sectionContainer}>
+                                    <View style={styles.section} key={index}>
+                                        <Text style={styles.text}>{data.description}</Text>
 
+                                        <Text style={styles.text}>{moment().format("YYYY-MM-DD hh:mm:ss")}</Text>
+
+                                    </View>
                                 </View>
                             )
                         })
@@ -105,7 +107,35 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        textAlign: 'center'
-    }
+        textAlign: 'center',
+        fontWeight: 'bold',
+
+    },
+
+    headerText: {
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 20
+
+    },
+
+    section: {
+        backgroundColor: '#F8E191',
+        alignSelf: 'center',
+        alignItems: 'center',
+        flex: 1,
+        height: 60,
+        borderWidth: 2,
+        borderColor: 'black',
+        justifyContent: 'center'
+    },
+
+    sectionContainer: {
+        flex: 0,
+        flexDirection: 'row',
+        paddingTop: 5,
+        paddingBottom: 5
+
+    },
 
 });
