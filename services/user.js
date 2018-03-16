@@ -23,11 +23,13 @@ async function checkLogin() {
 
 async function login(email, password, usertype) {
     await logout();
+    console.log('logged out');
     const response = await RestServices.post('/api/auth/login', {
         email,
         password,
         usertype
     });
+    console.log('post login');
     await AuthServices.setAuthToken(response.token);
 }
 

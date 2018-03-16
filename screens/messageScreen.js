@@ -1,3 +1,6 @@
+//messagescreen
+
+
 import React, { Component } from 'react';
 import { View, ScrollView, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-elements';

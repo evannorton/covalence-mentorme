@@ -18,7 +18,12 @@ export default class LoginScreen extends Component {
     static navigationOptions = DEFAULT_NAVIGATION_OPTIONS;
 
     async login() {
-        await login(this.email, this.password, this.userType);
+        try {
+            await login(this.email, this.password, this.userType);
+        } catch (e) {
+            console.log(e);
+            return;
+        }
         let res = await getMe();
         console.log(res);
         if (res) {
