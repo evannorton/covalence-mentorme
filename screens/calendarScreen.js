@@ -85,10 +85,10 @@ export default class CalendarScreen extends Component {
 
     }
 
-    navigate(screen) {
-        userType = this.props.navigation.state.params.userType;
-        this.props.navigation.navigate(screen, { userType });
-    };
+    // navigate(screen) {
+    //     userType = this.props.navigation.state.params.userType;
+    //     this.props.navigation.navigate(screen, { userType });
+    // };
 
     loadItems(day) {
         setTimeout(() => {
@@ -226,7 +226,11 @@ export default class CalendarScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <AvailabilityPicker me={this.state.me} visibility={this.state.isAvailabilityVisible} />
+                <AvailabilityPicker 
+                me={this.state.me} 
+                visibility={this.state.isAvailabilityVisible}
+                screenProps={this.props.screenProps}
+                 />
                 {this.renderButton()}
 
                 <Agenda
