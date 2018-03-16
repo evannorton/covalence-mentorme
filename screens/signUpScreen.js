@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         margin: 0,
         alignItems: 'center',
-        backgroundColor: 'rgb(208,230,210)',
+        backgroundColor: '#405E63',
 
     },
 
@@ -104,7 +104,8 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         borderRadius: 70,
         borderWidth: 1,
-        marginTop: 10
+        marginTop: 10,
+        backgroundColor: '#A2D5E1',
     },
 
     buttonContainer: {
@@ -112,11 +113,11 @@ const styles = StyleSheet.create({
     },
 
     button: {
-        borderColor: 'rgb(135,204,236)',
-        backgroundColor: 'rgb(135,204,236)',
+        borderColor: 'black',
+        backgroundColor: '#465C62',
         borderRadius: 70,
         borderWidth: 1,
-        marginTop: 10
+        marginTop: 10,
 
     }
 
