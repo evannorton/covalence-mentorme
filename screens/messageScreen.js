@@ -3,7 +3,7 @@ import { View, ScrollView, StyleSheet, Image, Text, TouchableOpacity } from 'rea
 import { Button } from 'react-native-elements';
 import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
 
-import { getAppointments, confirmAppointment, deleteAppointment } from '../services/calendar';
+import { getAppointments, confirmAppointment, deleteAppointment, getAvailability, addException } from '../services/calendar';
 import { SubjectServices } from '../services/attribute';
 import { getMe, getUser } from '../services/user';
 
@@ -118,10 +118,20 @@ export default class MessageScreen extends Component {
                                 {this.renderConfirm(appointment)}
                                 <TouchableOpacity
                                     onPress={async () => {
+                                        //delete appointment
                                         await deleteAppointment(appointment.id);
+                                        //delete exception from availabilities
+                                        let availability = [];
+                                        if (this.state.me.usertype === 'Mentor') {
+                                            availability = await getAvailability(this.state.me.id);
+                                        } else {
+                                            availability = await getAvailability(appointment.user.id);
+                                        }
+                                        //reload page with new appointments
                                         let appointments = await getAppointments(this.state.me.usertype, this.state.me.id, 0);
                                         for (let i = 0; i < appointments.length; i++) {
                                             let appointment = appointments[i];
+
                                             let appt = await this.handleAppointment(appointment);
 
                                             appointment.user = appt.user;
