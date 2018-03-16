@@ -21,11 +21,7 @@ const styles = StyleSheet.create({
         flex: 0,
         paddingLeft: 20,
         paddingRight: 20,
-<<<<<<< HEAD
-        alignItems:'center'
-=======
         alignItems: 'center'
->>>>>>> 4b3c388eb83d256e84c2cd9a5c46479bed8e24e2
     }
 
 });
