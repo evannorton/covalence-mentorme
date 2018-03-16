@@ -78,7 +78,7 @@ export default class SearchScreen extends Component {
                                                         }}>
                                                         <View style={styles.contentContainer}>
                                                             <View key={subject.id} style={styles.content} >
-                                                                <Text  >
+                                                                <Text style={styles.subjectText}  >
                                                                     {subject.name}
                                                                 </Text>
                                                             </View>
@@ -103,14 +103,15 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 0,
-        backgroundColor: '#465C62'
+        backgroundColor: 'white',
+        margin: 10,
+
     },
 
     sectionContainer: {
         flex: 0,
         flexDirection: 'row',
-        paddingRight: 10,
-        paddingLeft: 10
+
     },
 
     section: {
@@ -118,14 +119,14 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         alignItems: 'center',
         flex: 1,
-        height: 40,
+        height: 60,
         borderWidth: 2,
         borderColor: 'black',
         justifyContent: 'center',
     },
 
     content: {
-        backgroundColor: '#6C8290',
+        backgroundColor: '#465C62',
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
@@ -133,17 +134,24 @@ const styles = StyleSheet.create({
         height: 40,
         borderWidth: 2,
         borderColor: 'black',
+
     },
     contentContainer: {
         flex: 0,
         flexDirection: 'row',
         paddingLeft: 40,
-        paddingRight: 40
+        paddingRight: 40,
+
     },
 
     text: {
         fontWeight: 'bold',
         fontSize: 20
-    }
+    },
+
+    subjectText: {
+        color: '#F4E19A',
+        fontSize: 20,
+    },
 
 });

@@ -153,6 +153,7 @@ const styles = StyleSheet.create({
     sectionContainer: {
         flex: 0,
         flexDirection: 'row',
+
     },
 
     section: {
@@ -164,6 +165,7 @@ const styles = StyleSheet.create({
         height: 60,
         borderWidth: 2,
         borderColor: 'black',
+
     },
 
     accordian: {
