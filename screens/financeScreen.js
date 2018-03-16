@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     headerText: {
         textAlign: 'center',
         fontWeight: 'bold',
-        fontSize: 20
+        fontSize: 20,
 
     },
 
@@ -133,8 +133,6 @@ const styles = StyleSheet.create({
     sectionContainer: {
         flex: 0,
         flexDirection: 'row',
-        paddingTop: 5,
-        paddingBottom: 5
 
     },
 

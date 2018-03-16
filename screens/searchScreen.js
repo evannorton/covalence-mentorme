@@ -60,7 +60,7 @@ export default class SearchScreen extends Component {
                                     return (
                                         <View style={styles.sectionContainer}>
                                             <View style={styles.section}>
-                                                <Text key={category.id} >{category.name}</Text>
+                                                <Text key={category.id} style={styles.text}>{category.name}</Text>
                                             </View>
                                         </View>
 
@@ -78,7 +78,7 @@ export default class SearchScreen extends Component {
                                                         }}>
                                                         <View style={styles.contentContainer}>
                                                             <View key={subject.id} style={styles.content} >
-                                                                <Text>
+                                                                <Text  >
                                                                     {subject.name}
                                                                 </Text>
                                                             </View>
@@ -103,26 +103,29 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 0,
+        backgroundColor: '#465C62'
     },
 
     sectionContainer: {
         flex: 0,
         flexDirection: 'row',
+        paddingRight: 10,
+        paddingLeft: 10
     },
 
     section: {
-        backgroundColor: 'gold',
+        backgroundColor: '#F8E191',
         alignSelf: 'center',
         alignItems: 'center',
-        justifyContent: 'center',
         flex: 1,
         height: 40,
         borderWidth: 2,
         borderColor: 'black',
+        justifyContent: 'center',
     },
 
     content: {
-        backgroundColor: 'blue',
+        backgroundColor: '#6C8290',
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
@@ -134,6 +137,13 @@ const styles = StyleSheet.create({
     contentContainer: {
         flex: 0,
         flexDirection: 'row',
+        paddingLeft: 40,
+        paddingRight: 40
+    },
+
+    text: {
+        fontWeight: 'bold',
+        fontSize: 20
     }
 
 });
