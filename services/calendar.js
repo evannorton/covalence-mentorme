@@ -57,4 +57,4 @@ async function deleteAppointment(id) {
     return await RestServices.destroy(`/api/appointments/${id}`);
 }
 
-export { getAvailability, addException, removeException, getAppointments, createAppointment, confirmAppointment, deleteAppointment, createAvailability, getAgenda, createAvailability};
+export { getAvailability, addException, removeException, getAppointments, createAppointment, confirmAppointment, deleteAppointment, createAvailability, getAgenda};
