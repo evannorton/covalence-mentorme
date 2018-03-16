@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Button, Overlay, List, ListItem, Input } from 'react-native-elements';
 import DatePicker from 'react-native-datepicker';
-import {createAvailability} from '../services/calendar';
+import { createAvailability } from '../services/calendar';
 
 
 
@@ -13,15 +13,31 @@ export default class AvailabilityPicker extends Component {
         super(props);
         this.state = {
             date: '',
-            start:'',
+            start: '',
             end: '',
         }
     }
 
-    submitAvailability(date,userid,start,end){
-        createAvailability(date,userid,start,end);
+    submitAvailability(date, userid, start, end) {
+        start = parseInt(start);
+        end = parseInt(end);
+        if (end >= 1 && end <= 8) {
+            end = end + 12;
+        };
+        if(start >= 1 && start <=7){
+            start = start + 12
+        };
+     createAvailability(date,userid,start,end);
+     this.setState({date: ''});
+     this.input1.clear();
+     this.input2.clear();
+     
+
+     
 
     }
+
+
     render() {
         return (
             <Overlay
@@ -31,13 +47,14 @@ export default class AvailabilityPicker extends Component {
                 isVisible={this.props.visibility}
             >
                 <View style={styles.container}>
-                    <View style={styles.buttonContainer}>
-                        <Button
-                            text='Back'
-                            onPress={() => {
-
-                            }}
-                        />
+                    <View style={styles.iconContainer}>
+                        <TouchableOpacity onPress={() => { this.props.screenProps.navigation.navigate('Tab', { isAvailabilityVisible: false }) }}>
+                            <Image
+                                style={styles.icon}
+                                source={require('../images/Back.png')}
+                            />
+                        </TouchableOpacity>
+                        <Text> Back  </Text>
                     </View>
                     <View style={styles.datePickerContainer}>
                         <DatePicker
@@ -65,14 +82,20 @@ export default class AvailabilityPicker extends Component {
 
                             onDateChange={(date) => { this.setState({ date: date }) }}
                         />
-                        <Input placeholder="Start Time" 
-                        onStartChange={(start) => { this.setState({ start }) }}
+                        <Text style ={styles.text}>Hours Available 8Am - 8Pm</Text>
+                        <Input 
+                            ref={input => this.input1 = input} 
+                            placeholder="Start Time"
+                            onChangeText={(start) => { this.setState({ start }) }}
                         />
-                        <Input placeholder="End Time" 
-                        onEndChange={(end) => { this.setState({ end }) }}
+                        <Input
+                            ref={input => this.input2 = input} 
+                             placeholder="End Time"
+                            onChangeText={(end) => { this.setState({ end }) }}
                         />
                         <Button text="Submit Availability"
-                        onPress={()=>{this.submitAvailability(this.state.date,this.props.me.id,this.state.start,this.state.end)}}
+
+                            onPress={() => { this.submitAvailability(this.state.date, this.props.me.id, this.state.start, this.state.end) }}
                         />
                     </View>
 
@@ -89,12 +112,12 @@ const styles = StyleSheet.create({
     overlayContainer: {
         zIndex: 1,
         margin: -5,
-        backgroundColor: 'rgba(255,255,255,0.75)',
+        backgroundColor: 'rgba(255,255,255,0.90)',
     },
 
     overlay: {
         zIndex: 2,
-        backgroundColor: 'rgba(255,255,255,0.5)',
+        backgroundColor: 'rgba(255,255,255,0.9)',
         flex: 1,
         flexDirection: 'column',
     },
@@ -103,11 +126,23 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center'
     },
-    buttonContainer:{
-        flex:1,
+    buttonContainer: {
+        flex: 1,
     },
-    datePickerContainer:{
+    datePickerContainer: {
         flex: 5,
+    },
+    icon: {
+        height: 40,
+        width: 40,
+    },
+    iconContainer: {
+        alignItems: 'flex-end',
+    },
+    text:{
+        textAlign: 'center',
+        fontWeight:'bold',
+        fontSize: 20,
     }
 
 
