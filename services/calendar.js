@@ -14,6 +14,21 @@ async function addException(id, exceptions) {
     return await RestServices.put(`/api/availability/${id}`, { exceptions });
 }
 
+async function removeException(id, exceptions, exception) {
+    exception = exception.substring(0, exception.length - 2);
+    console.log(arguments);
+    let index = exceptions.indexOf(exception);
+    if (index === -1) {
+        return;
+    } else if (index === 0) {
+        exceptions = exceptions.substring(exception.length + 1);
+    } else {
+        exceptions = exceptions.substring(0, index - 1) + exceptions.substring(index + exception.length);
+    }
+    console.log(exceptions);
+    return await RestServices.put(`/api/availability/${id}`, { exceptions });
+}
+
 async function getAppointments(usertype, userid, confirmed) {
     if (usertype === 'Mentor') {
         return await RestServices.get(`/api/appointments/mentors/${userid}/${confirmed}`);
@@ -42,4 +57,8 @@ async function deleteAppointment(id) {
     return await RestServices.destroy(`/api/appointments/${id}`);
 }
 
+<<<<<<< HEAD
 export { getAvailability, addException, getAppointments, createAppointment, confirmAppointment, deleteAppointment, getAgenda };
+=======
+export { getAvailability, addException, removeException, getAppointments, createAppointment, confirmAppointment, deleteAppointment };
+>>>>>>> bc17a22385f7ce1d8a5016ab0287246f73ace662

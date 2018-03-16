@@ -6,7 +6,7 @@ import { View, ScrollView, StyleSheet, Image, Text, TouchableOpacity } from 'rea
 import { Button } from 'react-native-elements';
 import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
 
-import { getAppointments, confirmAppointment, deleteAppointment, getAvailability, addException } from '../services/calendar';
+import { getAppointments, confirmAppointment, deleteAppointment, getAvailability, addException, removeException } from '../services/calendar';
 import { SubjectServices } from '../services/attribute';
 import { getMe, getUser } from '../services/user';
 
@@ -130,6 +130,18 @@ export default class MessageScreen extends Component {
                                         } else {
                                             availability = await getAvailability(appointment.user.id);
                                         }
+                                        console.log(availability);
+                                        let singleAvailability = {};
+                                        for (let i = 0; i < availability.length; i++) {
+                                            console.log(availability[i].date.substring(0, 10));
+                                            console.log(appointment.date);
+                                            if (availability[i].date.substring(0, 10) === appointment.date) {
+                                                console.log('hi');
+                                                singleAvailability = availability[i];
+                                            }
+                                        }
+                                        console.log(singleAvailability);
+                                        removeException(singleAvailability.id, singleAvailability.exceptions, appointment.time);
                                         //reload page with new appointments
                                         let appointments = await getAppointments(this.state.me.usertype, this.state.me.id, 0);
                                         for (let i = 0; i < appointments.length; i++) {
