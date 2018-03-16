@@ -24,6 +24,9 @@ export default class SignUpScreen extends Component {
             console.log(e);
         }
     }
+    goBack(){
+        this.props.navigation.goBack();
+    }
 
     navigate(screen) {
         this.props.navigation.navigate(screen);
@@ -82,6 +85,8 @@ export default class SignUpScreen extends Component {
                     buttonStyle={styles.button}
                     onPress={() => {
                         this.signup();
+                        this.goBack();
+
                     }}
                 />
             </View>
