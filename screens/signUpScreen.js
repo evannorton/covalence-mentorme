@@ -50,6 +50,7 @@ export default class SignUpScreen extends Component {
                     onChangeText={(email) => { this.email = email }}
                     containerStyle={styles.input}
                     placeholder='EMAIL'
+                    keyboardType='email-address'
                     leftIcon={
                         <Icon
                             name='mail'
@@ -63,6 +64,7 @@ export default class SignUpScreen extends Component {
                 <Input
                     onChangeText={(password) => { this.password = password }}
                     containerStyle={styles.input}
+                    secureTextEntry={true}
                     placeholder='PASSWORD'
                     leftIcon={
                         <Icon

@@ -45,6 +45,7 @@ export default class LoginScreen extends Component {
                     onChangeText={(email) => { this.email = email.toLowerCase() }}
                     containerStyle={styles.input}
                     placeholder='EMAIL'
+                    keyboardType='email-address'
                     leftIcon={
                         <Icon
                             name='mail'
@@ -60,6 +61,7 @@ export default class LoginScreen extends Component {
                     onChangeText={(password) => { this.password = password }}
                     containerStyle={styles.input}
                     placeholder='PASSWORD'
+                    secureTextEntry={true}
                     leftIcon={
                         <Icon
                             name='lock'
