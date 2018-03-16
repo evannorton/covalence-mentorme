@@ -56,6 +56,7 @@ export default class ProfileSkills extends Component {
                         />
                     </View>
                     <Text style={styles.overlayText}>My Skills</Text>
+                    <Text style={styles.instruction}>Press on Skills to Remove</Text>
                     <View style={styles.mySkillsContainer}>
                         {
                             this.props.mySkills.map((skill, key) => {
@@ -113,6 +114,11 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         fontWeight: 'bold',
         fontSize: 20,
+    },
+    instruction:{
+        alignSelf: 'center',
+        fontWeight: 'bold',
+        fontSize: 15,
     },
     mySkillsText:{
         fontWeight: 'bold',

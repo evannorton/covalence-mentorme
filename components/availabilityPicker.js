@@ -124,12 +124,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        alignItems: 'center'
+        
     },
     buttonContainer: {
         flex: 1,
     },
     datePickerContainer: {
+        alignItems: 'center',
         flex: 5,
     },
     icon: {
