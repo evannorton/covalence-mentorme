@@ -27,6 +27,7 @@ export default class ProfileSubjects extends Component {
                     <Text> Back  </Text>
                 </View>
                     <Text style={styles.overlayText}>My Subjects</Text>
+                    <Text style={styles.instruction}> Press Subject to Remove</Text>
                     <View style={styles.mySubjectsContainer}>
                         {
                             this.props.mySubjects.map((subject, key) => {
@@ -124,7 +125,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 15,
     },
-
+    instruction:{
+        fontWeight: 'bold',
+        fontSize: 15,
+        textAlign: 'center',
+    },
     mySubjectsContainer: {
         flex: 1,
         flexDirection: 'row',
@@ -158,7 +163,6 @@ const styles = StyleSheet.create({
         height: 60,
         borderWidth: 2,
         borderColor: 'black',
-        fontWeight: 'bold',
     },
 
     accordian: {
