@@ -6,14 +6,6 @@ import { BASE_URL } from '../services/rest';
 import { getMe, getCharges } from '../services/user';
 import moment from 'moment';
 
-// let moment = require('moment');
-
-let formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2
-});
-
 export default class FinanceScreen extends Component {
 
     constructor(props) {
