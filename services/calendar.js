@@ -33,6 +33,14 @@ async function getAppointments(usertype, userid, confirmed) {
     }
 }
 
+async function getAgenda(usertype, userid) {
+    if (usertype === 'Mentor') {
+        return await RestServices.get(`/api/appointments/mentor/${userid}`);
+    } else {
+        return await RestServices.get(`/api/appointments/student/${userid}`);
+    }
+}
+
 async function createAppointment(date, mentorid, studentid, subjectid, hour) {
     return await RestServices.post('/api/appointments/', { date, mentorid, studentid, subjectid, hour });
 }
