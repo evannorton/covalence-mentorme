@@ -8,6 +8,7 @@ import { DEFAULT_NAVIGATION_OPTIONS } from '../services/navigation';
 
 import { getAppointments, confirmAppointment, deleteAppointment, getAvailability, addException, removeException } from '../services/calendar';
 import { SubjectServices } from '../services/attribute';
+import { makePayment } from '../services/stripe';
 import { getMe, getUser } from '../services/user';
 
 export default class MessageScreen extends Component {
@@ -38,6 +39,7 @@ export default class MessageScreen extends Component {
 
     async componentDidMount() {
         let me = await getMe();
+        this.setState({ me });
         let appointments = await getAppointments(me.usertype, me.id, 0);
 
         for (let i = 0; i < appointments.length; i++) {
@@ -50,12 +52,13 @@ export default class MessageScreen extends Component {
             appointment.subject = appt.subject;
         }
 
-        this.setState({ me, appointments });
+        this.setState({ appointments });
     }
 
     async handleAppointment(appointment) {
         //user
         let user = {};
+        console.log(this.state.me.usertype);
         if (this.state.me.usertype === 'Mentor') {
             user = await getUser(appointment.studentid);
         } else {
@@ -84,6 +87,7 @@ export default class MessageScreen extends Component {
                 <TouchableOpacity
                     onPress={async () => {
                         await confirmAppointment(appointment.id);
+                        makePayment(this.state.me.id, appointment.user.id, this.state.me.wage * 100);
                         let appointments = await getAppointments(this.state.me.usertype, this.state.me.id, 0);
                         for (let i = 0; i < appointments.length; i++) {
                             let appointment = appointments[i];

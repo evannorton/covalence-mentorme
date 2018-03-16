@@ -6,10 +6,6 @@ import { TimerMixin } from 'react-timer-mixin';
 
 import { DEFAULT_NAVIGATION_NO_ARROW } from '../services/navigation';
 
-//temporary code for testing
-import { login, getMe } from '../services/user';
-//end temporary code
-
 const wateringCan = require('../images/wateringcaniconblue.png');
 
 const wateringCanWater = require('../images/wateringcaniconwaterblue.png');
@@ -29,26 +25,6 @@ export default class LandingScreen extends Component {
     }
 
     static navigationOptions = DEFAULT_NAVIGATION_NO_ARROW;
-
-    //temporary code for testing
-
-    async testFunction() {
-        await login('admin', 'Admin', 'Mentor');
-        let res = await getMe();
-        if (res) {
-            this.props.navigation.navigate('Tab');
-        }
-    }
-
-    async testFunction2() {
-        await login('1', '1', 'Student');
-        let res = await getMe();
-        if (res) {
-            this.props.navigation.navigate('Tab');
-        }
-    }
-
-    //end temporary code
 
     studentNavigate(userType) {
         setTimeout(() => {
@@ -118,15 +94,6 @@ export default class LandingScreen extends Component {
                     </TouchableOpacity>
                     <Text style={styles.text}> Student </Text>
                 </View>
-                {/* Temporary test code */}
-                <View style={styles.buttonContainer}>
-                    <Button text='TEST BUTTON' onPress={() => { this.testFunction() }} />
-                </View>
-
-                <View style={styles.buttonContainer}>
-                    <Button text='TEST BUTTON2' onPress={() => { this.testFunction2() }} />
-                </View>
-                {/* end test code */}
 
             </View >
         );
