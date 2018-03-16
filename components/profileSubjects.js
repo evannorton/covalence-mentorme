@@ -17,15 +17,15 @@ export default class ProfileSubjects extends Component {
                 isVisible={this.props.isSubjectsVisible}
             >
                 <ScrollView contentContainerStyle={styles.scrollView}>
-                <View style={styles.iconContainer}>
-                    <TouchableOpacity onPress={() => { this.props.screenProps.navigation.navigate('Tab', { isSubjectsVisible: false }) }}>
-                        <Image
-                            style={styles.icon}
-                            source={require('../images/Back.png')}
-                        />
-                    </TouchableOpacity>
-                    <Text> Back  </Text>
-                </View>
+                    <View style={styles.iconContainer}>
+                        <TouchableOpacity onPress={() => { this.props.screenProps.navigation.navigate('Tab', { isSubjectsVisible: false }) }}>
+                            <Image
+                                style={styles.icon}
+                                source={require('../images/Back.png')}
+                            />
+                        </TouchableOpacity>
+                        <Text> Back  </Text>
+                    </View>
                     <Text style={styles.overlayText}>My Subjects</Text>
                     <Text style={styles.instruction}> Press Subject to Remove</Text>
                     <View style={styles.mySubjectsContainer}>
@@ -36,7 +36,7 @@ export default class ProfileSubjects extends Component {
                                         key={key}
                                         style={styles.mySubjects}>
                                         <Text
-                                        style={styles.subjectText}
+                                            style={styles.subjectText}
                                             onPress={() => {
                                                 SubjectServices.deleteMentorSubject(this.props.me.id, subject.id)
                                                     .then(() => {
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
 
     overlayContainer: {
         zIndex: 1,
-        margin: -5,
+        margin: 0,
         backgroundColor: 'rgba(255,255,255,0.75)',
 
     },
@@ -117,15 +117,16 @@ const styles = StyleSheet.create({
         fontSize: 20,
     },
 
-    categoryText:{
+    categoryText: {
         fontWeight: 'bold',
         fontSize: 20,
     },
-    subjectText:{
+    subjectText: {
         fontWeight: 'bold',
-        fontSize: 15,
+        fontSize: 14,
+        textAlign: 'center'
     },
-    instruction:{
+    instruction: {
         fontWeight: 'bold',
         fontSize: 15,
         textAlign: 'center',
@@ -139,7 +140,7 @@ const styles = StyleSheet.create({
     },
 
     mySubjects: {
-        backgroundColor: '#F8E191',
+        backgroundColor: '#F4E19A',
         alignItems: 'center',
         justifyContent: 'center',
         width: 110,
@@ -155,7 +156,7 @@ const styles = StyleSheet.create({
     },
 
     section: {
-        backgroundColor: '#F8E191',
+        backgroundColor: '#F4E19A',
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
@@ -168,11 +169,11 @@ const styles = StyleSheet.create({
     accordian: {
         flex: 6,
     },
-    icon:{
+    icon: {
         height: 40,
         width: 40,
     },
-    iconContainer:{
+    iconContainer: {
         alignItems: 'flex-end',
     }
 
