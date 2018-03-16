@@ -5,6 +5,8 @@ import { Button, Overlay, List, ListItem } from 'react-native-elements'
 import { updateMe } from '../services/user';
 import { logout } from '../services/user';
 
+import ProfileCreditCard from '../components/profileCreditCard';
+
 export default class ProfileEditList extends Component {
 
     constructor(props) {
@@ -13,7 +15,8 @@ export default class ProfileEditList extends Component {
             name: '',
             email: '',
             phone: '',
-            bio: ''
+            bio: '',
+            card: ''
         }
     }
     async logout() {
@@ -68,6 +71,10 @@ export default class ProfileEditList extends Component {
                         textInputOnChangeText={(bio) => { this.setState({ bio }) }}
                     />
                 </List>
+                <ProfileCreditCard
+                    me={this.props.me}
+                    setCard={(card) => { this.setState({ card }) }}
+                />
                 <Button
                     containerStyle={styles.btnContainer}
                     buttonStyle={styles.button}
@@ -77,7 +84,8 @@ export default class ProfileEditList extends Component {
                             name: this.state.name,
                             email: this.state.email,
                             phone: this.state.phone,
-                            bio: this.state.bio
+                            bio: this.state.bio,
+                            card: this.state.card
                         }).then(() => {
                             this.props.navigate('Tab');
                         });
@@ -146,7 +154,7 @@ const styles = StyleSheet.create({
     },
 
     button: {
-        backgroundColor: '#465C62'
-    }
+        backgroundColor: '#148FD9'
+    },
 
 })
