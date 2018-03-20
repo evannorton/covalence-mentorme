@@ -1,11 +1,13 @@
 {
     "name": "MentorMe",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "private": true,
     "scripts": {
         "start": "node node_modules/react-native/local-cli/cli.js start",
         "test": "jest"
     },
+    "author": "Leavitt, Norton, Pierson",
+    "license": "MIT",
     "dependencies": {
         "intl": "^1.2.5",
         "moment": "^2.21.0",
